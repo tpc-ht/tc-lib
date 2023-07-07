@@ -1,0 +1,41 @@
+.tc-libib-map-main {
+  position: relative;
+
+  /*清除腾讯logo*/
+  .map-content > div:nth-child(2) {
+    z-index: 500 !important;
+  }
+  .map-content
+    > div:nth-child(2)
+    > div:nth-child(2)
+    > div:nth-child(1)
+    > div:nth-child(2) {
+    display: none !important;
+  }
+  .map-content {
+    height: 100%;
+    width: 100%;
+  }
+  .map-search {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 1;
+    z-index: 501;
+  }
+  .map-location {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    background: #fff;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #1890ff;
+    z-index: 501;
+  }
+}

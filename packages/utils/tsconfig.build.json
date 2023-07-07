@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./lib",
+    "paths": {
+      "@tc-lib/*": [
+        "../*"
+      ]
+    },
+    "declaration": true
+  }
+}

@@ -1,0 +1,39 @@
+// @import '~antd/lib/style/themes/default.less';
+
+@import '../../assets/variables.less';
+.@{prefix-cls}-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > :first-child {
+    width: inherit;
+    height: 100%;
+    background-color: #dfdfe1;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    div {
+      width: 10px;
+      height: 100%;
+      background-color: #1890ff;
+      border-radius: 10px;
+    }
+  }
+  &-handle {
+    width: 14px;
+    height: 14px;
+    background-color: #1890ff;
+    border-radius: 10px;
+    position: absolute;
+    cursor: pointer;
+    transform: translateX(-12px);
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@tc-lib/utils",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "homepage": "https://github.com/tpc-ht/tc-ali#readme",
+  "bugs": {
+    "url": "https://github.com/tpc-ht/tc-ali/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpc-ht/tc-ali.git"
+  },
+  "license": "ISC",
+  "author": "tpc-ht <59469126+tpc-ht@users.noreply.github.com>",
+  "main": "lib",
+  "module": "lib",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "scripts": {
+    "build": "rimraf -rf lib esm dist && tsc --project tsconfig.build.json",
+    "test": "node ./__tests__/test.test.js"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.7",
+    "numeral": "^2.0.6"
+  },
+  "engines": {
+    "npm": ">=3.0.0"
+  }
+}

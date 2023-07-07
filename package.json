@@ -1,0 +1,28 @@
+{
+  "name": "root",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpc-ht/tc-ali.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "yarn build:c & yarn build:u",
+    "build:c": "yarn workspace @tc-lib/components build",
+    "build:u": "yarn workspace @tc-lib/utils build",
+    "clean": "lerna clean",
+    "publish": "lerna publish",
+    "start:c": "yarn workspace @tc-lib/components dev",
+    "start:u": "yarn workspace @tc-lib/utils dev",
+    "test:u": "yarn workspace @tc-lib/utils test"
+  },
+  "dependencies": {
+    "ahooks": "^3.7.7"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

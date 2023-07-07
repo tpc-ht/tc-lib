@@ -1,0 +1,55 @@
+{
+  "name": "@tc-lib/components",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/tpc-ht/tc-ali#readme",
+  "bugs": {
+    "url": "https://github.com/tpc-ht/tc-ali/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpc-ht/tc-ali.git"
+  },
+  "license": "MIT",
+  "author": "tpc-ht <59469126+tpc-ht@users.noreply.github.com>",
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ],
+  "main": "lib",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "father build",
+    "test": "node ./__tests__/test.test.js"
+  },
+  "dependencies": {
+    "ahooks": "^3.7.7",
+    "antd": "4.24.8",
+    "dayjs": "^1.11.7"
+  },
+  "devDependencies": {
+    "father": "^4.2.3",
+    "file-loader": "^5.0.2",
+    "react": "^18.0.0",
+    "react-color": "^2.19.3",
+    "react-dom": "^18.0.0",
+    "react-draggable": "^4.4.5",
+    "react-highlight-words": "^0.20.0",
+    "react-split-pane": "^0.1.92",
+    "react-waterfall-clover": "1.0.5",
+    "styled-components": "^5.3.8",
+    "ts-loader": "^7.0.4",
+    "typescript": "^5.0.4"
+  },
+  "engines": {
+    "npm": ">=3.0.0"
+  }
+}
