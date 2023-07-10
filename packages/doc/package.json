@@ -2,13 +2,13 @@
   "name": "@tc-lib/doc",
   "version": "0.0.12",
   "description": "A react library developed with dumi",
-  "homepage": "https://github.com/tpc-ht/lerna-react-components#readme",
+  "homepage": "https://github.com/tpc-ht/tc-lib#readme",
   "bugs": {
-    "url": "https://github.com/tpc-ht/lerna-react-components/issues"
+    "url": "https://github.com/tpc-ht/tc-lib/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tpc-ht/lerna-react-components.git"
+    "url": "git+https://github.com/tpc-ht/tc-lib.git"
   },
   "license": "MIT",
   "author": "tpc-ht <59469126+tpc-ht@users.noreply.github.com>",
