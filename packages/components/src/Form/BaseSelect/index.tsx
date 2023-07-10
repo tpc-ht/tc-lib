@@ -1,5 +1,5 @@
 import { Disabled } from "@tc-lib/components";
-import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from "@tc-lib/test";
+import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from "@tc-lib/utils";
 import { useRequest } from "ahooks";
 import { Select, SelectProps, Typography } from "antd";
 import { TextProps } from "antd/lib/typography/Text";

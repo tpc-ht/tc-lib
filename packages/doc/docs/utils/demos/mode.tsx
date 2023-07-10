@@ -1,4 +1,4 @@
-import { IModalProps, useModelProps } from '@tc-lib/test;';
+import { IModalProps, useModelProps } from '@tc-lib/utils;';
 import { Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';

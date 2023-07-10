@@ -1,5 +1,5 @@
 import { Disabled } from "@tc-lib/components";
-import { getAttrFromArr, getTreeNodes, isArr } from "@tc-lib/test";
+import { getAttrFromArr, getTreeNodes, isArr } from "@tc-lib/utils";
 import { useRequest } from "ahooks";
 import { Cascader } from "antd";
 import { CascaderProps, DefaultOptionType } from "antd/lib/cascader";

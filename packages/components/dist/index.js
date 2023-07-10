@@ -1,4 +1,4 @@
-import "./style";
+import "./global.less";
 export * from "./Button";
 export * from "./DragModal";
 export * from "./Form";

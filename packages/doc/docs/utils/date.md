@@ -4,7 +4,7 @@ toc: content
 # 时间
 ## reverse 相差天数
 ```jsx
-import { dayDiff } from '@tc-lib/test';
+import { dayDiff } from '@tc-lib/utils';
 import 'antd/dist/antd.css';
 import { DatePicker,Space } from 'antd';
 import { useState } from 'react';

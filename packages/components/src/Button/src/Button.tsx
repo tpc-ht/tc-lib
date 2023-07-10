@@ -1,4 +1,4 @@
-import { isFn, isPro } from "@tc-lib/test";
+import { isFn, isPro } from "@tc-lib/utils";
 import { Button as AndButton, ButtonProps } from "antd";
 import React, { memo, useState } from "react";
 

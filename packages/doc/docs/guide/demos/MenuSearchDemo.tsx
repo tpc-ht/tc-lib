@@ -1,4 +1,4 @@
-import { MenuSearch } from '@tc-libibibibibibib/components';
+import { MenuSearch } from '@tc-lib/components';
 // import { history } from 'umi';
 const MenuSearchDemo = () => {
   const options = [

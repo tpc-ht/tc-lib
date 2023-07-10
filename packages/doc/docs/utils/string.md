@@ -7,7 +7,7 @@ nav:
 # 字符串
 ## reverse 字符串反转
 ```javascript
-import {reverse} from '@tc-lib/test'
+import {reverse} from '@tc-lib/utils'
 reverse('abc');// cda
 ```
 ## getPathParams URL参数解析

@@ -37,6 +37,6 @@ export const isVoid = (v: unknown) => v === null || v === undefined;
 ```
 
 ```jsx
-import { isArr } from '@tc-lib/test'
+import { isArr } from '@tc-lib/utils'
 export default ()=><div>{isArr([])?'是':'否'}</div>
 ```

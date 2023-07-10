@@ -3,7 +3,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tpc-ht/tc-ali.git"
+    "url": "git+https://github.com/tpc-ht/lerna-react-components.git"
   },
   "workspaces": [
     "packages/*"

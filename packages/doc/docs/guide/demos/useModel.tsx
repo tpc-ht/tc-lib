@@ -5,7 +5,7 @@ import {
   useModelProps,
 } from '@tc-lib/components';
 import { Button, Space } from 'antd';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import React from 'react';
 type CreateFormModalProps = IModalProps<
   any,

@@ -4,7 +4,7 @@ toc: content
 # 随机
 ## randomHexColor 随机16进制颜色
 ```jsx
-import { randomHexColor } from '@tc-lib/test';
+import { randomHexColor } from '@tc-lib/utils';
 export default ()=>{
     return <div style={{display: 'flex'}}>
         {
@@ -18,7 +18,7 @@ export default ()=>{
 ## getUid Uid
 默认11位
 ```jsx
-import { uid } from '@tc-lib/test';
+import { uid } from '@tc-lib/utils';
 import { Space } from 'antd';
 export default ()=>{
     return <Space direction='vertical'>

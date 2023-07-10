@@ -1,5 +1,5 @@
 import { AimOutlined } from "@ant-design/icons";
-import { debounce } from "@tc-lib/test";
+import { debounce } from "@tc-lib/utils";
 import { Select, Typography, message } from "antd";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import "./index.less";

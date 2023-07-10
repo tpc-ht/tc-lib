@@ -1,4 +1,4 @@
-import { isArr } from "@tc-lib/test";
+import { isArr } from "@tc-lib/utils";
 import { Modal, ModalProps, Space } from "antd";
 import React, { FC, ReactNode, memo, useMemo, useRef, useState } from "react";
 import type { DraggableData, DraggableEvent } from "react-draggable";

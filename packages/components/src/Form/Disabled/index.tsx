@@ -1,5 +1,5 @@
 import { CheckCircleFilled, CloseCircleFilled } from "@ant-design/icons";
-import { isFullArr, isFullObj, isStr } from "@tc-lib/test";
+import { isFullArr, isFullObj, isStr } from "@tc-lib/utils";
 import { Space, Tag, Typography } from "antd";
 import csn from "classnames";
 import React, { CSSProperties, Key, memo, useMemo } from "react";

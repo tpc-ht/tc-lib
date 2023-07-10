@@ -12,7 +12,7 @@ import 'antd/dist/antd.css';
 import { Button, message } from 'antd';
 
 
-import { copyText } from '@tc-lib/test';
+import { copyText } from '@tc-lib/utils';
 export default ()=>{
     const onCopy = async ()=>{
         const s = await copyText('Hello World');
@@ -46,7 +46,7 @@ const debounceFunB = throttle(doSomething, 1000, true);
 
 ## 发布订阅
 ```jsx
-import { EventEmitter } from '@tc-lib/test';
+import { EventEmitter } from '@tc-lib/utils';
 import { Button, Input, message } from 'antd';
 import { useEffect, useState } from 'react';
 const event = new EventEmitter()

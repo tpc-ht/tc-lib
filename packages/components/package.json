@@ -1,14 +1,14 @@
 {
   "name": "@tc-lib/components",
-  "version": "0.0.1",
+  "version": "0.0.12",
   "description": "",
-  "homepage": "https://github.com/tpc-ht/tc-ali#readme",
+  "homepage": "https://github.com/tpc-ht/lerna-react-components#readme",
   "bugs": {
-    "url": "https://github.com/tpc-ht/tc-ali/issues"
+    "url": "https://github.com/tpc-ht/lerna-react-components/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tpc-ht/tc-ali.git"
+    "url": "git+https://github.com/tpc-ht/lerna-react-components.git"
   },
   "license": "MIT",
   "author": "tpc-ht <59469126+tpc-ht@users.noreply.github.com>",

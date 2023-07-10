@@ -1,14 +1,14 @@
 {
   "name": "@tc-lib/utils",
-  "version": "0.0.1",
+  "version": "0.0.12",
   "description": "> TODO: description",
-  "homepage": "https://github.com/tpc-ht/tc-ali#readme",
+  "homepage": "https://github.com/tpc-ht/lerna-react-components#readme",
   "bugs": {
-    "url": "https://github.com/tpc-ht/tc-ali/issues"
+    "url": "https://github.com/tpc-ht/lerna-react-components/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tpc-ht/tc-ali.git"
+    "url": "git+https://github.com/tpc-ht/lerna-react-components.git"
   },
   "license": "ISC",
   "author": "tpc-ht <59469126+tpc-ht@users.noreply.github.com>",
@@ -21,11 +21,14 @@
   },
   "scripts": {
     "build": "rimraf -rf lib esm dist && tsc --project tsconfig.build.json",
-    "test": "node ./__tests__/test.test.js"
+    "test": "jest"
   },
   "dependencies": {
     "dayjs": "^1.11.7",
     "numeral": "^2.0.6"
+  },
+  "devDependencies": {
+    "jest": "^29.6.1"
   },
   "engines": {
     "npm": ">=3.0.0"
