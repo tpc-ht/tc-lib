@@ -108,6 +108,9 @@ export var BaseSelect = /*#__PURE__*/forwardRef(function (_ref, ref) {
     placeholder: "\u8BF7\u9009\u62E9",
     allowClear: true,
     showSearch: true,
+    getCalendarContainer: function getCalendarContainer(triggerNode) {
+      return triggerNode.parentNode;
+    },
     filterOption: function filterOption(input, option) {
       var _option$label;
       return ((_option$label = option === null || option === void 0 ? void 0 : option.label) !== null && _option$label !== void 0 ? _option$label : "").toLowerCase().includes(input.toLowerCase());

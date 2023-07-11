@@ -107,6 +107,9 @@ export var BaseTreeSelect = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
   }) : /*#__PURE__*/_jsx(TreeSelect, _objectSpread(_objectSpread({
     allowClear: true,
     showSearch: true,
+    getCalendarContainer: function getCalendarContainer(triggerNode) {
+      return triggerNode.parentNode;
+    },
     fieldNames: fieldNames,
     value: value,
     loading: load || loading,

@@ -123,6 +123,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         placeholder="请选择"
         allowClear
         showSearch
+        getCalendarContainer={(triggerNode) => triggerNode.parentNode}
         filterOption={(input, option) =>
           ((option?.label ?? "") as any)
             .toLowerCase()
