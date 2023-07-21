@@ -1,5 +1,3 @@
-var _templateObject;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 import { Space } from "@tc-lib/components";
 import { InputNumber } from "antd";
 import React, { useRef } from "react";
@@ -8,7 +6,10 @@ import { usePrefix } from "../../hooks";
 import "./index.less";
 import { jsx as _jsx } from "react/jsx-runtime";
 import { jsxs as _jsxs } from "react/jsx-runtime";
-var InputContent = styled.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  .ant-input-number {\n    width: ", "px;\n    position: relative;\n    input {\n      padding: 0 ", "px 0 4px;\n    }\n    &::after {\n      position: absolute;\n      content: \"", "\";\n      right: 4px;\n      top: 0;\n      bottom: 0;\n      line-height: 30px;\n      font-size: 12px;\n      color: #bbb;\n    }\n  }\n"])), function (e) {
+var InputContent = styled.div.withConfig({
+  displayName: "InputContent",
+  componentId: "components-6f0d__sc-1cwhpg-0"
+})([".ant-input-number{width:", "px;position:relative;input{padding:0 ", "px 0 4px;}&::after{position:absolute;content:\"", "\";right:4px;top:0;bottom:0;line-height:30px;font-size:12px;color:#bbb;}}"], function (e) {
   return e.suffix ? 70 : 50;
 }, function (e) {
   return e.suffix ? 26 : 4;

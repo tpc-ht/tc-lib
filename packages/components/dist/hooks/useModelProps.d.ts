@@ -1,4 +1,4 @@
-import { ModalProps } from 'antd';
+import { ModalProps } from "antd";
 export declare type IHandleModalVisible<T> = (flag?: boolean, value?: T, extra?: IExtraModalProps<T>) => void;
 export interface IExtraModalProps<T, U = any> extends ModalProps {
     modalType?: U;
@@ -8,7 +8,7 @@ export interface IExtraModalProps<T, U = any> extends ModalProps {
 }
 export interface IModalProps<T, U = any> extends IExtraModalProps<T, U> {
     open: boolean;
-    value?: Partial<T>;
+    value?: T;
 }
 /** model开启规范 */
 export declare const useModelProps: <T>(value?: IModalProps<T, any>) => [IModalProps<T, any>, (flag?: boolean, value?: T, extra?: IExtraModalProps<T, any>) => void];

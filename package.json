@@ -15,8 +15,7 @@
     "build:u": "yarn workspace @tc-lib/utils build",
     "clean": "lerna clean",
     "publish": "lerna publish",
-    "start:c": "yarn workspace @tc-lib/components dev",
-    "start:u": "yarn workspace @tc-lib/utils dev",
+    "start": "yarn workspace @tc-lib/doc dev",
     "test:u": "yarn workspace @tc-lib/utils test"
   },
   "dependencies": {

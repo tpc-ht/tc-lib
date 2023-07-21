@@ -1,5 +1,5 @@
 import { Disabled } from "@tc-lib/components";
-import { getAttrFromArr, getTreeNodes, isArr } from "@tc-lib/utils";
+import { getAttrFromArr, getTreeNodes, isArr, isVoid } from "@tc-lib/utils";
 import { useRequest } from "ahooks";
 import { TreeSelect, TreeSelectProps } from "antd";
 import React, {
@@ -76,7 +76,7 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
       }
     );
     const expandedKeys = useMemo(() => {
-      return data?.[0]?.value ? [data?.[0]?.value] : [];
+      return !isVoid(data?.[0]?.value) ? [data?.[0]?.value] : [];
     }, [data]);
 
     useImperativeHandle<any, IBaseTreeSelectRef>(
