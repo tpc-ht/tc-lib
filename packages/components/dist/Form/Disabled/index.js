@@ -49,7 +49,7 @@ export var Disabled = /*#__PURE__*/memo(function (_ref) {
     }
   }, [value]);
   if (isFullObj(dangerouslySetInnerHTML)) return /*#__PURE__*/_jsx("div", _objectSpread(_objectSpread({
-    className: csn("form-preview-text", className)
+    className: csn("form-preview-text", prefix + "-html", className)
   }, e), {}, {
     dangerouslySetInnerHTML: dangerouslySetInnerHTML || {
       __html: ""

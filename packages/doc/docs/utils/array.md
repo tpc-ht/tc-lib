@@ -57,10 +57,12 @@ complement(A, B, 'id')
 ```
 ## 获取对象匹配的节点对象
 ```javascript
-import { getArrNodes } from '@tc-lib/utils'
+import { getArrNodes, getArrNode } from '@tc-lib/utils'
 console.log(
 getArrNodes([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 2, 'a')//[{a:2}]
 getArrNodes([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], [2, 3], 'a')//[{a:2},{a:3}]
+getArrNode([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 1, 'a')//{ a: 1, b: 1 }
+getArrNode([{ a: 0 }, { a: 1, b: 9 }, { a: 2 }, { a: 3 }], 1, 'a','b')//9
 ```
 ## 获取对象数组指定字段值
 ```javascript

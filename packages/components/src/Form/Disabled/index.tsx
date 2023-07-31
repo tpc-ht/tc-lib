@@ -45,7 +45,7 @@ export const Disabled = memo(
     if (isFullObj(dangerouslySetInnerHTML))
       return (
         <div
-          className={csn("form-preview-text", className)}
+          className={csn("form-preview-text", prefix + "-html", className)}
           {...e}
           dangerouslySetInnerHTML={dangerouslySetInnerHTML || { __html: "" }}
         />

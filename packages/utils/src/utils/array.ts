@@ -1,6 +1,6 @@
-import { Key } from 'react';
-import { ObjAny } from '../type';
-import { isArr, isFullArr, isStr } from './check';
+import { Key } from "react";
+import { ObjAny } from "../type";
+import { isArr, isFullArr, isStr } from "./check";
 /** 基础函数 变量处理 */
 
 /** 数组去重 */
@@ -18,7 +18,7 @@ export const intersect = (arr1: any[], arr2: any[], filed: string) => {
   if (!isArr(arr1) || !isArr(arr2)) return [];
   return (
     arr1.filter((item) =>
-      arr2.find((bItem) => item?.[filed] == bItem?.[filed]),
+      arr2.find((bItem) => item?.[filed] == bItem?.[filed])
     ) || []
   );
 };
@@ -27,7 +27,7 @@ export const intersect = (arr1: any[], arr2: any[], filed: string) => {
 export const minus = (arr1: any[], arr2: any[], filed: string) => {
   if (!isArr(arr1) || !isArr(arr2)) return [];
   return arr1.filter(
-    (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed]),
+    (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed])
   );
 };
 
@@ -36,10 +36,10 @@ export const complement = (arr1: any[], arr2: any[], filed: string) => {
   if (!isArr(arr1) || !isArr(arr2)) return [];
   return [
     ...arr1.filter(
-      (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed]),
+      (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed])
     ),
     ...arr2.filter(
-      (item) => !arr1.find((aItem) => item?.[filed] == aItem?.[filed]),
+      (item) => !arr1.find((aItem) => item?.[filed] == aItem?.[filed])
     ),
   ];
 };
@@ -62,6 +62,18 @@ export const getArrNodes = (data: any[], value: Key[] | Key, key: string) => {
   let item = data.find((e) => e[key] === value);
   return item ? [item] : [];
 };
+/** 快速匹配数组中指定节点中的值 */
+export const getArrNode = (
+  data: any[],
+  value: Key,
+  key: string,
+  field?: string
+) => {
+  if (!isArr(data)) return undefined;
+  let item = data.find((e) => e[key] === value);
+  return field && isStr(field) ? item?.[field] : item;
+};
+
 export interface FieldNames {
   value?: string;
   label?: string;
@@ -71,12 +83,12 @@ export interface FieldNames {
 export const getTreeNodes = (
   data: any[],
   val: Key[] | Key,
-  fieldNames?: FieldNames, //= { label: 'label', value: 'value', children: 'children' },
+  fieldNames?: FieldNames //= { label: 'label', value: 'value', children: 'children' },
 ) => {
   const {
     // label = 'label',
-    value = 'value',
-    children = 'children',
+    value = "value",
+    children = "children",
   } = fieldNames || {};
   if (!isArr(data)) return [];
   let nodes: any[] = [];
@@ -107,7 +119,7 @@ export const getTreeNodes = (
 export const getAttrFromArr = (
   array: ObjAny,
   attr: string,
-  separator?: string,
+  separator?: string
 ) => {
   if (!isArr(array)) return [];
   let values = [];
@@ -120,7 +132,7 @@ export const getAttrFromArr = (
 };
 
 /** 生成指定长度的数组 */
-export const makeArray = (size: number): number[] => new Array(size).fill('');
+export const makeArray = (size: number): number[] => new Array(size).fill("");
 
 /**
  * 获取数组最大值
