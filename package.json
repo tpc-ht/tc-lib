@@ -18,9 +18,7 @@
     "start": "yarn workspace @tc-lib/doc dev",
     "test:u": "yarn workspace @tc-lib/utils test"
   },
-  "dependencies": {
-    "ahooks": "^3.7.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "lerna": "^4.0.0"
   }

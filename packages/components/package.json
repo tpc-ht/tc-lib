@@ -32,11 +32,11 @@
   },
   "dependencies": {
     "ahooks": "^3.7.7",
+    "allotment": "^1.19.2",
     "antd": "4.24.8",
     "dayjs": "^1.11.7",
     "react-draggable": "^4.4.5",
     "react-highlight-words": "^0.20.0",
-    "react-split-pane": "^0.1.92",
     "styled-components": "^5.3.8"
   },
   "devDependencies": {

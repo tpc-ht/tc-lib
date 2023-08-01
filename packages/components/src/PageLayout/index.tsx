@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC, memo, ReactNode, useState } from 'react';
-import SplitPane from 'react-split-pane';
-import './index.less';
-import SideBar from './SideBar';
-const RSplitPane: any = SplitPane;
+import { Allotment } from "allotment";
+import "allotment/dist/style.css";
+import React, { CSSProperties, FC, memo, ReactNode, useState } from "react";
+import "./index.less";
+import SideBar from "./SideBar";
 export interface IPageMainProps {
   header?: ReactNode;
   children: ReactNode;
@@ -43,32 +43,32 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
     return (
       <div className="y-layout" {...extra}>
         {aside ? (
-          <RSplitPane
-            split="vertical"
-            allowResize={!visible}
-            size={visible ? 0 : minSize || 200}
-            minSize={visible ? 0 : minSize || 200}
-            maxSize={maxSize || 400}
-          >
-            <div className="y-layout-aside" style={asideStyle}>
-              <SideBar
-                visible={visible}
-                onClick={() => setVisible((e) => !e)}
-              />
-              {aside}
-            </div>
-
-            <PageMain>
-              {header ? (
-                <div className="y-layout-header" style={headStyle}>
-                  {header}
+          <>
+            <SideBar visible={visible} onClick={() => setVisible((e) => !e)} />
+            <Allotment separator={!visible}>
+              <Allotment.Pane
+                visible={!visible}
+                preferredSize={visible ? 0 : minSize || 200}
+                minSize={visible ? 0 : minSize || 200}
+                maxSize={maxSize || 400}
+              >
+                <div className="y-layout-aside" style={asideStyle}>
+                  {aside}
                 </div>
-              ) : null}
-              <div className="y-layout-app" style={bodyStyle}>
-                {children}
-              </div>
-            </PageMain>
-          </RSplitPane>
+              </Allotment.Pane>
+
+              <PageMain>
+                {header ? (
+                  <div className="y-layout-header" style={headStyle}>
+                    {header}
+                  </div>
+                ) : null}
+                <div className="y-layout-app" style={bodyStyle}>
+                  {children}
+                </div>
+              </PageMain>
+            </Allotment>
+          </>
         ) : (
           <PageMain>
             {header ? (
@@ -83,5 +83,5 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
         )}
       </div>
     );
-  },
+  }
 );

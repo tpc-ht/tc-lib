@@ -64,3 +64,13 @@ export default () => {
 | asideStyle  | 侧边栏样式    | `CSSProperties` | - |
 | headStyle   | 头部样式      | `CSSProperties` | - |
 
+## 拖拽样式设置
+``` css
+:root {
+  --focus-border: #1890ff;
+  --separator-border: rgb(240, 240, 240);
+}
+```
+更多层叠样式参考: [allotment](https://www.npmjs.com/package/allotment)
+
+
