@@ -36,6 +36,10 @@ toHyphen("ArrObj",'-');//arr-obj
 toPathParams({ name: '小明', id: 1 });//name=小明&id=1
 toPathParams({ name: '小明', id: 1 },'-');//name=小明-id=1
 ```
+## 对象转FormData参数
+```javascript
+toFormDate({ name: '小明', id: 1 });
+```
 ## 重复生成字符串
 ` const repeat = (str: string, times: number) `
 ```javascript

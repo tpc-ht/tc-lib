@@ -1,11 +1,15 @@
 import {
   complement,
+  downEle,
   getArrMax,
   getArrNode,
   intersect,
   makeArray,
   minus,
+  moveEle,
+  swapEle,
   toJSON,
+  upEle,
 } from "../src";
 let A = [
   { id: 0, name: "小0" },
@@ -67,5 +71,20 @@ describe("数组指定值", () => {
   test("01", () => {
     expect(toJSON(getArrNode(A, 1, "id"))).toBe(toJSON({ id: 1, name: "小1" }));
     expect(getArrNode(A, 1, "id", "name")).toBe("小1");
+  });
+});
+describe("数组值移动", () => {
+  let arr = [1, 2, 3, 4, 5];
+  test("数组值移动", () => {
+    expect(toJSON(moveEle(arr, 3, 0))).toBe(toJSON([4, 1, 2, 3, 5]));
+  });
+  test("数组值互换", () => {
+    expect(toJSON(swapEle(arr, 0, 4))).toBe(toJSON([5, 1, 2, 3, 4]));
+  });
+  test("数组值上移", () => {
+    expect(toJSON(upEle(arr, 0))).toBe(toJSON([1, 2, 3, 4, 5]));
+  });
+  test("数组值下移", () => {
+    expect(toJSON(downEle(arr, 0))).toBe(toJSON([2, 1, 3, 4, 5]));
   });
 });

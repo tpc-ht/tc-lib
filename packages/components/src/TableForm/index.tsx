@@ -1,5 +1,5 @@
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import { Button, Space } from 'antd';
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { Button, Space } from "antd";
 import React, {
   ReactNode,
   memo,
@@ -7,9 +7,9 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from 'react';
-import ResizeObserver from 'resize-observer-polyfill';
-import styled from 'styled-components';
+} from "react";
+import ResizeObserver from "resize-observer-polyfill";
+import styled from "styled-components";
 
 const Wrapper: any = styled.div`
   display: flex;
@@ -26,11 +26,12 @@ const FormWrapper: any = styled.div`
   flex-wrap: wrap;
   width: 100%;
   .ant-form-item-label {
-    width: ${(p: any) => (p.width ? p.width + 'px' : 'auto')};
+    width: ${(p: any) => (p.width ? p.width + "px" : "auto")};
   }
   .ant-form-item {
     margin-bottom: 10px;
-    width: ${(p: any) => (p.flag ? '33.3333%' : '25%')};
+    // width: ${(p: any) => (p.flag ? "33.3333%" : "25%")};
+    width: ${(p: any) => p.flag};
   }
   .ant-picker-range {
     width: 100%;
@@ -53,20 +54,11 @@ export interface ITableFormProps {
     submit: () => void;
     reset: () => void;
   };
-  minNum?: number;
-  maxNum?: number;
-  direction?: 'row' | 'column';
+  direction?: "row" | "column";
 }
 
 export const TableForm = memo(
-  ({
-    list,
-    labelW,
-    search,
-    direction = 'row',
-    minNum = 6,
-    maxNum = 8,
-  }: ITableFormProps) => {
+  ({ list, labelW, search, direction = "row" }: ITableFormProps) => {
     let resizeObserver: any = useRef(null);
     let _innerCont: any = useRef(null);
     const [width, setWidth] = useState<number>(0);
@@ -77,7 +69,7 @@ export const TableForm = memo(
         (entries: ResizeObserverEntry[]) => {
           const { width = 0 } = (entries[0] && entries[0].contentRect) || {};
           setWidth(width);
-        },
+        }
       );
       resizeObserver.current.observe(_innerCont.current);
     };
@@ -95,32 +87,48 @@ export const TableForm = memo(
 
     const childList = useMemo(() => {
       const len = list.length;
-      const flag = width <= 1410;
-      let o = { list, flag, len };
-      // if (len <= 4) return o;
+      const flag = (() => {
+        if (width > 1410) {
+          return "25%";
+        }
+        if (width >= 1000) {
+          return "33%";
+        }
+        if (width >= 500) {
+          return "50%";
+        } else {
+          return "100%";
+        }
+      })();
+      let o = { list, flag, len, IsChangeType: false };
       // 大屏幕
-      if (width > 1410) {
+      if (width >= 1410) {
         //多余8个
-        if (len > maxNum) {
+        if (len > 8) {
           if (show) return o;
-          return { ...o, list: list.slice(0, maxNum) };
+          return { ...o, list: list.slice(0, 8), IsChangeType: true };
         }
         return o;
+      } else if (width >= 1000) {
+        if (len > 6) {
+          if (show) return o;
+          return { ...o, list: list.slice(0, 6), IsChangeType: true };
+        }
+        return o;
+      } else if (width >= 500) {
+        if (len > 4) {
+          if (show) return o;
+          return { ...o, list: list.slice(0, 4), IsChangeType: true };
+        }
+      } else {
+        if (len > 1) {
+          if (show) return o;
+          return { ...o, list: list.slice(0, 1), IsChangeType: true };
+        }
       }
 
-      if (len > minNum) {
-        if (show) return o;
-        return { ...o, list: list.slice(0, minNum) };
-      }
       return o;
-    }, [list, width, minNum, maxNum, show]);
-
-    const IsChangeType = useMemo(() => {
-      return (
-        (childList.flag && childList.len > minNum) ||
-        (!childList.flag && childList.len > maxNum)
-      );
-    }, [childList]);
+    }, [list, width, show]);
 
     return (
       <Wrapper ref={_innerCont} direction={direction}>
@@ -129,10 +137,10 @@ export const TableForm = memo(
         </FormWrapper>
         <SearchBar
           style={
-            direction === 'column'
+            direction === "column"
               ? {
-                  width: '100%',
-                  textAlign: 'end',
+                  width: "100%",
+                  textAlign: "end",
                 }
               : {}
           }
@@ -143,7 +151,7 @@ export const TableForm = memo(
             </Button>
             <div>
               <Button onClick={search?.reset}>重置</Button>
-              {IsChangeType ? (
+              {childList.IsChangeType ? (
                 <Button
                   size="small"
                   type="link"
@@ -167,5 +175,5 @@ export const TableForm = memo(
         </SearchBar>
       </Wrapper>
     );
-  },
+  }
 );

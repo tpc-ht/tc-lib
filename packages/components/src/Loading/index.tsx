@@ -1,5 +1,8 @@
 import { Button, Empty, Spin, SpinProps } from "antd";
+import cns from "classnames";
 import React, { memo } from "react";
+import { usePrefix } from "../hooks";
+import "./index.less";
 
 export interface ILoadingProps extends SpinProps {
   loading: boolean;
@@ -21,6 +24,7 @@ export const Loading = memo(
     size = "default",
     ...e
   }: ILoadingProps) => {
+    const loadClassName = usePrefix("loading-main");
     if (error)
       return (
         <Empty
@@ -35,11 +39,14 @@ export const Loading = memo(
           ) : null}
         </Empty>
       );
+    // if (!loading && !empty) {
+    //   return children;
+    // }
     return (
       <Spin
         size={size}
         spinning={loading}
-        wrapperClassName={className}
+        wrapperClassName={cns(loadClassName, className)}
         delay={200}
         {...e}
       >

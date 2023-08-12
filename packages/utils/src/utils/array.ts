@@ -142,3 +142,56 @@ export const makeArray = (size: number): number[] => new Array(size).fill("");
  */
 export const getArrMax = (data: number[], num = 1) =>
   data.sort((a, b) => a - b).slice(-num);
+
+/**
+ * 元素位置移动
+ * @param arr 目标数组
+ * @param fromIndex 开始坐标
+ * @param toIndex 结束坐标
+ */
+export const moveEle = (arr: any[], fromIndex: number, toIndex: number) => {
+  if (!isArr(arr)) return arr;
+  // 使用splice()方法删除元素并在指定位置插入新元素
+  arr.splice(toIndex, 0, arr.splice(fromIndex, 1)[0]);
+  return arr;
+};
+/**
+ * 元素互换
+ * @param arr
+ * @param index1
+ * @param index2
+ * @returns
+ */
+export const swapEle = (arr: any[], index1: number, index2: number) => {
+  if (!isArr(arr)) return arr;
+  arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+  return arr;
+};
+/**
+ * 上移动一格
+ * @param fieldData
+ * @param index
+ */
+export const upEle = (arr: any[], index: number) => {
+  if (!isArr(arr)) return arr;
+  if (index != 0) {
+    arr[index] = arr.splice(index - 1, 1, arr[index])[0];
+  } else {
+    arr.push(arr.shift());
+  }
+  return arr;
+};
+/**
+ * 下移动一格
+ * @param fieldData
+ * @param index
+ */
+export const downEle = (arr: any[], index: number) => {
+  if (!isArr(arr)) return arr;
+  if (index != arr.length - 1) {
+    arr[index] = arr.splice(index + 1, 1, arr[index])[0];
+  } else {
+    arr.unshift(arr.splice(index, 1)[0]);
+  }
+  return arr;
+};

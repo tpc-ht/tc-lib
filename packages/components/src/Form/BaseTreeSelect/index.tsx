@@ -112,7 +112,6 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
       <TreeSelect
         allowClear
         showSearch
-        getCalendarContainer={(triggerNode) => triggerNode.parentNode}
         fieldNames={fieldNames}
         value={value}
         loading={load || loading}

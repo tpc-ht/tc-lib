@@ -105,3 +105,16 @@ import { getArrMax } from '@tc-lib/utils'
 console.log(getArrMax([1,2,3,4,5]))// [5]
 console.log(getArrMax([1,2,3,4,5], 3))// [5,4,3]
 ```
+## 数组元素移动
+```javascript
+import { moveEle,swapEle,upEle,downEle } from '@tc-lib/utils'
+let arr = [1, 2, 3, 4, 5];
+// 元素移动
+moveEle(arr, 3, 0);//[4, 1, 2, 3, 5]
+// 元素互换
+swapEle(arr, 0, 4);//[5, 1, 2, 3, 4]
+// 元素上移
+upEle(arr, 0);//[1, 2, 3, 4, 5]
+// 元素下移
+downEle(arr, 0);//[2, 1, 3, 4, 5]
+```

@@ -23,9 +23,10 @@ export const AddMapJs = (key: string, id = "TxMapJs") => {
       return;
     }
     let script = document.createElement("script");
-    document.head.appendChild(script);
+    document.body.appendChild(script);
     script.id = id;
     script.type = "text/javascript";
+    script.async = true;
     script.src = `https://map.qq.com/api/gljs?v=1.exp&libraries=service&key=${key}`;
     script.onerror = (err) => reject(err);
     script.onload = (e) => resolve(e);

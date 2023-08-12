@@ -31,19 +31,20 @@
     "test": "node ./__tests__/test.test.js"
   },
   "dependencies": {
+    "@tc-lib/utils": "^0.0.3",
     "ahooks": "^3.7.7",
     "allotment": "^1.19.2",
     "antd": "4.24.8",
     "dayjs": "^1.11.7",
+    "file-loader": "^5.0.2",
+    "react-color": "^2.19.3",
     "react-draggable": "^4.4.5",
     "react-highlight-words": "^0.20.0",
     "styled-components": "^5.3.8"
   },
   "devDependencies": {
     "father": "^4.2.3",
-    "file-loader": "^5.0.2",
     "react": "^18.0.0",
-    "react-color": "^2.19.3",
     "react-dom": "^18.0.0",
     "react-waterfall-clover": "1.0.5",
     "ts-loader": "^7.0.4",
