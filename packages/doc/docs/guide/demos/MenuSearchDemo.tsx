@@ -1,4 +1,5 @@
 import { MenuSearch } from '@tc-lib/components';
+import React from 'react';
 // import { history } from 'umi';
 const MenuSearchDemo = () => {
   const options = [
@@ -18,6 +19,8 @@ const MenuSearchDemo = () => {
         // history.push(value);
       }}
     />
+
+    //
   );
 };
 export default MenuSearchDemo;

@@ -1,12 +1,12 @@
-import { SearchOutlined } from '@ant-design/icons';
-import type { AutoCompleteProps, InputRef } from 'antd';
-import { AutoComplete, Input, Space } from 'antd';
-import classNames from 'classnames';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import Highlighter from 'react-highlight-words';
-import styled from 'styled-components';
-import { usePrefix } from '../hooks';
-import './index.less';
+import { SearchOutlined } from "@ant-design/icons";
+import type { AutoCompleteProps, InputRef } from "antd";
+import { AutoComplete, Input, Space } from "antd";
+import classNames from "classnames";
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import Highlighter from "react-highlight-words";
+import styled from "styled-components";
+import { usePrefix } from "../hooks";
+import "./index.less";
 const HighWrapper = styled(Highlighter)`
   .highlight-text {
     background-color: #ffd63f;
@@ -16,15 +16,15 @@ const HighWrapper = styled(Highlighter)`
 export type MenuSearchProps = {
   className?: string;
   placeholder?: string;
-  options?: AutoCompleteProps['options'];
+  options?: AutoCompleteProps["options"];
   onSelect?: (value: string, option: any) => void;
 };
 
 export const MenuSearch: React.FC<MenuSearchProps> = (props) => {
-  const { className, options = [], onSelect, placeholder = '搜索' } = props;
-  const prefix = usePrefix('menu-search');
+  const { className, options = [], onSelect, placeholder = "搜索" } = props;
+  const prefix = usePrefix("menu-search");
   const inputRef = useRef<InputRef | null>(null);
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
   const [searchMode, setSearchMode] = useState(false);
 
   const getShowOptions = useCallback((menuData: any, keyWord: string) => {
@@ -50,7 +50,7 @@ export const MenuSearch: React.FC<MenuSearchProps> = (props) => {
 
   const optionsData = useMemo(
     () => getShowOptions(options, value),
-    [value, options],
+    [value, options]
   );
 
   const inputClass = classNames(`${prefix}-input`, {

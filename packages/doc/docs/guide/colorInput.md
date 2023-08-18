@@ -5,7 +5,7 @@ group:
   order: 1
 order: 1
 ---
-# 颜色选择器
+# ColorInput
 ```jsx
 import { ColorInput } from '@tc-lib/components';
 import { useEffect,useState } from 'react';

@@ -1,7 +1,7 @@
 import { Disabled } from "@tc-lib/components";
-import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from "@tc-lib/utils";
+import { getArrNodes, getAttrFromArr, isFn, isStr } from "@tc-lib/utils";
 import { useRequest } from "ahooks";
-import { Select, SelectProps, Typography } from "antd";
+import { Empty, Select, SelectProps, Spin, Typography } from "antd";
 import { TextProps } from "antd/lib/typography/Text";
 import React, {
   ForwardRefExoticComponent,
@@ -10,24 +10,24 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useMemo,
+  useState,
 } from "react";
-export type IBaseSelectProps = {
+export type IBaseSearchSelectProps = {
   /** 接口函数 */
-  serverFun: (params?: any) => Promise<any>;
-  /** 下拉数据 外部传递避免重复渲染出现的多次请求 */
+  serverFun: (params: any) => Promise<any>;
   dataSource?: any[];
   /** 默认请求参数 */
   params?: { [key: string]: any };
-  /** 是否手动请求 默认false */
-  manual?: boolean;
-  /** 是否多选 */
+  /** 是否多选 默认 true */
   isMultiple?: boolean;
+  /** 防抖 默认 500ms*/
+  debounceWait?: number;
   /** 每一项描述 */
   description?: string | ((row: any, index: number) => ReactNode);
-  /** 自定义lobel */
+  /** 自定义label */
   labelFormat?: (row: any, index: number) => ReactNode;
 } & SelectProps;
-export interface IBaseSelectRef {
+export interface IBaseSearchSelectRef {
   refresh(): void;
   run(...params: any): void;
   mutate(data?: any | ((oldData?: any) => any | undefined)): void;
@@ -42,7 +42,7 @@ export const DescriptionText = (props: TextProps) => (
   <Text type="secondary" {...props} />
 );
 type CompoundedComponent = ForwardRefExoticComponent<
-  IBaseSelectProps & RefAttributes<any>
+  IBaseSearchSelectProps & RefAttributes<any>
 > & {
   DescriptionText: typeof DescriptionText;
 };
@@ -54,41 +54,45 @@ const getMultiple = (isMultiple = true): any =>
       }
     : undefined;
 // @ts-ignore
-export const BaseSelect: CompoundedComponent = forwardRef(
+export const BaseSearchSelect: CompoundedComponent = forwardRef(
   (
     {
       serverFun = required(),
       params,
-      manual = false,
       fieldNames = { label: "label", value: "value", options: "options" },
       description,
       labelFormat,
       disabled,
+      dataSource,
+      debounceWait = 500,
       isMultiple = true,
       value,
-      dataSource,
       loading: load,
       ...extra
     },
     ref
   ) => {
-    const isOpt = useMemo(() => isArr(dataSource), [dataSource]);
-    const { label = "label", value: val = "value" } = useMemo(
-      () => fieldNames,
-      [fieldNames]
+    const [emptyText, SetEmptyText] = useState<string | undefined>(
+      "请输入关键词进行搜索"
     );
-
     const { loading, data, run, refresh, mutate } = useRequest(
       (e) => serverFun({ ...params, ...e }),
       {
-        manual: isOpt || manual,
+        manual: true,
+        debounceWait,
+        onSuccess() {
+          SetEmptyText(undefined);
+        },
+        onError() {
+          SetEmptyText(undefined);
+        },
       }
     );
     const list = useMemo(
-      () => (isOpt ? dataSource : data),
-      [isOpt, dataSource, data]
+      () => (dataSource ? dataSource : data),
+      [dataSource, data]
     );
-    useImperativeHandle<any, IBaseSelectRef>(
+    useImperativeHandle<any, IBaseSearchSelectRef>(
       ref,
       () => ({
         run: (e) => {
@@ -103,6 +107,10 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       }),
       [run, refresh, mutate]
     );
+    const { label = "label", value: val = "value" } = useMemo(
+      () => fieldNames,
+      [fieldNames]
+    );
     const getDescriptionText = (e: any, index: number) => {
       if (isStr(description)) return e?.[description];
       if (isFn(description)) return description(e, index);
@@ -112,23 +120,38 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         let text = getAttrFromArr(getArrNodes(list, value, val), label, ",");
         return text || value;
       }
-    }, [list, disabled, value]);
+    }, [list, disabled, value, label, val]);
 
+    const onSearch = (e: string) => {
+      if (!e) return;
+      mutate([]);
+      SetEmptyText("加载中");
+      run({ phoneKeyword: e });
+    };
+    const onDropdownVisibleChange = (e: boolean) => {
+      if (e) SetEmptyText("请输入关键词进行搜索");
+    };
     return disabled ? (
       <Disabled value={disValue} />
     ) : (
       <Select
-        loading={load || loading}
-        optionLabelProp={label}
         style={{ width: "100%" }}
+        optionLabelProp={label}
         placeholder="请选择"
         allowClear
         showSearch
-        // getCalendarContainer={(triggerNode) => triggerNode.parentNode}
-        filterOption={(input, option) =>
-          ((option?.label ?? "") as any)
-            .toLowerCase()
-            .includes(input.toLowerCase())
+        onSearch={onSearch}
+        showArrow={false}
+        filterOption={false}
+        loading={loading || load}
+        onDropdownVisibleChange={onDropdownVisibleChange}
+        notFoundContent={
+          <Spin size="small" spinning={loading} delay={200}>
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description={emptyText}
+            />
+          </Spin>
         }
         value={value}
         disabled={disabled}

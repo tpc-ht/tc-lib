@@ -5,7 +5,7 @@ group:
   order: 0
 order: 0
 ---
-# 禁用
+# Disabled
 
 ## Disabled 禁用
 ```jsx

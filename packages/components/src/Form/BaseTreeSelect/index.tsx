@@ -9,7 +9,7 @@ import React, {
   useMemo,
 } from "react";
 type SelectType = "radio" | "multiple" | "checkbox";
-export interface IBaseTreeSelectProps extends TreeSelectProps {
+export type IBaseTreeSelectProps = {
   /** 接口函数 */
   serverFun: (params: any) => Promise<any>;
   /** 下拉数据 外部传递避免重复渲染出现的多次请求 */
@@ -18,9 +18,11 @@ export interface IBaseTreeSelectProps extends TreeSelectProps {
   params?: { [key: string]: any };
   /** 是否手动请求 默认false */
   manual?: boolean;
-  /** 选择类型 */
+  /** 选择类型 "multiple" | "radio" | "checkbox" */
   selectType?: SelectType;
-}
+  /** 顶端开启 默认 true */
+  topExpanded?: boolean;
+} & TreeSelectProps;
 export interface IBaseTreeSelectRef {
   refresh(): void;
   run(...params: any): void;
@@ -58,7 +60,8 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
       serverFun = required(),
       params,
       manual = false,
-      fieldNames,
+      topExpanded = true,
+      fieldNames = { label: "label", value: "value", children: "children" },
       dataSource,
       selectType = "radio",
       loading: load,
@@ -76,8 +79,11 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
       }
     );
     const expandedKeys = useMemo(() => {
-      return !isVoid(data?.[0]?.value) ? [data?.[0]?.value] : [];
-    }, [data]);
+      if (!topExpanded) return undefined;
+      return !isVoid(data?.[0]?.[fieldNames.value])
+        ? [data?.[0]?.[fieldNames.value]]
+        : [];
+    }, [data, fieldNames, topExpanded]);
 
     useImperativeHandle<any, IBaseTreeSelectRef>(
       ref,

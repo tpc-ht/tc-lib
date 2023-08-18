@@ -5,7 +5,7 @@ group:
   order: 0
 order: 0
 ---
-# 进度条
+# ProgressBar
 ```jsx
 import { ProgressBar } from '@tc-lib/components';
 import { useEffect,useState } from 'react';
