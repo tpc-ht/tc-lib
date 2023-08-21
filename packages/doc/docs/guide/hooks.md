@@ -3,7 +3,7 @@ toc: content
 ---
 # Hooks
 
-## useModelProps model开启规范
+## useModalProps model开启规范
 开启对话框统一方式
 <code src="./demos/useModel.tsx"></code>
 ```

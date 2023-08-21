@@ -1,2 +1,2 @@
-export * from './useModelProps';
+export * from './useModalProps';
 export * from './usePrefix';

@@ -1,4 +1,4 @@
-import { IModalProps, useModelProps } from '@tc-lib/utils;';
+import { IModalProps, useModalProps } from '@tc-lib/utils;';
 import { Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import React from 'react';
@@ -25,7 +25,7 @@ const CreateModal: React.FC<ICreateModalProps> = ({
   );
 };
 export default () => {
-  const [modalProps, setModalProps] = useModelProps<any>({
+  const [modalProps, setModalProps] = useModalProps<any>({
     open: false,
   });
   return (

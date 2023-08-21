@@ -21,7 +21,7 @@ const obj1 = { ...extra, a }
 const obj1 = { a, ...extra }
 ```
 ## ant弹窗开启规范
-使用 `@tc-lib/utils` 的 `useModelProps`
+使用 `@tc-lib/utils` 的 `useModalProps`
 
 ## 组件封装约定
 1. formily组件封装，拆分一个通用纯组件，基于formily规范二次封装（接口业务）

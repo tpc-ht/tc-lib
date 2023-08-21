@@ -16,7 +16,7 @@ export interface IModalProps<T, U = any> extends IExtraModalProps<T, U> {
   value?: T;
 }
 /** model开启规范 */
-export const useModelProps = <T>(
+export const useModalProps = <T>(
   value?: IModalProps<T>
 ): [
   IModalProps<T>,

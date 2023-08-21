@@ -2,7 +2,7 @@ import {
   DragModal,
   IModalProps,
   ModalFooter,
-  useModelProps,
+  useModalProps,
 } from '@tc-lib/components';
 import { Button, Space } from 'antd';
 // import 'antd/dist/antd.css';
@@ -20,13 +20,15 @@ const CreateModal: React.FC<CreateFormModalProps> = ({
     <DragModal
       {...extra}
       title="Basic Modal"
-      onCancel={() => handleModalVisible(false, value)}
-      afterClose={() => handleModalVisible()}
+      onCancel={() => handleModalVisible?.(false, value)}
+      afterClose={() => handleModalVisible?.()}
     >
       <div style={{ padding: 10 }}>
         <p>Some contents...</p>
         <p>Some contents...</p>
-        <p onClick={() => handleModalVisible(false, value)}>Some contents...</p>
+        <p onClick={() => handleModalVisible?.(false, value)}>
+          Some contents...
+        </p>
       </div>
 
       <ModalFooter>
@@ -37,7 +39,7 @@ const CreateModal: React.FC<CreateFormModalProps> = ({
   );
 };
 export default () => {
-  const [modalProps, setModalProps] = useModelProps<any>({
+  const [modalProps, setModalProps] = useModalProps<any>({
     open: false,
   });
   return (
