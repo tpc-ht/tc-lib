@@ -1,6 +1,6 @@
 {
   "name": "@tc-lib/utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "> TODO: description",
   "homepage": "https://github.com/tpc-ht/tc-lib#readme",
   "bugs": {
@@ -27,8 +27,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@tc-lib/components": "^0.0.3",
-    "@tc-lib/utils": "^0.0.3",
+    "@tc-lib/components": "^0.0.4",
+    "@tc-lib/utils": "^0.0.4",
     "dayjs": "^1.11.7",
     "numeral": "^2.0.6"
   },
