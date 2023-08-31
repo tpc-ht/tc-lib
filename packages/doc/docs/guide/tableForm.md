@@ -7,6 +7,7 @@ toc: content
 ```jsx
 import { PageLayout,TableForm } from '@tc-lib/components';
 import { Space, Button, Form, Input } from 'antd';
+import 'antd/dist/antd.less';
 const FormItem = Form.Item;
 export default () => {
     
@@ -14,14 +15,6 @@ export default () => {
     return <Form form={form}>
             <TableForm
               list={[
-                <FormItem noStyle key="as12">
-                  <FormItem name="Input1" key="Input1" label="Input1">
-                    <Input placeholder="请输入" allowClear />
-                  </FormItem>
-                  <FormItem hidden key="Input0" name="Input0">
-                    <Input />
-                  </FormItem>
-                </FormItem>,
                 <FormItem name="Input2" key="Input2" label="Input2">
                     <Input placeholder="请输入" allowClear />
                 </FormItem>,

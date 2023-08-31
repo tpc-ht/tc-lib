@@ -84,4 +84,11 @@ useUnactivate(() => {
   handleModalVisible?.();
 });
 ```
-## 提交规范
+## antd
+### 4.x className 前缀修改
+```css
+@import '~antd/lib/style/themes/default.less';
+  .@{ant-prefix}-xxxxx {
+    border: none;
+  }
+```

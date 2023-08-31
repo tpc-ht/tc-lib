@@ -118,3 +118,12 @@ upEle(arr, 0);//[1, 2, 3, 4, 5]
 // 元素下移
 downEle(arr, 0);//[2, 1, 3, 4, 5]
 ```
+## 拆分数组为指定元组
+```javascript
+import { splitArr } from '@tc-lib/utils'
+let arr = [1, 2, 3, 4, 5];
+// 基础
+splitArr(arr, 3);//[[1, 2, 3], [4, 5]]
+// 空隙填充
+splitArr(arr, 3, true);//[[1, 2, 3], [4, 5, undefined]]
+```

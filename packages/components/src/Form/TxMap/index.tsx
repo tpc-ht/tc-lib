@@ -2,6 +2,7 @@ import { AimOutlined } from "@ant-design/icons";
 import { debounce } from "@tc-lib/utils";
 import { Select, Typography, message } from "antd";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
+import { usePrefix } from "../../hooks";
 import "./index.less";
 const { Text } = Typography;
 
@@ -58,6 +59,7 @@ export const TxMap = memo(
     value,
     ...e
   }: ITXMapPropsType) => {
+    const prefix = usePrefix("tx-map");
     const markerLayerRef = useRef<any>(null);
     const mapRef = useRef<any>(null);
     const [location, setLocation] = useState<any>();
@@ -221,13 +223,9 @@ export const TxMap = memo(
     }, [value]);
 
     return (
-      <div
-        className="tc-lib-map-main"
-        style={{ height, minHeight: 200 }}
-        {...e}
-      >
+      <div className={prefix} style={{ height, minHeight: 200 }} {...e}>
         {!disabled ? (
-          <div className="map-search">
+          <div className={prefix + "-search"}>
             <Select
               showSearch
               placeholder="请输入地址"
@@ -255,11 +253,11 @@ export const TxMap = memo(
             />
           </div>
         ) : null}
-        <div id={id} className="map-content" />
+        <div id={id} className={prefix + "-content"} />
         {/*定位*/}
         {location ? (
           <div
-            className="map-location"
+            className={prefix + "-location"}
             onClick={(e) => {
               e.stopPropagation();
               getAtLocation();

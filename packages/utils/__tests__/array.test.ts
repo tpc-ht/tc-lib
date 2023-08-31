@@ -7,6 +7,7 @@ import {
   makeArray,
   minus,
   moveEle,
+  splitArr,
   swapEle,
   toJSON,
   upEle,
@@ -86,5 +87,24 @@ describe("数组值移动", () => {
   });
   test("数组值下移", () => {
     expect(toJSON(downEle(arr, 0))).toBe(toJSON([2, 1, 3, 4, 5]));
+  });
+});
+describe("数组拆分为元组", () => {
+  let arr = [1, 2, 3, 4, 5];
+  test("元组拆分", () => {
+    expect(toJSON(splitArr(arr, 3))).toBe(
+      toJSON([
+        [1, 2, 3],
+        [4, 5],
+      ])
+    );
+  });
+  test("元组拆分-空袭填充", () => {
+    expect(toJSON(splitArr(arr, 3, true))).toBe(
+      toJSON([
+        [1, 2, 3],
+        [4, 5, undefined],
+      ])
+    );
   });
 });

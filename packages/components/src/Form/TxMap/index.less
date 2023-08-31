@@ -1,29 +1,36 @@
-.tc-libib-map-main {
+@import "~antd/lib/style/themes/default.less";
+@import "../../assets/variables.less";
+.@{ant-prefix}-formily-item-error {
+  .@{prefix-cls}-map-main {
+    border: 1px solid var(--ant-error-color) !important;
+  }
+}
+.@{prefix-cls}-tx-map {
   position: relative;
 
   /*清除腾讯logo*/
-  .map-content > div:nth-child(2) {
+  &-content > div:nth-child(2) {
     z-index: 500 !important;
   }
-  .map-content
+  &-content
     > div:nth-child(2)
     > div:nth-child(2)
     > div:nth-child(1)
     > div:nth-child(2) {
     display: none !important;
   }
-  .map-content {
+  &-content {
     height: 100%;
     width: 100%;
   }
-  .map-search {
+  &-search {
     position: absolute;
     left: 10px;
     top: 10px;
     z-index: 1;
     z-index: 501;
   }
-  .map-location {
+  &-location {
     position: absolute;
     right: 30px;
     bottom: 20px;

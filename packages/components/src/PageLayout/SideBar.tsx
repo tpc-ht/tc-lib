@@ -2,21 +2,21 @@
  * 侧边树状图收缩按钮
  * */
 
-import classNames from 'classnames';
-import React from 'react';
-import sidebarHide from '../assets/side-bar-hide.svg';
-import sidebarOpen from '../assets/side-bar-open.svg';
-import './index.less';
+import classNames from "classnames";
+import React from "react";
+import sidebarHide from "../assets/side-bar-hide.svg";
+import sidebarOpen from "../assets/side-bar-open.svg";
 
 interface SideBarProps {
+  className: string;
   visible: boolean;
   onClick: () => void;
 }
 
 const SideBar: React.FC<SideBarProps> = (props) => {
-  const { visible, onClick } = props;
+  const { visible, onClick, className } = props;
   return (
-    <div className={'side-handle-bar'} onClick={onClick}>
+    <div className={className} onClick={onClick}>
       <img
         src={sidebarHide}
         alt="点击展开"

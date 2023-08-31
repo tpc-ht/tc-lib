@@ -1,6 +1,15 @@
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
-import React, { CSSProperties, FC, memo, ReactNode, useState } from "react";
+import React, {
+  CSSProperties,
+  FC,
+  memo,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { usePrefix } from "../hooks";
 import "./index.less";
 import SideBar from "./SideBar";
 export interface IPageMainProps {
@@ -10,8 +19,9 @@ export interface IPageMainProps {
   headStyle?: CSSProperties;
 }
 export const PageMain = ({ children, ...e }: IPageMainProps) => {
+  const mainClass = usePrefix("page-layout");
   return (
-    <div className="y-layout-main" {...e}>
+    <div className={mainClass + "-main"} {...e}>
       {children}
     </div>
   );
@@ -32,38 +42,46 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
     aside,
     header,
     children,
-    minSize,
-    maxSize,
+    minSize = 200,
+    maxSize = 400,
     bodyStyle,
     asideStyle,
     headStyle,
     ...extra
   }) => {
+    const mainClass = usePrefix("page-layout");
     const [visible, setVisible] = useState(false);
+    const ref = useRef<any>();
+    useEffect(() => {
+      setTimeout(() => ref.current?.reset(), 0);
+    }, []);
     return (
-      <div className="y-layout" {...extra}>
+      <div className={mainClass} {...extra}>
         {aside ? (
           <>
-            <SideBar visible={visible} onClick={() => setVisible((e) => !e)} />
-            <Allotment separator={!visible}>
+            <SideBar
+              visible={visible}
+              className={mainClass + "-side-bar"}
+              onClick={() => setVisible((e) => !e)}
+            />
+            <Allotment separator={!visible} ref={ref}>
               <Allotment.Pane
                 visible={!visible}
-                preferredSize={visible ? 0 : minSize || 200}
-                minSize={visible ? 0 : minSize || 200}
-                maxSize={maxSize || 400}
+                preferredSize={minSize}
+                minSize={minSize}
+                maxSize={maxSize}
               >
-                <div className="y-layout-aside" style={asideStyle}>
+                <div className={mainClass + "-aside"} style={asideStyle}>
                   {aside}
                 </div>
               </Allotment.Pane>
-
               <PageMain>
                 {header ? (
-                  <div className="y-layout-header" style={headStyle}>
+                  <div className={mainClass + "-header"} style={headStyle}>
                     {header}
                   </div>
                 ) : null}
-                <div className="y-layout-app" style={bodyStyle}>
+                <div className={mainClass + "-app"} style={bodyStyle}>
                   {children}
                 </div>
               </PageMain>
@@ -72,11 +90,11 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
         ) : (
           <PageMain>
             {header ? (
-              <div className="y-layout-header" style={headStyle}>
+              <div className={mainClass + "-header"} style={headStyle}>
                 {header}
               </div>
             ) : null}
-            <div className="y-layout-app" style={bodyStyle}>
+            <div className={mainClass + "-app"} style={bodyStyle}>
               {children}
             </div>
           </PageMain>

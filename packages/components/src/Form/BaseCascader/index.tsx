@@ -78,7 +78,7 @@ export const BaseCascader: CompoundedComponent = forwardRef(
     const filter = (inputValue: string, path: DefaultOptionType[]) =>
       path.some(
         (option) =>
-          (option.label as string)
+          (option[fieldNames?.label || "label"] as string)
             .toLowerCase()
             .indexOf(inputValue.toLowerCase()) > -1
       );

@@ -195,3 +195,20 @@ export const downEle = (arr: any[], index: number) => {
   }
   return arr;
 };
+
+/**
+ * 拆分数组为指定长度元组
+ */
+export const splitArr = (arr: any[], len: number, isFill = false) => {
+  if (!isArr(arr)) return [];
+  const tuples = [];
+  for (let i = 0; i < arr.length; i += len) {
+    const subArray = arr.slice(i, i + len);
+    const diff = len - subArray.length;
+    if (diff && isFill) {
+      subArray.push(...Array(diff));
+    }
+    tuples.push(subArray);
+  }
+  return tuples;
+};
