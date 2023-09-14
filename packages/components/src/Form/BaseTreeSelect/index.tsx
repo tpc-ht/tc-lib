@@ -78,12 +78,14 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
         manual: isOpt || manual,
       }
     );
+
+    const treeData = useMemo(() => (isOpt ? dataSource : data), [data, isOpt]);
     const expandedKeys = useMemo(() => {
       if (!topExpanded) return undefined;
-      return !isVoid(data?.[0]?.[fieldNames.value])
-        ? [data?.[0]?.[fieldNames.value]]
+      return !isVoid(treeData?.[0]?.[fieldNames.value])
+        ? [treeData?.[0]?.[fieldNames.value]]
         : [];
-    }, [data, fieldNames, topExpanded]);
+    }, [treeData, fieldNames, topExpanded]);
 
     useImperativeHandle<any, IBaseTreeSelectRef>(
       ref,
@@ -104,13 +106,13 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
     const disValue: any = useMemo(() => {
       if (disabled) {
         let text = getAttrFromArr(
-          getTreeNodes(isOpt ? dataSource : data, value, fieldNames),
+          getTreeNodes(treeData, value, fieldNames),
           fieldNames?.label || "label",
           ","
         );
         return text || value;
       }
-    }, [isOpt, dataSource, data, disabled, value]);
+    }, [treeData, disabled, value]);
 
     return disabled ? (
       <Disabled value={disValue} />
@@ -124,7 +126,7 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
         style={{ width: "100%" }}
         placeholder="请选择"
         treeDefaultExpandAll
-        treeData={isOpt ? dataSource : data}
+        treeData={treeData}
         treeIcon //
         treeNodeFilterProp="label"
         treeLine={{ showLeafIcon: false }}
