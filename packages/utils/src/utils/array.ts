@@ -1,6 +1,6 @@
 import { Key } from "react";
 import { ObjAny } from "../type";
-import { isArr, isFullArr, isStr } from "./check";
+import { isArr, isFullArr, isNum, isStr } from "./check";
 /** 基础函数 变量处理 */
 
 /** 数组去重 */
@@ -200,7 +200,7 @@ export const downEle = (arr: any[], index: number) => {
  * 拆分数组为指定长度元组
  */
 export const splitArr = (arr: any[], len: number, isFill = false) => {
-  if (!isArr(arr)) return [];
+  if (!isArr(arr) || !isNum(len)) return [];
   const tuples = [];
   for (let i = 0; i < arr.length; i += len) {
     const subArray = arr.slice(i, i + len);
@@ -211,4 +211,29 @@ export const splitArr = (arr: any[], len: number, isFill = false) => {
     tuples.push(subArray);
   }
   return tuples;
+};
+
+/**
+ * 树节点数据格式化
+ * @param data
+ * @param nodeCallback
+ * @param childrenName
+ * @returns
+ */
+export const treeFormat = (
+  data: any[],
+  nodeCallback: (e: any) => any,
+  childrenName = "children"
+) => {
+  return data?.map((item) => {
+    let row = {
+      ...item,
+      ...nodeCallback?.(item),
+      children: null,
+    };
+    if (isArr(item[childrenName]) && item[childrenName].length) {
+      row.children = treeFormat(item[childrenName], nodeCallback, childrenName);
+    }
+    return row;
+  });
 };

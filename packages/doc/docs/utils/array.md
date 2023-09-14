@@ -127,3 +127,63 @@ splitArr(arr, 3);//[[1, 2, 3], [4, 5]]
 // 空隙填充
 splitArr(arr, 3, true);//[[1, 2, 3], [4, 5, undefined]]
 ```
+## treeFormat
+树节点数据格式化
+``` javascript
+import { treeFormat } from '@tc-lib/utils'
+import {
+    BugTwoTone,
+    CarTwoTone
+} from '@ant-design/icons';
+const treeData = [
+  {
+    value: 'parent 1',
+    title: 'parent 1',
+    children: [
+      {
+        value: 'parent 1-0',
+        title: 'parent 1-0',
+        children: [
+          {
+            value: 'leaf1',
+            title: 'leaf1',
+          },
+          {
+            value: 'leaf2',
+            title: 'leaf2',
+          },
+        ],
+      },
+      {
+        value: 'parent 1-1',
+        title: 'parent 1-1',
+        type: 0,
+        children: [
+          {
+            value: 'leaf3',
+            title: <b style={{ color: '#08c' }}>leaf3</b>,
+          },
+        ],
+      },
+    ],
+  },
+];
+const data = useMemo(()=>treeFormat(
+    treeData,
+    (item) => {
+      return {
+        label: item.title,
+        disabled: item.type === 0,
+        icon: item.type ? <BugTwoTone />:<CarTwoTone />,
+      };
+    }
+  ),[])
+```
+
+```js
+treeFormat = (
+  data: any[],
+  nodeCallback: (e: any) => any,
+  childrenName = "children"
+)
+```
