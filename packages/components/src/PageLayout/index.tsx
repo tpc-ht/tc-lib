@@ -1,5 +1,6 @@
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
+import csn from "classnames";
 import React, {
   CSSProperties,
   FC,
@@ -36,6 +37,7 @@ export interface IPageLayoutProps {
   bodyStyle?: CSSProperties;
   asideStyle?: CSSProperties;
   headStyle?: CSSProperties;
+  className?: string;
 }
 export const PageLayout: FC<IPageLayoutProps> = memo(
   ({
@@ -47,6 +49,7 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
     bodyStyle,
     asideStyle,
     headStyle,
+    className,
     ...extra
   }) => {
     const mainClass = usePrefix("page-layout");
@@ -56,7 +59,7 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
       setTimeout(() => ref.current?.reset(), 0);
     }, []);
     return (
-      <div className={mainClass} {...extra}>
+      <div className={csn(mainClass, className)} {...extra}>
         {aside ? (
           <>
             <SideBar

@@ -1,4 +1,4 @@
-import { usePrefix } from "@tc-lib/components";
+import { Disabled, Space, usePrefix } from "@tc-lib/components";
 import { Input, Popover } from "antd";
 import React, { useRef } from "react";
 import { SketchPicker } from "react-color";
@@ -7,21 +7,40 @@ import "./index.less";
 export interface IColorInputProps {
   value?: string;
   onChange?: (color: string) => void;
+  disabled?: boolean;
 }
-
-export const ColorInput: React.FC<IColorInputProps> = (props) => {
+const colorBox = (value: string) =>
+  value ? (
+    <Space align="center" size={6}>
+      <div
+        style={{
+          height: 15,
+          width: 15,
+          backgroundColor: value,
+        }}
+      />
+      {value}
+    </Space>
+  ) : undefined;
+export const ColorInput: React.FC<IColorInputProps> = ({
+  value,
+  onChange,
+  disabled,
+}) => {
   const container = useRef<HTMLDivElement>();
   const prefix = usePrefix("color-input");
-  const color = props.value as string;
+  const color = value as string;
+
+  if (disabled) return <Disabled value={colorBox(color)} />;
   return (
     <div ref={container} className={prefix}>
       <Input
-        value={props.value}
+        value={value}
         onChange={(e) => {
-          props.onChange?.(e.target.value);
+          onChange?.(e.target.value);
         }}
         allowClear
-        placeholder="颜色"
+        placeholder="颜色6666"
         prefix={
           <Popover
             autoAdjustOverflow
@@ -32,7 +51,7 @@ export const ColorInput: React.FC<IColorInputProps> = (props) => {
               <SketchPicker
                 color={color}
                 onChange={({ rgb }) => {
-                  props.onChange?.(`rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`);
+                  onChange?.(`rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`);
                 }}
               />
             }

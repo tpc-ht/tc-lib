@@ -19,3 +19,4 @@ export default ()=>{
 | ---- | --- | --- | --- | --- |
 | value   | 值      | `number` | - | - |
 | onChange | 变更回调  | `(color: number) => void`    | - | - |
+| disabled | 禁用  | `boolean`    | - | - |

@@ -12,6 +12,7 @@
     "boot": "lerna bootstrap",
     "build": "yarn build:c & yarn build:u",
     "build:c": "yarn workspace @tc-lib/components build",
+    "build:d": "yarn workspace @tc-lib/doc docs:build",
     "build:u": "yarn workspace @tc-lib/utils build",
     "clean": "lerna clean",
     "publish": "lerna publish",
