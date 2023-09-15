@@ -1,6 +1,6 @@
 {
   "name": "@tc-lib/components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "homepage": "https://github.com/tpc-ht/tc-lib#readme",
   "bugs": {
@@ -31,7 +31,7 @@
     "test": "node ./__tests__/test.test.js"
   },
   "dependencies": {
-    "@tc-lib/utils": "^0.0.4",
+    "@tc-lib/utils": "^0.0.5",
     "ahooks": "^3.7.7",
     "allotment": "^1.19.2",
     "antd": "4.24.8",
