@@ -89,6 +89,9 @@
   },
   "authors": [],
   "gitHead": "ee57d22280cdec8b3de7111c05427dd746eb1b59",
+  "gitHooks": {
+    "commit-msg": "node ./commitlint.js verify-commit"
+  },
   "rules": {
     "no-unused-vars": "off"
   }
