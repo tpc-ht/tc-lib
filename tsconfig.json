@@ -1,23 +1,23 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "moduleResolution": "node",
-        "jsx": "react",
-        "module": "commonjs",
-        "target": "es5",
-        "allowJs": false,
-        "noUnusedLocals": true,
-        "preserveConstEnums": true,
-        "sourceMap": false,
-        "declaration": true,
-        "skipLibCheck": true,
-        "experimentalDecorators": true,
-        "downlevelIteration": true,
-        "baseUrl": ".",
-        "paths": {
-            "@tc-lib/*": [
-                "./packages/*/src"
-            ]
-        },
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": false,
+    "noUnusedLocals": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "declaration": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tc-lib/*": [
+        "./packages/*/src"
+      ]
     },
+  },
 }
