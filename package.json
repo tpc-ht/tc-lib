@@ -49,6 +49,11 @@
       "@commitlint/config-conventional"
     ]
   },
+  "config": {
+    "ghooks": {
+      "commit-msg": "node ./commitlint.js"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.21.3",

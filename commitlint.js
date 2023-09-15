@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
+console.log('001');
 const yParser = require('yargs-parser');
 const chalk = require('chalk');
-const osLocale = require('os-locale');
+// const osLocale = require('os-locale');
 
 // 截取命令行参数
 const args = yParser(process.argv.slice(2));
 const option = args._[0];
-
+console.log('001');
 const judeCommitResult = () => {
+  console.log('002');
   // 提取commit信息
   const msgPath = process.env.GIT_PARAMS || process.env.HUSKY_GIT_PARAMS;
   const msg = require('fs').readFileSync(msgPath, 'utf-8').trim();
@@ -19,7 +21,9 @@ const judeCommitResult = () => {
     osLocale().then((locale) => {
       if (locale === 'zh-CN') {
         console.error(
-          `  ${chalk.bgRed.white(' ERROR ')} ${chalk.red(`提交日志不符合规范`)}\n\n${chalk.red(
+          `  ${chalk.bgRed.white(' ERROR ')} ${chalk.red(
+            `提交日志不符合规范`,
+          )}\n\n${chalk.red(
             `  合法的提交日志格式如下(emoji 和 模块可选填)：\n\n`,
           )}    
       ${chalk.green(`💥 feat(模块): 添加了个很棒的功能`)}
@@ -29,7 +33,9 @@ const judeCommitResult = () => {
       ${chalk.green(`🔨 refactor(模块): 代码重构`)}
       ${chalk.green(`🏰 chore(模块): 对脚手架做了些更改`)}
       ${chalk.green(`🌐 locale(模块): 为国际化做了微小的贡献`)}
-      ${chalk.red(`See https://github.com/MrXujiang/best-cps for more details.\n`)}`,
+      ${chalk.red(
+        `See https://github.com/MrXujiang/best-cps for more details.\n`,
+      )}`,
         );
       } else {
         console.error(
@@ -44,8 +50,12 @@ const judeCommitResult = () => {
       ${chalk.green(`🌷 UI(compiler): better styles`)}
       ${chalk.green(`🔨 refactor(compiler): code refactor`)}
       ${chalk.green(`🏰 chore(compiler): Made some changes to the scaffolding`)}
-      ${chalk.green(`🌐 locale(compiler): Made a small contribution to internationalization`)}\n
-      ${chalk.red(`See https://github.com/MrXujiang/best-cps for more details.\n`)}`,
+      ${chalk.green(
+        `🌐 locale(compiler): Made a small contribution to internationalization`,
+      )}\n
+      ${chalk.red(
+        `See https://github.com/MrXujiang/best-cps for more details.\n`,
+      )}`,
         );
       }
 
