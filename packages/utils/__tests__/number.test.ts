@@ -1,4 +1,4 @@
-import { calcPageNo, numberFormat } from '../src';
+import { amountFormat, calcPageNo, numberFormat } from '../src';
 
 describe('小数格式化', () => {
   test('默认值', () => {
@@ -20,5 +20,19 @@ describe('分页计算', () => {
   });
   test('批量删除', () => {
     expect(calcPageNo(42, 3, 20, 2)).toBe(2);
+  });
+});
+describe('金额格式化', () => {
+  test('低于1万', () => {
+    expect(amountFormat(2000)).toBe('2,000.00');
+  });
+  test('高于1万', () => {
+    expect(amountFormat(20000)).toBe('2.00万');
+  });
+  test('高于1万，修改后缀', () => {
+    expect(amountFormat(20000, '万元')).toBe('2.00万元');
+  });
+  test('千万以上，', () => {
+    expect(amountFormat(20000000, '万元')).toBe('2,000.00万元');
   });
 });

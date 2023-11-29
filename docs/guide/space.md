@@ -2,14 +2,15 @@
 toc: content
 ---
 # Space
-比antd的Space更灵活！
+基于flex实现的布局组件。比antd的Space更灵活！
 ## 默认
 ```jsx
 import { Space } from '@tc-lib/components';
 export default () => (
-    <Space>
+    <Space wrap style={{flexWrap:'wrap'}}>
         名称
         <span>小花</span>
+        <div style={{flexWrap:"wrap"}}>6666666</div>
     </Space>
 )
 ```

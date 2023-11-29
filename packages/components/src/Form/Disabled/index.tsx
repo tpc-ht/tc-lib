@@ -1,70 +1,81 @@
-import { CheckCircleFilled, CloseCircleFilled } from "@ant-design/icons";
-import { isFullArr, isFullObj, isStr } from "@tc-lib/utils";
-import { Space, Tag, Typography } from "antd";
-import csn from "classnames";
-import React, { CSSProperties, Key, memo, useMemo } from "react";
-import "./index.less";
+import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
+import { isFullArr, isFullObj, isStr } from '@tc-lib/utils';
+import { Space, Typography } from 'antd';
+import csn from 'classnames';
+import React, { CSSProperties, Key, memo, useMemo } from 'react';
+import './index.less';
 
-import { usePrefix } from "../../hooks";
+import { usePrefix } from '../../hooks';
 const { Paragraph } = Typography;
 export interface IDisabledProps {
   value?: any;
   // gap?: string;
   isCopy?: boolean;
+  bordered?: boolean;
   ellipsisRows?: number;
   className?: string;
   dangerouslySetInnerHTML?: { __html: string };
   style?: React.CSSProperties;
 }
 
-const getTag = (arr: any[], name?: string) =>
-  arr?.map((e) => (
-    <Tag color="processing" key={name ? e[name] : e}>
-      {name ? e[name] : e}
-    </Tag>
-  )) || "-";
-
 export const Disabled = memo(
   ({
     value,
     isCopy,
     ellipsisRows,
+    bordered = true,
     dangerouslySetInnerHTML,
     className,
     ...e
   }: IDisabledProps) => {
-    const prefix = usePrefix("preview-text");
-    const valStr = useMemo(() => {
-      switch (Object.prototype.toString.call(value)) {
-        case "[object Array]":
-          return getTag(value);
-        default:
-          return value;
-      }
-    }, [value]);
+    const prefix = usePrefix('preview-text');
+    // const valStr = useMemo(() => {
+    //   // switch (Object.prototype.toString.call(value)) {
+    //   //   case '[object Array]':
+    //   //     return getTag(value);
+    //   //   default:
+    //   return value;
+    //   // }
+    // }, [value]);
     if (isFullObj(dangerouslySetInnerHTML))
       return (
         <div
-          className={csn("form-preview-text", prefix + "-html", className)}
+          className={csn(
+            'form-preview-text',
+            prefix + '-html',
+            className,
+            !bordered ? prefix + '-no-border' : '',
+          )}
           {...e}
-          dangerouslySetInnerHTML={dangerouslySetInnerHTML || { __html: "" }}
+          dangerouslySetInnerHTML={dangerouslySetInnerHTML || { __html: '' }}
         />
       );
     return (
-      <div className={csn(prefix, className)} {...e}>
-        <Paragraph
-          copyable={isCopy && isStr(value) ? { text: value } : false}
-          style={{ marginBottom: 0, width: "99.9%", lineHeight: "inherit" }}
-          ellipsis={{
-            rows: ellipsisRows || 1,
-            expandable: true,
-          }}
-        >
-          {valStr || "-"}
-        </Paragraph>
+      <div
+        className={csn(
+          prefix,
+          className,
+          !bordered ? prefix + '-no-border' : '',
+        )}
+        {...e}
+      >
+        {isStr(value) ? (
+          <Paragraph
+            copyable={isCopy ? { text: value } : false}
+            style={{ marginBottom: 0, width: '99.9%', lineHeight: 'inherit' }}
+            ellipsis={{
+              rows: ellipsisRows || 1,
+              expandable: true,
+            }}
+          >
+            {value || '-'}
+          </Paragraph>
+        ) : (
+          value
+        )}
       </div>
     );
-  }
+  },
 );
 
 interface IBooleanDisableProps {
@@ -74,17 +85,19 @@ interface IBooleanDisableProps {
   className?: string;
   style?: CSSProperties;
   checkedValue?: [Key, Key];
+  bordered?: boolean;
 }
 export const BooleanDisable = memo(
   ({
     value,
     className,
     checkedValue,
-    checkedChildren = "是",
-    unCheckedChildren = "否",
+    bordered = true,
+    checkedChildren = '是',
+    unCheckedChildren = '否',
     ...e
   }: IBooleanDisableProps) => {
-    const prefix = usePrefix("preview-text");
+    const prefix = usePrefix('preview-text');
     const switchValue = useMemo(() => {
       if (isFullArr(checkedValue)) {
         const [v1] = checkedValue;
@@ -93,19 +106,26 @@ export const BooleanDisable = memo(
       return value;
     }, [checkedValue, value]);
     return (
-      <div className={csn(prefix, className)} {...e}>
+      <div
+        className={csn(
+          prefix,
+          className,
+          !bordered ? prefix + '-no-border' : '',
+        )}
+        {...e}
+      >
         {switchValue ? (
           <Space align="baseline" size={6}>
-            <CheckCircleFilled style={{ color: "#6abf40", fontSize: 14 }} />
+            <CheckCircleFilled style={{ color: '#6abf40', fontSize: 14 }} />
             <span>{checkedChildren}</span>
           </Space>
         ) : (
           <Space align="start" size={6}>
-            <CloseCircleFilled style={{ color: "#ff4d4f", fontSize: 14 }} />
+            <CloseCircleFilled style={{ color: '#ff4d4f', fontSize: 14 }} />
             <span>{unCheckedChildren}</span>
           </Space>
         )}
       </div>
     );
-  }
+  },
 );

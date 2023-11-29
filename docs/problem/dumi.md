@@ -1,5 +1,4 @@
 ---
-toc: content
 ---
 
 # Dumi

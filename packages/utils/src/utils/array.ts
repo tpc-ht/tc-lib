@@ -199,7 +199,7 @@ export const downEle = (arr: any[], index: number) => {
 /**
  * 拆分数组为指定长度元组
  */
-export const splitArr = (arr: any[], len: number, isFill = false) => {
+export const equalTuple = (arr: any[], len: number, isFill = false) => {
   if (!isArr(arr) || !isNum(len)) return [];
   const tuples = [];
   for (let i = 0; i < arr.length; i += len) {
@@ -237,3 +237,46 @@ export const treeFormat = (
     return row;
   });
 };
+
+const enumColor = {
+  draft: {
+    background: '#E6E6E6',
+    color: '#00000073',
+  },
+  afoot: {
+    background: '#D6EEFF',
+    color: '#208EFD',
+  },
+  success: {
+    background: '#E1F2D9',
+    color: '#54C31E',
+  },
+  error: {
+    background: '#FFE5E6',
+    color: '#FF4E4E',
+  },
+};
+
+export type EnumItemType = {
+  label: string | JSX.Element;
+  value: any;
+  type?: 'draft' | 'afoot' | 'success' | 'error';
+  [key: string]: any;
+};
+/** 枚举格式化 获取名称与颜色属性 */
+export class EnumController {
+  list: EnumItemType[] = [];
+  names: Map<any, any>;
+  constructor(e: EnumItemType[]) {
+    const list = isArr(e) ? e : [];
+    this.list = list;
+    const ns = new Map<any, any>();
+    for (let index = 0; index < list.length; index++) {
+      const ele: EnumItemType = index[index];
+      ns.set(ele.value, ele);
+    }
+    this.names = ns;
+  }
+  getName = (value: any) => this.names.get(value)?.label;
+  getColor = (value: any) => enumColor[this.names.get(value)?.colorType];
+}

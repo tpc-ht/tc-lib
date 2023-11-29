@@ -1,16 +1,16 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 interface SpaceProps extends React.HTMLAttributes<HTMLDivElement> {
-  align?: "start" | "end" | "center" | "baseline";
-  justify?: "start" | "end" | "center" | "space-between" | "space-around";
-  direction?: "column" | "row";
+  align?: 'start' | 'end' | 'center' | 'baseline';
+  justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around';
+  direction?: 'column' | 'row';
   size?: number;
   wrap?: boolean;
 }
 export const Space: FC<SpaceProps> = ({
   align,
-  direction = "row",
-  justify = "start",
+  direction = 'row',
+  justify = 'start',
   wrap = false,
   size = 8,
   children,
@@ -20,11 +20,11 @@ export const Space: FC<SpaceProps> = ({
   return (
     <div
       style={{
-        display: "flex",
+        display: 'flex',
         alignItems: align,
+        flexWrap: wrap ? 'wrap' : 'nowrap',
         flexDirection: direction,
         justifyContent: justify,
-        flexWrap: wrap ? "wrap" : "nowrap",
         gap: size,
         ...style,
       }}

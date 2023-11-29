@@ -7,7 +7,7 @@ import {
   makeArray,
   minus,
   moveEle,
-  splitArr,
+  equalTuple,
   swapEle,
   toJSON,
   upEle,
@@ -92,7 +92,7 @@ describe("数组值移动", () => {
 describe("数组拆分为元组", () => {
   let arr = [1, 2, 3, 4, 5];
   test("元组拆分", () => {
-    expect(toJSON(splitArr(arr, 3))).toBe(
+    expect(toJSON(equalTuple(arr, 3))).toBe(
       toJSON([
         [1, 2, 3],
         [4, 5],
@@ -100,7 +100,7 @@ describe("数组拆分为元组", () => {
     );
   });
   test("元组拆分-空袭填充", () => {
-    expect(toJSON(splitArr(arr, 3, true))).toBe(
+    expect(toJSON(equalTuple(arr, 3, true))).toBe(
       toJSON([
         [1, 2, 3],
         [4, 5, undefined],

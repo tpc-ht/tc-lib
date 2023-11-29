@@ -1,8 +1,8 @@
-import { Disabled, Space, usePrefix } from "@tc-lib/components";
-import { Input, Popover } from "antd";
-import React, { useRef } from "react";
-import { SketchPicker } from "react-color";
-import "./index.less";
+import { Disabled, Space, usePrefix } from '@tc-lib/components';
+import { Input, Popover } from 'antd';
+import React, { useRef } from 'react';
+import { SketchPicker } from 'react-color';
+import './index.less';
 
 export interface IColorInputProps {
   value?: string;
@@ -28,7 +28,7 @@ export const ColorInput: React.FC<IColorInputProps> = ({
   disabled,
 }) => {
   const container = useRef<HTMLDivElement>();
-  const prefix = usePrefix("color-input");
+  const prefix = usePrefix('color-input');
   const color = value as string;
 
   if (disabled) return <Disabled value={colorBox(color)} />;
@@ -40,7 +40,7 @@ export const ColorInput: React.FC<IColorInputProps> = ({
           onChange?.(e.target.value);
         }}
         allowClear
-        placeholder="颜色6666"
+        placeholder="颜色"
         prefix={
           <Popover
             autoAdjustOverflow
@@ -57,7 +57,7 @@ export const ColorInput: React.FC<IColorInputProps> = ({
             }
           >
             <div
-              className={prefix + "-color-tips"}
+              className={prefix + '-color-tips'}
               style={{
                 backgroundColor: color,
               }}

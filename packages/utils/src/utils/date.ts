@@ -17,24 +17,30 @@ export interface IFormatDatesProps {
   names?: string[];
   showTime?: boolean;
   stamp?: boolean;
+  type?: "date" | "time";
 }
 /** 查询日期格式化 */
 export const formatDates = ({
   date,
   names = ["startDate", "endDate"],
   showTime = false,
+  type = 'date',
   stamp = false,
 }: IFormatDatesProps) => {
   let params = {};
   if (isArr(date) && date.length) {
     const [s, e] = date;
-    let time = showTime ? " HH:mm" : "";
-    params[names[0]] = stamp
-      ? dayjs(s).valueOf()
-      : dayjs(s).format(`YYYY-MM-DD${time ? time : ""}`) + (time ? ":00" : "");
-    params[names[1]] = stamp
-      ? dayjs(e).valueOf()
-      : dayjs(e).format(`YYYY-MM-DD${time ? time : ""}`) + (time ? ":59" : "");
+    // let time = showTime ? " HH:mm" : "";
+    if (type === 'date') {
+      params[names[0]] = dayjs(s).format(`YYYY-MM-DD`) + (showTime ? ' 00:00:00' : '');
+      params[names[1]] = dayjs(e).format(`YYYY-MM-DD`) + (showTime ? ' 23:59:59' : '');
+    }
+    if (type === 'time') {
+      let time = showTime ? " HH:mm" : "";
+      params[names[0]] = dayjs(s).format(`YYYY-MM-DD${time ? time : ""}`) + (time ? ":00" : "");
+      params[names[1]] = dayjs(e).format(`YYYY-MM-DD${time ? time : ""}`) + (time ? ":59" : "");
+    }
+    if (stamp) Object.keys(params).forEach(key => params[key] = dayjs(params[key]).valueOf());
   }
   return params;
 };

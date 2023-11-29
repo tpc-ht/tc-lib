@@ -33,7 +33,7 @@
     "numeral": "^2.0.6"
   },
   "devDependencies": {
-    "father": "^4.2.3",
+    "father": "4.2.3",
     "jest": "^29.6.1"
   },
   "engines": {

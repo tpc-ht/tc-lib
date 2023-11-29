@@ -25,3 +25,6 @@ npm publish
 ```
 ## 依赖新版发布淘宝镜像缓存处理
 在 [淘宝镜像](https://npmmirror.com/) 中对指定包进行更新！
+
+## webgl相关
+1. `cannon-es`: 碰撞监测

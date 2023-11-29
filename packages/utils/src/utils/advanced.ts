@@ -66,6 +66,9 @@ export const copyText = async (text: any) => {
   }
 };
 
+/**
+ * 发布订阅
+ */
 export class EventEmitter {
   events = {};
   constructor() {
@@ -88,10 +91,25 @@ export class EventEmitter {
     }
   }
 
-  off(eventName, callback) {
+  off(eventName, callback?: any) {
+    if (!callback) {
+      this.events[eventName] = undefined;
+      delete this.events[eventName]
+      return
+    }
     const callbacks = this.events[eventName];
     if (callbacks && callbacks.length > 0) {
       this.events[eventName] = callbacks.filter((cb) => cb !== callback);
     }
   }
+}
+
+/** 延迟加载 */
+export const sleep = async (time = 0, callback?: any) => {
+  return await new Promise(e => {
+    setTimeout(() => {
+      callback?.();
+      e(true)
+    }, time)
+  })
 }

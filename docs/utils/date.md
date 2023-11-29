@@ -32,7 +32,14 @@ formatDates({
     names: ['recordAtStart', 'recordAtEnd'],
     showTime: true
 })
-//{recordAtEnd: "2023-05-17 15:47:59",recordAtStart: "2023-05-17 15:47:00"}
+//{recordAtEnd: "2023-05-17 23:59:59",recordAtStart: "2023-05-17 00:00:00"}
+formatDates({
+    date: [new Date(),new Date()],
+    names: ['recordAtStart', 'recordAtEnd'],
+    type: "time",
+    showTime: true
+})
+//{recordAtEnd: "2023-05-17 11:11:59",recordAtStart: "2023-05-17 11:11:42"}
 formatDates({
     date: [new Date(),new Date()],
     names: ['recordAtStart', 'recordAtEnd'],

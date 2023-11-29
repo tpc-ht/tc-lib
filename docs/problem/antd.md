@@ -1,3 +1,2 @@
 ---
-toc: content
 ---

@@ -1,8 +1,10 @@
+
+export const getType = (obj: any) => Object.prototype.toString.call(obj);
 const isType =
   <T>(type: string | string[]) =>
-  (obj: unknown): obj is T =>
-    getType(obj) === `[object ${type}]`;
-export const getType = (obj: any) => Object.prototype.toString.call(obj);
+    (obj: unknown): obj is T =>
+      getType(obj) === `[object ${type}]`;
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const isFn = (val: any): val is Function => typeof val === 'function';
 export const isArr = Array.isArray;
 export const isPlainObj = isType<object>('Object');

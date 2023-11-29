@@ -30,3 +30,18 @@ export const calcPageNo = (
   }
   return pageNumber - 1;
 };
+
+/**
+ * 金额格式化
+ * @param num 
+ * @returns 
+ */
+export function amountFormat(num: number, addonAfter = '万') {
+  const n = Number(num);
+  if (!isNum(n)) return
+  if (n == 0 || (n > 0 && n < 10000)) {
+    return numberFormat(n, 2);
+  } else {
+    return numberFormat((n / 10000), 2) + addonAfter;
+  }
+}

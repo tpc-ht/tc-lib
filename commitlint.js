@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-
-console.log('001');
 const yParser = require('yargs-parser');
 const chalk = require('chalk');
 const osLocale = require('os-locale');

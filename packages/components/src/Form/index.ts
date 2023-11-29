@@ -1,3 +1,4 @@
+export * from "./ArrayTags";
 export * from "./BaseCascader";
 export * from "./BaseSearchSelect";
 export * from "./BaseSelect";
@@ -6,3 +7,4 @@ export * from "./ColorInput";
 export * from "./Disabled";
 export * from "./ProgressBar";
 export * from "./TxMap";
+

@@ -4,6 +4,7 @@ import {
   ModalFooter,
   useModalProps,
 } from '@tc-lib/components';
+import { isFullArr, isFullObj } from '@tc-lib/utils';
 import { Button, Space } from 'antd';
 // import 'antd/dist/antd.css';
 import React from 'react';
@@ -39,24 +40,35 @@ const CreateModal: React.FC<CreateFormModalProps> = ({
   );
 };
 export default () => {
-  const [modalProps, setModalProps] = useModalProps<any>({
-    open: false,
-  });
+  const [createModalProps, setCreateModalProps] = useModalProps<any>();
+  const [editModalProps, setEditModalProps] = useModalProps<any>();
   return (
     <div>
       <Space>
-        <Button type="primary" onClick={() => setModalProps(true, {})}>
+        <Button
+          type="primary"
+          onClick={() => setCreateModalProps(true, ['open'])}
+        >
           新增
         </Button>
         <Button
           type="primary"
-          onClick={() => setModalProps(true, {}, { modalType: 'edit' })}
+          onClick={() => setEditModalProps(true, { id: 1 })}
         >
           编辑
         </Button>
       </Space>
-      {modalProps?.value ? (
-        <CreateModal {...modalProps} handleModalVisible={setModalProps} />
+      {isFullArr(createModalProps?.value) ? (
+        <CreateModal
+          {...createModalProps}
+          handleModalVisible={setCreateModalProps}
+        />
+      ) : null}
+      {isFullObj(editModalProps?.value) ? (
+        <CreateModal
+          {...editModalProps}
+          handleModalVisible={setEditModalProps}
+        />
       ) : null}
     </div>
   );

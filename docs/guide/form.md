@@ -9,15 +9,12 @@ order: 0
 
 ## Disabled 禁用
 ```jsx
-import { Disabled } from '@tc-lib/components';
+import { Disabled, Space } from '@tc-lib/components';
 export default ()=>{
-
-  return <>
-  <Disabled value="禁用组件" isCopy/>
-  <div style={{height:10}}/>
-  <Disabled value={[1,2,3,45,6]} isCopy/>  
-
-  </>
+  return <Space direction="column">
+    <Disabled value="禁用组件" isCopy/>
+    <Disabled value={'无边框背景'} bordered={false}/>  
+  </Space>
 }
 ```
 <!-- <code src="./demo/Disabled.tsx"></code> -->
@@ -25,11 +22,11 @@ export default ()=>{
 
 ## BooleanDisable 真假值禁用
 ```jsx
-import { BooleanDisable } from '@tc-lib/components';
-import { Space } from 'antd';
-export default ()=><Space direction="vertical">
+import { BooleanDisable, Space } from '@tc-lib/components';
+export default ()=><Space direction="column">
     <BooleanDisable value/>
     <BooleanDisable />
+  <BooleanDisable bordered={false}/>  
 </Space>
 ```
 <!-- <code src="./demo/Disabled.tsx"></code> -->
@@ -43,6 +40,8 @@ export default ()=><Space direction="vertical">
 | ellipsisRows  | 超出省略行数        | `number` | 1 |
 | className  | class        | `string` | - |
 | style  | 样式        | `CSSProperties` | - |
+| bordered  | 边框与背景        | `boolean` | true |
+
 ## BooleanDisable API
 | 属性 | 说明 | 类型  | 默认值 |
 | --- | --- | --- | --- |
@@ -51,3 +50,4 @@ export default ()=><Space direction="vertical">
 | unCheckedChildren | false显示文字  | `string`    | 否 |
 | className  | class        | `string` | - |
 | style  | 样式        | `CSSProperties` | - |
+| bordered  | 边框与背景        | `boolean` | true |

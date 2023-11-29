@@ -50,18 +50,38 @@ import { EventEmitter } from '@tc-lib/utils';
 import { Button, Input, message } from 'antd';
 import { useEffect, useState } from 'react';
 const event = new EventEmitter()
+const TestButton = (props:any)=>{
+  const eventEmit = () => {
+    event.emit('test','子组件调用了')
+  }
+  return <Button {...props} onClick={eventEmit}>触发事件</Button>
+}
 export default ()=>{
-  const [ value, setValue ] = useState();
-  useEffect(()=>{
+  const eventBind = ()=>{
+    message.success(`绑定成功`)
     event.on('test',onEmit)
-    return ()=>event.off('test',onEmit)
-  },[])
+  }
+  const eventClear = ()=>{
+    message.success(`清理成功`)
+    event.off('test')
+    // event.off('test',onEmit)
+  }
   const onEmit = (text:string)=>{
     message.success(`事件触发：${text}`)
   }
   return <div style={{display: 'flex'}}>
-    <Input value={value} onChange={e=>setValue(e.target.value)}/>
-    <Button onClick={()=>event.emit('test',value)}>事件触发</Button>
+    <Button onClick={eventBind}>绑定事件</Button>
+    <TestButton/>
+    <Button onClick={eventClear}>清理事件</Button>
   </div>
 }
+```
+## 流程阻塞
+```javascript
+(async function sleepTest() {
+   await sleep(1000,()=>{
+    console.log('1s后执行01')
+   })
+   console.log('1s后执行02')
+})()
 ```

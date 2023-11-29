@@ -1,5 +1,6 @@
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import { Button, Space } from "antd";
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { isNum } from '@tc-lib/utils';
+import { Button, Space } from 'antd';
 import React, {
   ReactNode,
   memo,
@@ -7,9 +8,9 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from "react";
-import ResizeObserver from "resize-observer-polyfill";
-import styled from "styled-components";
+} from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
+import styled from 'styled-components';
 
 const Wrapper: any = styled.div`
   display: flex;
@@ -26,11 +27,12 @@ const FormWrapper: any = styled.div`
   flex-wrap: wrap;
   width: 100%;
   .ant-form-item-label {
-    width: ${(p: any) => (p.width ? p.width + "px" : "auto")};
+    width: ${(p: any) => (p.width ? p.width + 'px' : 'auto')};
   }
   .ant-form-item {
-    margin-bottom: 10px;
-    // width: ${(p: any) => (p.flag ? "33.3333%" : "25%")};
+    margin-bottom: ${(p: any) =>
+      isNum(p.marginBottom) ? p.marginBottom + 'px' : p.marginBottom};
+    // width: ${(p: any) => (p.flag ? '33.3333%' : '25%')};
     width: ${(p: any) => p.flag};
   }
   .ant-picker-range {
@@ -50,15 +52,22 @@ const SearchBar = styled.div`
 export interface ITableFormProps {
   list: ReactNode[];
   labelW?: number;
+  marginBottom?: number | string;
   search?: {
     submit: () => void;
     reset: () => void;
   };
-  direction?: "row" | "column";
+  direction?: 'row' | 'column';
 }
 
 export const TableForm = memo(
-  ({ list, labelW, search, direction = "row" }: ITableFormProps) => {
+  ({
+    list,
+    labelW,
+    marginBottom = 16,
+    search,
+    direction = 'row',
+  }: ITableFormProps) => {
     let resizeObserver: any = useRef(null);
     let _innerCont: any = useRef(null);
     const [width, setWidth] = useState<number>(0);
@@ -69,7 +78,7 @@ export const TableForm = memo(
         (entries: ResizeObserverEntry[]) => {
           const { width = 0 } = (entries[0] && entries[0].contentRect) || {};
           setWidth(width);
-        }
+        },
       );
       resizeObserver.current.observe(_innerCont.current);
     };
@@ -89,15 +98,15 @@ export const TableForm = memo(
       const len = list.length;
       const flag = (() => {
         if (width > 1410) {
-          return "25%";
+          return '25%';
         }
         if (width >= 1000) {
-          return "33%";
+          return '33%';
         }
         if (width >= 500) {
-          return "50%";
+          return '50%';
         } else {
-          return "100%";
+          return '100%';
         }
       })();
       let o = { list, flag, len, IsChangeType: false };
@@ -132,15 +141,19 @@ export const TableForm = memo(
 
     return (
       <Wrapper ref={_innerCont} direction={direction}>
-        <FormWrapper width={labelW} flag={childList.flag}>
+        <FormWrapper
+          width={labelW}
+          flag={childList.flag}
+          marginBottom={marginBottom}
+        >
           {childList.list}
         </FormWrapper>
         <SearchBar
           style={
-            direction === "column"
+            direction === 'column'
               ? {
-                  width: "100%",
-                  textAlign: "end",
+                  width: '100%',
+                  textAlign: 'end',
                 }
               : {}
           }
@@ -175,5 +188,5 @@ export const TableForm = memo(
         </SearchBar>
       </Wrapper>
     );
-  }
+  },
 );
