@@ -280,3 +280,35 @@ export class EnumController {
   getName = (value: any) => this.names.get(value)?.label;
   getColor = (value: any) => enumColor[this.names.get(value)?.colorType];
 }
+
+/**
+ * 数字数组连号处理
+ * @param nums 
+ * @returns 
+ */
+export const continuousNumber = (nums: number[]) => {
+  if (!isArr(nums)) return '';
+  nums.sort((a, b) => a - b); // 对数组进行升序排序
+  let result: any[] = [];
+  let start = nums[0];
+  let end = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] === end + 1) {
+      end = nums[i];
+    } else {
+      if (start !== end) {
+        result.push(start + '-' + end);
+      } else {
+        result.push(start);
+      }
+      start = nums[i];
+      end = nums[i];
+    }
+  }
+  if (start !== end) {
+    result.push(start + '-' + end);
+  } else {
+    result.push(start);
+  }
+  return result.join(',');
+}

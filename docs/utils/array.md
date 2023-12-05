@@ -188,4 +188,11 @@ treeFormat = (
 )
 ```
 
+## 数字数组连号处理 continuousNumber
+```javascript
+import { continuousNumber } from '@tc-lib/utils'
+let arr = [1, 3, 12, 2, 99, 98, 7, 9, 6, 10];
+equalTuple(arr, 3);//'1-3,6-7,9-10,12,98-99'
+```
+
 ## 枚举格式化 EnumController

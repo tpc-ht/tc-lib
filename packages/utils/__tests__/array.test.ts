@@ -1,13 +1,14 @@
 import {
   complement,
+  continuousNumber,
   downEle,
+  equalTuple,
   getArrMax,
   getArrNode,
   intersect,
   makeArray,
   minus,
   moveEle,
-  equalTuple,
   swapEle,
   toJSON,
   upEle,
@@ -105,6 +106,15 @@ describe("数组拆分为元组", () => {
         [1, 2, 3],
         [4, 5, undefined],
       ])
+    );
+  });
+});
+
+describe("数组连号字符串", () => {
+  let arr = [1, 3, 12, 2, 99, 98, 7, 9, 6, 10];
+  test("获取连号字符串", () => {
+    expect(toJSON(continuousNumber(arr))).toBe(
+      toJSON('1-3,6-7,9-10,12,98-99')
     );
   });
 });
