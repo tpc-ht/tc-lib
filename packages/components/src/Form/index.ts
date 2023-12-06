@@ -7,4 +7,5 @@ export * from "./ColorInput";
 export * from "./Disabled";
 export * from "./ProgressBar";
 export * from "./TxMap";
+export * from "./ContinuousNumberSelect";
 
