@@ -10,7 +10,7 @@ order: 0
 <code src='./demos/BusinessSelectDemo.tsx'></code>
 
 ## API
-```typeScript
+```ts
 import { SelectProps } from "antd";
 export interface IBaseSelectProps extends SelectProps {
   /** 接口函数 */

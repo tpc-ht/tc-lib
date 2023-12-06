@@ -11,7 +11,7 @@ order: 0
 <code src='./demos/BusinessTreeSelectDemo.tsx'></code>
 
 ## API
-```typeScript
+```ts 
 import { TreeSelectProps } from "antd";
 export interface IBaseTreeSelectProps extends TreeSelectProps {
   /** 接口函数 */

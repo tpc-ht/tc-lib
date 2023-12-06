@@ -11,7 +11,7 @@ order: 0
 <code src='./demos/BusinessCascader.tsx'></code>
 
 ## API
-```typeScript
+```js
 import { CascaderProps } from "antd";
 export type IBaseCascaderProps<T> = {
   /** 接口函数 */
