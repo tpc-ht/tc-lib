@@ -12,7 +12,6 @@ export interface IDisabledProps {
   // gap?: string;
   isCopy?: boolean;
   bordered?: boolean;
-  ellipsisRows?: number;
   className?: string;
   dangerouslySetInnerHTML?: { __html: string };
   style?: React.CSSProperties;
@@ -22,21 +21,26 @@ export const Disabled = memo(
   ({
     value,
     isCopy,
-    ellipsisRows,
     bordered = true,
     dangerouslySetInnerHTML,
     className,
     ...e
   }: IDisabledProps) => {
     const prefix = usePrefix('preview-text');
+    // const getTag = (arr: any[], name?: string) =>
+    //   arr?.map((e) => (
+    //     <Tag key={name ? e[name] : e}>{name ? e[name] : e}</Tag>
+    //   )) || '-';
     // const valStr = useMemo(() => {
-    //   // switch (Object.prototype.toString.call(value)) {
-    //   //   case '[object Array]':
-    //   //     return getTag(value);
-    //   //   default:
-    //   return value;
-    //   // }
-    // }, [value]);
+    //   switch (Object.prototype.toString.call(value)) {
+    //     case '[object Array]':
+    //       return spaceType === 'tag'
+    //         ? getTag(value)
+    //         : value.join(spaceType || ',');
+    //     default:
+    //       return value;
+    //   }
+    // }, [value, spaceType]);
     if (isFullObj(dangerouslySetInnerHTML))
       return (
         <div
@@ -60,16 +64,20 @@ export const Disabled = memo(
         {...e}
       >
         {isStr(value) ? (
-          <Paragraph
-            copyable={isCopy ? { text: value } : false}
-            style={{ marginBottom: 0, width: '99.9%', lineHeight: 'inherit' }}
-            ellipsis={{
-              rows: ellipsisRows || 1,
-              expandable: true,
-            }}
-          >
-            {value || '-'}
-          </Paragraph>
+          isCopy ? (
+            <Paragraph
+              copyable={{ text: value }}
+              style={{ marginBottom: 0, width: '99.9%', lineHeight: 'inherit' }}
+              ellipsis={{
+                rows: 1,
+                expandable: true,
+              }}
+            >
+              {value || '-'}
+            </Paragraph>
+          ) : (
+            value || '-'
+          )
         ) : (
           value
         )}

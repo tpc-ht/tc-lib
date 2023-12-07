@@ -41,8 +41,6 @@ export const ContinuousNumberSelect = ({
     [onChange],
   );
   const strValue = useMemo(() => {
-    console.log('continuousNumber', continuousNumber);
-
     return optionType === 'week'
       ? continuousNumber(value)
           .replace(/1/g, '星期一')
@@ -54,6 +52,7 @@ export const ContinuousNumberSelect = ({
           .replace(/7/g, '星期日')
       : continuousNumber(value);
   }, [value, optionType]);
+
   const options = useMemo(() => {
     const weekOptions = ['一', '二', '三', '四', '五', '六', '日'];
     switch (optionType) {
@@ -83,7 +82,7 @@ export const ContinuousNumberSelect = ({
     e.stopPropagation();
   };
 
-  if (disabled) return <Disabled value={value} style={style} />;
+  if (disabled) return <Disabled value={strValue} style={style} {...e} />;
   return (
     <>
       {/* <SelectStyle /> */}
