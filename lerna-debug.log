@@ -1,5 +1,5 @@
 15 error Error: Command failed with exit code 1: git remote update
-15 error fatal: unable to access 'https://github.com/tpc-ht/tc-lib.git/': Failed to connect to github.com port 443: Timed out
+15 error fatal: unable to access 'https://github.com/tpc-ht/tc-lib.git/': The requested URL returned error: 502
 15 error error: Could not fetch origin
 15 error Fetching origin
 15 error     at makeError (E:\work\组件开发\tc-lib\node_modules\execa\lib\error.js:60:11)
