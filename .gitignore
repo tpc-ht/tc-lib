@@ -2,7 +2,7 @@
 .dumi/tmp-test
 .dumi/tmp-production
 .DS_Store
-.lerna-debug
+.lerna-debug.log
 /dist
 /node_modules/*
 /packages/*/node_modules/*
