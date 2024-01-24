@@ -18,7 +18,8 @@ export interface ITagArrayItemsProps {
   type: 'input' | 'number' | 'time' | 'timeRange';
   /** 最大标签数 */
   tagLength?: number;
-  /** 禁用 */
+  /** 禁用  */
+  
   disabled?: boolean;
   /** 输入框属性 详见 antd */
   inputProps?: InputProps &
