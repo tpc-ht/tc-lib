@@ -135,7 +135,6 @@ export const TableForm = memo(
           return { ...o, list: list.slice(0, 1), IsChangeType: true };
         }
       }
-
       return o;
     }, [list, width, show]);
 

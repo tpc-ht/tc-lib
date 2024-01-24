@@ -1,4 +1,4 @@
-import { amountFormat, calcPageNo, numberFormat } from '../src';
+import { amountFormat, calcPageNo, numberFormat, strToNum } from '../src';
 
 describe('小数格式化', () => {
   test('默认值', () => {
@@ -23,6 +23,9 @@ describe('分页计算', () => {
   });
 });
 describe('金额格式化', () => {
+  test('低于0', () => {
+    expect(amountFormat(-2000)).toBe('-2,000.00');
+  });
   test('低于1万', () => {
     expect(amountFormat(2000)).toBe('2,000.00');
   });
@@ -35,4 +38,19 @@ describe('金额格式化', () => {
   test('千万以上，', () => {
     expect(amountFormat(20000000, '万元')).toBe('2,000.00万元');
   });
+});
+describe('字符串转数值', () => {
+  test('100', () => {
+    expect(strToNum("100")).toBe(100);
+  });
+  test('1A', () => {
+    expect(strToNum('1A')).toBe(0);
+  });
+  test('A1', () => {
+    expect(strToNum('A1', 2)).toBe(2);
+  });
+  test('测试空', () => {
+    expect(strToNum('', null)).toBe(null);
+  });
+
 });

@@ -11,7 +11,7 @@ export interface IExtraModalProps<T, U = any> extends ModalProps {
   handleModalVisible: IHandleModalVisible<T>;
   [key: string]: any;
 }
-export interface IModalProps<T, U = any> extends IExtraModalProps<T, U> {
+export interface IModalProps<T = any, U = any> extends IExtraModalProps<T, U> {
   open: boolean;
   value?: T;
 }

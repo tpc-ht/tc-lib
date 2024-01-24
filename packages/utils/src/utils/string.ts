@@ -1,14 +1,15 @@
 import { isArr, isFullObj, isStr } from "./check";
 
+
 /** 路径参数解析 */
 export const getPathParams = (url: string) =>
-  isStr(url)
+  url && isStr(url)
     ? JSON.parse(
-        `{"${decodeURI(url.split("?")[1])
-          .replace(/"/g, '\\"')
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"')}"}`
-      )
+      `{"${decodeURI(url.split("?")[1])
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')}"}`
+    )
     : url;
 
 /** 字符串反转 */
@@ -19,10 +20,11 @@ export const reverse = (str: string) =>
 export const toJSON = (obj: any) => JSON.stringify(obj);
 
 /** JSON 解析 拦截解析异常 */
-export const fromJSON = (str: string) => {
+export const fromJSON = (str: string, defaultValue: any = {}) => {
   try {
     return JSON.parse(str);
-  } catch (error) {}
+  } catch (error) { }
+  return defaultValue
 };
 
 /**驼峰转换下划线 */

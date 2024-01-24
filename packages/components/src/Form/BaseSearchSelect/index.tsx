@@ -1,8 +1,8 @@
-import { Disabled } from "@tc-lib/components";
-import { getArrNodes, getAttrFromArr, isFn, isStr } from "@tc-lib/utils";
-import { useRequest } from "ahooks";
-import { Empty, Select, SelectProps, Spin, Typography } from "antd";
-import { TextProps } from "antd/lib/typography/Text";
+import { Disabled } from '@tc-lib/components';
+import { getArrNodes, getAttrFromArr, isFn, isStr } from '@tc-lib/utils';
+import { useRequest } from 'ahooks';
+import { Empty, Select, SelectProps, Spin, Typography } from 'antd';
+import { TextProps } from 'antd/lib/typography/Text';
 import React, {
   ForwardRefExoticComponent,
   ReactNode,
@@ -11,7 +11,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 export type IBaseSearchSelectProps = {
   /** 接口函数 */
   serverFun: (params: any) => Promise<any>;
@@ -33,7 +33,7 @@ export interface IBaseSearchSelectRef {
   mutate(data?: any | ((oldData?: any) => any | undefined)): void;
 }
 const required = () => {
-  throw new Error("This component requires an interface function.");
+  throw new Error('This component requires an interface function.');
 };
 
 const { Option } = Select;
@@ -49,8 +49,8 @@ type CompoundedComponent = ForwardRefExoticComponent<
 const getMultiple = (isMultiple = true): any =>
   isMultiple
     ? {
-        mode: "multiple",
-        maxTagCount: "responsive",
+        mode: 'multiple',
+        maxTagCount: 'responsive',
       }
     : undefined;
 // @ts-ignore
@@ -59,7 +59,7 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
     {
       serverFun = required(),
       params,
-      fieldNames = { label: "label", value: "value", options: "options" },
+      fieldNames = { label: 'label', value: 'value', options: 'options' },
       description,
       labelFormat,
       disabled,
@@ -70,10 +70,10 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
       loading: load,
       ...extra
     },
-    ref
+    ref,
   ) => {
     const [emptyText, SetEmptyText] = useState<string | undefined>(
-      "请输入关键词进行搜索"
+      '请输入关键词进行搜索',
     );
     const { loading, data, run, refresh, mutate } = useRequest(
       (e) => serverFun({ ...params, ...e }),
@@ -86,11 +86,11 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
         onError() {
           SetEmptyText(undefined);
         },
-      }
+      },
     );
     const list = useMemo(
       () => (dataSource ? dataSource : data),
-      [dataSource, data]
+      [dataSource, data],
     );
     useImperativeHandle<any, IBaseSearchSelectRef>(
       ref,
@@ -105,11 +105,11 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
         },
         mutate,
       }),
-      [run, refresh, mutate]
+      [run, refresh, mutate],
     );
-    const { label = "label", value: val = "value" } = useMemo(
+    const { label = 'label', value: val = 'value' } = useMemo(
       () => fieldNames,
-      [fieldNames]
+      [fieldNames],
     );
     const getDescriptionText = (e: any, index: number) => {
       if (isStr(description)) return e?.[description];
@@ -117,7 +117,7 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
     };
     const disValue = useMemo(() => {
       if (disabled) {
-        let text = getAttrFromArr(getArrNodes(list, value, val), label, ",");
+        let text = getAttrFromArr(getArrNodes(list, value, val), label, ',');
         return text || value;
       }
     }, [list, disabled, value, label, val]);
@@ -125,17 +125,17 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
     const onSearch = (e: string) => {
       if (!e) return;
       mutate([]);
-      SetEmptyText("加载中");
+      SetEmptyText('加载中');
       run({ phoneKeyword: e });
     };
     const onDropdownVisibleChange = (e: boolean) => {
-      if (e) SetEmptyText("请输入关键词进行搜索");
+      if (e) SetEmptyText('请输入关键词进行搜索');
     };
     return disabled ? (
       <Disabled value={disValue} />
     ) : (
       <Select
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
         optionLabelProp={label}
         placeholder="请选择"
         allowClear
@@ -179,5 +179,5 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
           })}
       </Select>
     );
-  }
+  },
 );

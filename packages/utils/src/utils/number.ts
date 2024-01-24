@@ -2,7 +2,7 @@ import numeral from 'numeral';
 import { isNum } from './check';
 import { repeat } from './string';
 /**小数格式化*/
-export const numberFormat = (num: number, precision = 2, addonAfter = '') => {
+export const numberFormat = (num: number, precision = 2, addonAfter = ''): string => {
   const pre = `0,0.${repeat('0', precision)}`;
   if (isNum(num)) {
     return `${numeral(num).format(pre)}${addonAfter ? ' ' + addonAfter : ''}`;
@@ -38,10 +38,23 @@ export const calcPageNo = (
  */
 export function amountFormat(num: number, addonAfter = '万') {
   const n = Number(num);
-  if (!isNum(n)) return
-  if (n == 0 || (n > 0 && n < 10000)) {
+  if (!isNum(n)) return 0
+  if (n < 10000) {
     return numberFormat(n, 2);
   } else {
     return numberFormat((n / 10000), 2) + addonAfter;
   }
+}
+
+/**
+ * 字符串转数值
+ * @param num 
+ * @returns 
+ */
+export function strToNum(num: string, defaultValue: any = 0) {
+  if (num) {
+    const n = Number(num);
+    return isNaN(n) ? defaultValue : n
+  }
+  return defaultValue
 }

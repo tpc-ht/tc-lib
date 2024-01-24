@@ -1,6 +1,6 @@
 {
   "name": "@tc-lib/doc",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "private": true,
   "description": "A react library developed with dumi",
   "homepage": "https://github.com/tpc-ht/tc-lib#readme",

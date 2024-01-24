@@ -1,14 +1,14 @@
-import { Disabled } from "@tc-lib/components";
-import { getAttrFromArr, getTreeNodes, isArr, isVoid } from "@tc-lib/utils";
-import { useRequest } from "ahooks";
-import { TreeSelect, TreeSelectProps } from "antd";
+import { Disabled } from '@tc-lib/components';
+import { getAttrFromArr, getTreeNodes, isArr, isVoid } from '@tc-lib/utils';
+import { useRequest } from 'ahooks';
+import { TreeSelect, TreeSelectProps } from 'antd';
 import React, {
   ForwardRefExoticComponent,
   RefAttributes,
   useImperativeHandle,
   useMemo,
-} from "react";
-type SelectType = "radio" | "multiple" | "checkbox";
+} from 'react';
+type SelectType = 'radio' | 'multiple' | 'checkbox';
 export type IBaseTreeSelectProps = {
   /** 接口函数 */
   serverFun: (params: any) => Promise<any>;
@@ -29,25 +29,25 @@ export interface IBaseTreeSelectRef {
   mutate(data?: any | ((oldData?: any) => any | undefined)): void;
 }
 const required = () => {
-  throw new Error("This component requires an interface function.");
+  throw new Error('This component requires an interface function.');
 };
 type CompoundedComponent = ForwardRefExoticComponent<
   IBaseTreeSelectProps & RefAttributes<any>
 >;
 const getMultiple = (type: SelectType): any => {
   switch (type) {
-    case "radio":
+    case 'radio':
       return {};
-    case "multiple":
+    case 'multiple':
       return {
         multiple: true,
-        mode: "multiple",
-        maxTagCount: "responsive",
+        mode: 'multiple',
+        maxTagCount: 'responsive',
       };
-    case "checkbox":
+    case 'checkbox':
       return {
         treeCheckable: true,
-        maxTagCount: "responsive",
+        maxTagCount: 'responsive',
         showCheckedStrategy: TreeSelect.SHOW_PARENT,
       };
   }
@@ -61,22 +61,22 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
       params,
       manual = false,
       topExpanded = true,
-      fieldNames = { label: "label", value: "value", children: "children" },
+      fieldNames = { label: 'label', value: 'value', children: 'children' },
       dataSource,
-      selectType = "radio",
+      selectType = 'radio',
       loading: load,
       value,
       disabled,
       ...extra
     },
-    ref
+    ref,
   ) => {
     const isOpt = useMemo(() => isArr(dataSource), [dataSource]);
     const { loading, data, run, refresh, mutate } = useRequest(
       (e) => serverFun({ ...params, ...e }),
       {
         manual: isOpt || manual,
-      }
+      },
     );
 
     const treeData = useMemo(() => (isOpt ? dataSource : data), [data, isOpt]);
@@ -100,15 +100,15 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
         },
         mutate,
       }),
-      [run, refresh, mutate]
+      [run, refresh, mutate],
     );
 
     const disValue: any = useMemo(() => {
       if (disabled) {
         let text = getAttrFromArr(
           getTreeNodes(treeData, value, fieldNames),
-          fieldNames?.label || "label",
-          ","
+          fieldNames?.label || 'label',
+          ',',
         );
         return text || value;
       }
@@ -123,7 +123,7 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
         fieldNames={fieldNames}
         value={value}
         loading={load || loading}
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
         placeholder="请选择"
         treeDefaultExpandAll
         treeData={treeData}
@@ -135,5 +135,5 @@ export const BaseTreeSelect: CompoundedComponent = React.forwardRef(
         {...extra}
       />
     );
-  }
+  },
 );

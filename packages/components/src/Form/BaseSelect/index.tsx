@@ -1,8 +1,8 @@
-import { Disabled } from "@tc-lib/components";
-import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from "@tc-lib/utils";
-import { useRequest } from "ahooks";
-import { Select, SelectProps, Typography } from "antd";
-import { TextProps } from "antd/lib/typography/Text";
+import { Disabled } from '@tc-lib/components';
+import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from '@tc-lib/utils';
+import { useRequest } from 'ahooks';
+import { Select, SelectProps, Typography } from 'antd';
+import { TextProps } from 'antd/lib/typography/Text';
 import React, {
   ForwardRefExoticComponent,
   ReactNode,
@@ -10,7 +10,9 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useMemo,
-} from "react";
+} from 'react';
+
+// let
 export type IBaseSelectProps = {
   /** 接口函数 */
   serverFun: (params?: any) => Promise<any>;
@@ -33,7 +35,7 @@ export interface IBaseSelectRef {
   mutate(data?: any | ((oldData?: any) => any | undefined)): void;
 }
 const required = () => {
-  throw new Error("This component requires an interface function.");
+  throw new Error('This component requires an interface function.');
 };
 
 const { Option } = Select;
@@ -49,8 +51,8 @@ type CompoundedComponent = ForwardRefExoticComponent<
 const getMultiple = (isMultiple = true): any =>
   isMultiple
     ? {
-        mode: "multiple",
-        maxTagCount: "responsive",
+        mode: 'multiple',
+        maxTagCount: 'responsive',
       }
     : undefined;
 // @ts-ignore
@@ -60,7 +62,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       serverFun = required(),
       params,
       manual = false,
-      fieldNames = { label: "label", value: "value", options: "options" },
+      fieldNames = { label: 'label', value: 'value', options: 'options' },
       description,
       labelFormat,
       disabled,
@@ -68,25 +70,27 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       value,
       dataSource,
       loading: load,
+      className,
+      style,
       ...extra
     },
-    ref
+    ref,
   ) => {
     const isOpt = useMemo(() => isArr(dataSource), [dataSource]);
-    const { label = "label", value: val = "value" } = useMemo(
+    const { label = 'label', value: val = 'value' } = useMemo(
       () => fieldNames,
-      [fieldNames]
+      [fieldNames],
     );
 
     const { loading, data, run, refresh, mutate } = useRequest(
       (e) => serverFun({ ...params, ...e }),
       {
         manual: isOpt || manual,
-      }
+      },
     );
     const list = useMemo(
       () => (isOpt ? dataSource : data),
-      [isOpt, dataSource, data]
+      [isOpt, dataSource, data],
     );
     useImperativeHandle<any, IBaseSelectRef>(
       ref,
@@ -101,7 +105,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         },
         mutate,
       }),
-      [run, refresh, mutate]
+      [run, refresh, mutate],
     );
     const getDescriptionText = (e: any, index: number) => {
       if (isStr(description)) return e?.[description];
@@ -109,24 +113,25 @@ export const BaseSelect: CompoundedComponent = forwardRef(
     };
     const disValue = useMemo(() => {
       if (disabled) {
-        let text = getAttrFromArr(getArrNodes(list, value, val), label, ",");
+        let text = getAttrFromArr(getArrNodes(list, value, val), label, ',');
         return text || value;
       }
     }, [list, disabled, value]);
 
     return disabled ? (
-      <Disabled value={disValue} />
+      <Disabled value={disValue} className={className} style={style} />
     ) : (
       <Select
         loading={load || loading}
         optionLabelProp={label}
-        style={{ width: "100%" }}
+        style={{ width: '100%', ...style }}
+        className={className}
         placeholder="请选择"
         allowClear
         showSearch
         // getCalendarContainer={(triggerNode) => triggerNode.parentNode}
         filterOption={(input, option) =>
-          ((option?.[label] ?? "") as any)
+          ((option?.[label] ?? '') as any)
             .toLowerCase()
             .includes(input.toLowerCase())
         }
@@ -156,5 +161,5 @@ export const BaseSelect: CompoundedComponent = forwardRef(
           })}
       </Select>
     );
-  }
+  },
 );

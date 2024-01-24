@@ -29,14 +29,14 @@ export const isReactElement = (obj: any): boolean =>
 export const isHTMLElement = (target: any): target is EventTarget => {
   return Object.prototype.toString.call(target).indexOf('HTML') > -1;
 };
-export const isTrueObj = (obj: unknown) =>
-  isPlainObj(obj) && Reflect.ownKeys(obj).length;
-export const isTrueArr = (arr: unknown): boolean =>
+export const isTrueObj = (obj: any) =>
+  !!(isPlainObj(obj) && Reflect.ownKeys(obj).length);
+export const isTrueArr = (arr: any): boolean =>
   !!(isArr(arr) && arr.length);
 
-export const isFullObj = (obj: unknown) =>
-  isPlainObj(obj) && Reflect.ownKeys(obj).length;
-export const isFullArr = (arr: unknown): boolean =>
+export const isFullObj = (obj: any) =>
+  !!(isPlainObj(obj) && Reflect.ownKeys(obj).length);
+export const isFullArr = (arr: any): boolean =>
   !!(isArr(arr) && arr.length);
 
-export const isVoid = (v: unknown) => v === null || v === undefined;
+export const isVoid = (v: any) => v === null || v === undefined;

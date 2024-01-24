@@ -24,6 +24,7 @@ export const Disabled = memo(
     bordered = true,
     dangerouslySetInnerHTML,
     className,
+    style,
     ...e
   }: IDisabledProps) => {
     const prefix = usePrefix('preview-text');
@@ -50,6 +51,7 @@ export const Disabled = memo(
             className,
             !bordered ? prefix + '-no-border' : '',
           )}
+          style={style}
           {...e}
           dangerouslySetInnerHTML={dangerouslySetInnerHTML || { __html: '' }}
         />
@@ -61,6 +63,7 @@ export const Disabled = memo(
           className,
           !bordered ? prefix + '-no-border' : '',
         )}
+        style={style}
         {...e}
       >
         {isStr(value) ? (
@@ -79,7 +82,7 @@ export const Disabled = memo(
             value || '-'
           )
         ) : (
-          value
+          value || '-'
         )}
       </div>
     );

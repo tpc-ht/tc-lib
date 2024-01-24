@@ -1,15 +1,15 @@
-import { Disabled } from "@tc-lib/components";
-import { getAttrFromArr, getTreeNodes, isArr } from "@tc-lib/utils";
-import { useRequest } from "ahooks";
-import { Cascader } from "antd";
-import { CascaderProps, DefaultOptionType } from "antd/lib/cascader";
+import { Disabled } from '@tc-lib/components';
+import { getAttrFromArr, getTreeNodes, isArr } from '@tc-lib/utils';
+import { useRequest } from 'ahooks';
+import { Cascader } from 'antd';
+import { CascaderProps, DefaultOptionType } from 'antd/lib/cascader';
 import React, {
   ForwardRefExoticComponent,
   RefAttributes,
   forwardRef,
   useImperativeHandle,
   useMemo,
-} from "react";
+} from 'react';
 
 export type IBaseCascaderProps =
   | ({
@@ -30,7 +30,7 @@ export interface IBaseCascaderRef {
   mutate(data?: any | ((oldData?: any) => any | undefined)): void;
 }
 const required = () => {
-  throw new Error("This component requires an interface function.");
+  throw new Error('This component requires an interface function.');
 };
 type CompoundedComponent = ForwardRefExoticComponent<
   IBaseCascaderProps & RefAttributes<any>
@@ -49,14 +49,14 @@ export const BaseCascader: CompoundedComponent = forwardRef(
       disabled,
       ...extra
     },
-    ref
+    ref,
   ) => {
     const isOpt = useMemo(() => isArr(dataSource), [dataSource]);
     const { loading, data, run, refresh, mutate } = useRequest(
       (e) => serverFun({ ...params, ...e }),
       {
         manual: isOpt || manual,
-      }
+      },
     );
 
     useImperativeHandle<any, IBaseCascaderRef>(
@@ -72,22 +72,22 @@ export const BaseCascader: CompoundedComponent = forwardRef(
         },
         mutate,
       }),
-      [run, refresh, mutate]
+      [run, refresh, mutate],
     );
 
     const filter = (inputValue: string, path: DefaultOptionType[]) =>
       path.some(
         (option) =>
-          (option[fieldNames?.label || "label"] as string)
+          (option[fieldNames?.label || 'label'] as string)
             .toLowerCase()
-            .indexOf(inputValue.toLowerCase()) > -1
+            .indexOf(inputValue.toLowerCase()) > -1,
       );
     const disValue = useMemo(() => {
       if (disabled) {
         let text = getAttrFromArr(
           getTreeNodes(isOpt ? dataSource : data, value as any, fieldNames),
-          fieldNames?.label || "label",
-          ","
+          fieldNames?.label || 'label',
+          ',',
         );
         return text || value;
       }
@@ -98,7 +98,7 @@ export const BaseCascader: CompoundedComponent = forwardRef(
       <Cascader
         loading={load || loading}
         options={isOpt ? dataSource : data}
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
         placeholder="请选择"
         value={value}
         fieldNames={fieldNames}
@@ -107,5 +107,5 @@ export const BaseCascader: CompoundedComponent = forwardRef(
         {...extra}
       />
     );
-  }
+  },
 );
