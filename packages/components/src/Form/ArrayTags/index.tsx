@@ -19,9 +19,9 @@ export interface ITagArrayItemsProps {
   /** 最大标签数 */
   tagLength?: number;
   /** 禁用  */
-  
+
   disabled?: boolean;
-  /** 输入框属性 详见 antd */
+  /** 输入框属性  详见 antd */
   inputProps?: InputProps &
     InputNumberProps &
     TimeRangePickerProps &
