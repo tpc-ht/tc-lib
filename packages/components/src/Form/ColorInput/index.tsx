@@ -1,7 +1,8 @@
-import { Disabled, Space, usePrefix } from '@tc-lib/components';
 import { Input, Popover } from 'antd';
 import React, { useRef } from 'react';
 import { SketchPicker } from 'react-color';
+import { usePrefix } from '../../hooks';
+import { Disabled } from '../Disabled';
 import './index.less';
 
 export interface IColorInputProps {

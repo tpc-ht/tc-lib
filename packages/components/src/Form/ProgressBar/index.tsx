@@ -1,7 +1,7 @@
-import { Space } from '@tc-lib/components';
 import { InputNumber } from 'antd';
 import React, { FC, ReactElement, useRef } from 'react';
 import styled from 'styled-components';
+import { Space } from '../../Space';
 import { usePrefix } from '../../hooks';
 import './index.less';
 const InputContent = styled.div`

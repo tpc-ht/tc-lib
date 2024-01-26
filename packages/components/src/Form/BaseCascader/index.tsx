@@ -1,4 +1,3 @@
-import { Disabled } from '@tc-lib/components';
 import { getAttrFromArr, getTreeNodes, isArr } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { Cascader } from 'antd';
@@ -10,6 +9,7 @@ import React, {
   useImperativeHandle,
   useMemo,
 } from 'react';
+import { Disabled } from '../Disabled';
 
 export type IBaseCascaderProps =
   | ({

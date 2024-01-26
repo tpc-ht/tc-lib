@@ -1,4 +1,3 @@
-import { Disabled } from '@tc-lib/components';
 import { getAttrFromArr, getTreeNodes, isArr, isVoid } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { TreeSelect, TreeSelectProps } from 'antd';
@@ -8,6 +7,7 @@ import React, {
   useImperativeHandle,
   useMemo,
 } from 'react';
+import { Disabled } from '../Disabled';
 type SelectType = 'radio' | 'multiple' | 'checkbox';
 export type IBaseTreeSelectProps = {
   /** 接口函数 */

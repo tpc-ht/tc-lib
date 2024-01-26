@@ -1,28 +1,40 @@
-import { Disabled, usePrefix } from '@tc-lib/components';
-import { continuousNumber, makeArray } from '@tc-lib/utils';
+import { isArr, makeArray } from '@tc-lib/utils';
 import { Select, SelectProps } from 'antd';
 import React, { useCallback, useMemo, useRef } from 'react';
+import { usePrefix } from '../../hooks';
+import { Disabled } from '../Disabled';
 import './index.less';
-// const SelectStyle = createGlobalStyle`
-//   body {
-//     .grid-custom-select-dropdown {
-//       min-width: 170px !important;
-//     }
-//   }
-// `;
-// const SelectDropdown = styled.div`
-//   text-align: center;
-//   .rc-virtual-list-holder-inner {
-//     display: grid !important;
-//     grid-template-columns: repeat(4, 1fr);
-//   }
-//   .ant-select-item-option-state {
-//     display: none !important;
-//   }
-// `;
+export const continuousNumber = (nums: number[]) => {
+  if (!isArr(nums)) return '';
+  nums.sort((a, b) => a - b); // 对数组进行升序排序
+  let result: any[] = [];
+  let start = nums[0];
+  let end = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] === end + 1) {
+      end = nums[i];
+    } else {
+      if (start !== end) {
+        result.push(start + '-' + end);
+      } else {
+        result.push(start);
+      }
+      start = nums[i];
+      end = nums[i];
+    }
+  }
+  if (start !== end) {
+    result.push(start + '-' + end);
+  } else {
+    result.push(start);
+  }
+  return result.join(',');
+};
 export interface ContinuousNumberSelectProps extends SelectProps {
   optionType?: 'day' | 'week';
 }
+
+console.log('isArr-外', isArr);
 export const ContinuousNumberSelect = ({
   value,
   style,
@@ -41,6 +53,7 @@ export const ContinuousNumberSelect = ({
     [onChange],
   );
   const strValue = useMemo(() => {
+    console.log('isArr-内', isArr);
     return optionType === 'week'
       ? continuousNumber(value)
           .replace(/1/g, '星期一')

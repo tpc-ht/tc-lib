@@ -27,7 +27,7 @@ export const Disabled = memo(
     style,
     ...e
   }: IDisabledProps) => {
-    const prefix = usePrefix('preview-text');
+    const prefix = usePrefix('preview-tx');
     // const getTag = (arr: any[], name?: string) =>
     //   arr?.map((e) => (
     //     <Tag key={name ? e[name] : e}>{name ? e[name] : e}</Tag>
@@ -46,7 +46,7 @@ export const Disabled = memo(
       return (
         <div
           className={csn(
-            'form-preview-text',
+            'form-preview-tx',
             prefix + '-html',
             className,
             !bordered ? prefix + '-no-border' : '',
@@ -108,7 +108,7 @@ export const BooleanDisable = memo(
     unCheckedChildren = '否',
     ...e
   }: IBooleanDisableProps) => {
-    const prefix = usePrefix('preview-text');
+    const prefix = usePrefix('preview-tx');
     const switchValue = useMemo(() => {
       if (isFullArr(checkedValue)) {
         const [v1] = checkedValue;

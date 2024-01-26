@@ -1,8 +1,6 @@
-import { Disabled } from '@tc-lib/components';
 import { getArrNodes, getAttrFromArr, isFn, isStr } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { Empty, Select, SelectProps, Spin, Typography } from 'antd';
-import { TextProps } from 'antd/lib/typography/Text';
 import React, {
   ForwardRefExoticComponent,
   ReactNode,
@@ -12,6 +10,8 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { DescriptionText } from '../DescriptionText';
+import { Disabled } from '../Disabled';
 export type IBaseSearchSelectProps = {
   /** 接口函数 */
   serverFun: (params: any) => Promise<any>;
@@ -38,9 +38,6 @@ const required = () => {
 
 const { Option } = Select;
 const { Text } = Typography;
-export const DescriptionText = (props: TextProps) => (
-  <Text type="secondary" {...props} />
-);
 type CompoundedComponent = ForwardRefExoticComponent<
   IBaseSearchSelectProps & RefAttributes<any>
 > & {

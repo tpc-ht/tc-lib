@@ -1,4 +1,15 @@
-54 error Error: Command failed with exit code 128: git push --follow-tags --no-verify --atomic origin main
-54 error fatal: unable to access 'https://github.com/tpc-ht/tc-lib.git/': The requested URL returned error: 502
-54 error     at makeError (E:\work\组件开发\tc-lib\node_modules\execa\lib\error.js:60:11)
-54 error     at handlePromise (E:\work\组件开发\tc-lib\node_modules\execa\index.js:118:26)
+0 silly argv {
+0 silly argv   _: [ 'clean' ],
+0 silly argv   lernaVersion: '6.6.2',
+0 silly argv   '$0': 'C:\\Users\\admin\\AppData\\Roaming\\npm\\node_modules\\lerna\\dist\\cli.js'
+0 silly argv }
+1 notice cli v6.6.2
+2 verbose rootPath E:\work\组件开发\tc-lib
+3 info Removing the following directories:
+4 info clean packages\components\node_modules
+4 info clean packages\utils\node_modules
+5 info clean removing E:\work\组件开发\tc-lib\packages\components\node_modules
+6 silly rimrafDir E:\work\组件开发\tc-lib\packages\components\node_modules
+7 info clean removing E:\work\组件开发\tc-lib\packages\utils\node_modules
+8 silly rimrafDir E:\work\组件开发\tc-lib\packages\utils\node_modules
+9 error
