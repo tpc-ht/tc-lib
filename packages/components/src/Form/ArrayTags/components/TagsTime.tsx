@@ -52,7 +52,7 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
           newTags[index] = val;
           return newTags;
         }
-        if (val && !oldState.includes(val)) {
+        if (!oldState.includes(val)) {
           return [...oldState, val];
         } else {
           message.warning('不能重复添加!');

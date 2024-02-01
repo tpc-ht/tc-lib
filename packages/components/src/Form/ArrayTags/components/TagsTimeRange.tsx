@@ -56,7 +56,7 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
           newTags[index] = strVal;
           return newTags;
         }
-        if (strVal && !items.includes(strVal)) {
+        if (!items.includes(strVal)) {
           return [...oldState, strVal];
         } else {
           message.warning('不能重复添加!');

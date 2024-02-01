@@ -13,9 +13,18 @@ order: 0
 ```jsx
 import { Disabled, Space } from '@tc-lib/components';
 export default () => {
+  let value = [
+    '小黑a小黑a小黑a小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑小黑',
+    2,
+    3,
+    4,
+    5,
+  ];
+  console.log('value', value);
   return (
     <Space direction="column">
       <Disabled value="禁用组件" isCopy />
+      <Disabled value={value} />
       <Disabled value={'无边框背景'} bordered={false} />
     </Space>
   );

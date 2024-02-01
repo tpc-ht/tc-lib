@@ -53,14 +53,16 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
   };
 
   const handleInputConfirm = () => {
-    setItems((oldState: any) => {
-      if (inputValue && items?.indexOf(inputValue) === -1) {
-        return [...oldState, inputValue];
-      } else {
-        message.warning('不能重复添加!');
-        return oldState;
-      }
-    });
+    if (inputValue) {
+      setItems((oldState: any) => {
+        if (items?.indexOf(inputValue) === -1) {
+          return [...oldState, inputValue];
+        } else {
+          message.warning('不能重复添加!');
+          return oldState;
+        }
+      });
+    }
     setInputVisible(false);
     setInputValue('');
   };

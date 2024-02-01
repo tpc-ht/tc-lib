@@ -49,7 +49,8 @@ export const ArrayTags: React.FC<ITagArrayItemsProps> = ({
     }
     return '';
   }, [value, disabled]);
-  if (disabled) return <Disabled bordered={!valStr} value={valStr} />;
+  if (disabled)
+    return <Disabled bordered={!valStr} value={valStr} arrSpaceSize={0} />;
   return (
     <div>
       {type === 'input' && <TagsInput value={value} {...e} />}

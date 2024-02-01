@@ -53,14 +53,16 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
   const handleInputConfirm = () => {
     setTimeout(() => {
       let val = inputRef.current.value && Number(inputRef.current.value);
-      setItems((oldState: any) => {
-        if (isNum(val) && !items.includes(val)) {
-          return [...oldState, val];
-        } else {
-          if (isNum(val)) message.warning('不能重复添加!');
-          return oldState;
-        }
-      });
+      if (isNum(val)) {
+        setItems((oldState: any) => {
+          if (!items.includes(val)) {
+            return [...oldState, val];
+          } else {
+            if (isNum(val)) message.warning('不能重复添加!');
+            return oldState;
+          }
+        });
+      }
       setInputVisible(false);
     }, 10);
   };
