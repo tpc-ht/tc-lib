@@ -5,6 +5,7 @@ import csn from 'classnames';
 import React, { CSSProperties, Key, memo, useMemo } from 'react';
 import './index.less';
 
+import { isArr } from '@tc-lib/utils';
 import { usePrefix } from '../../hooks';
 const { Paragraph } = Typography;
 export interface IDisabledProps {
@@ -13,6 +14,7 @@ export interface IDisabledProps {
   isCopy?: boolean;
   bordered?: boolean;
   className?: string;
+  arrSpaceSize?: number;
   dangerouslySetInnerHTML?: { __html: string };
   style?: React.CSSProperties;
 }
@@ -24,6 +26,7 @@ export const Disabled = memo(
     bordered = true,
     dangerouslySetInnerHTML,
     className,
+    arrSpaceSize,
     style,
     ...e
   }: IDisabledProps) => {
@@ -81,6 +84,10 @@ export const Disabled = memo(
           ) : (
             value || '-'
           )
+        ) : isArr(value) ? (
+          <Space align="start" size={arrSpaceSize}>
+            {value.map((item) => item)}
+          </Space>
         ) : (
           value || '-'
         )}
