@@ -49,6 +49,10 @@
       "@commitlint/config-conventional"
     ]
   },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
@@ -71,8 +75,6 @@
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.18",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
     "stylelint": "^14.9.1",
     "ts-jest": "^29.0.5",
     "tsconfig-paths": "^4.2.0",

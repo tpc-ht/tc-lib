@@ -36,7 +36,9 @@
     "antd": "4.24.8",
     "dayjs": "^1.11.7",
     "file-loader": "^5.0.2",
+    "react": "18.0.0",
     "react-color": "^2.19.3",
+    "react-dom": "18.0.0",
     "react-draggable": "^4.4.5",
     "react-highlight-words": "^0.20.0",
     "styled-components": "^5.3.8"
@@ -44,8 +46,6 @@
   "devDependencies": {
     "babel-plugin-import": "1.13.8",
     "father": "4.1.0",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
     "react-waterfall-clover": "1.0.5",
     "ts-loader": "7.0.4",
     "typescript": "5.0.4"

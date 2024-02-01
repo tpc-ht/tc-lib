@@ -10,7 +10,6 @@
     "preserveConstEnums": true,
     "sourceMap": false,
     "declaration": true,
-    "skipLibCheck": true,
     "experimentalDecorators": true,
     "downlevelIteration": true,
     "baseUrl": ".",
