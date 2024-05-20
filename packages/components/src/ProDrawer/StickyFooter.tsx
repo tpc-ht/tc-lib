@@ -4,12 +4,12 @@ import cns from 'classnames';
 import React, { ReactNode, useMemo } from 'react';
 import { usePrefix } from '../hooks';
 import './index.less';
-export interface IModalFooterProps {
+export interface IStickyFooterProps {
   leftRender?: ReactNode;
   children?: ReactNode;
 }
-const ModalFooter = ({ leftRender, children }: IModalFooterProps) => {
-  const modalFooter = usePrefix('modal-footer');
+const StickyFooter = ({ leftRender, children }: IStickyFooterProps) => {
+  const stickyFooter = usePrefix('sticky-footer');
   const child = useMemo(() => {
     if (isArr(children)) {
       return <Space>{children}</Space>;
@@ -18,10 +18,12 @@ const ModalFooter = ({ leftRender, children }: IModalFooterProps) => {
   }, [children]);
 
   return (
-    <div className={cns(modalFooter, leftRender ? modalFooter + '-flex' : '')}>
+    <div
+      className={cns(stickyFooter, leftRender ? stickyFooter + '-flex' : '')}
+    >
       {leftRender}
       {child}
     </div>
   );
 };
-export default ModalFooter;
+export default StickyFooter;

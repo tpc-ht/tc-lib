@@ -1,8 +1,8 @@
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
-import { isFullArr, isFullObj, isStr } from '@tc-lib/utils';
-import { Space, Typography } from 'antd';
+import { isFullArr, isFullObj } from '@tc-lib/utils';
+import { Space, Tag, TagProps, Typography } from 'antd';
 import csn from 'classnames';
-import React, { CSSProperties, Key, memo, useMemo } from 'react';
+import React, { CSSProperties, FC, Key, memo, useMemo } from 'react';
 import './index.less';
 
 import { isArr } from '@tc-lib/utils';
@@ -10,42 +10,102 @@ import { usePrefix } from '../../hooks';
 const { Paragraph } = Typography;
 export interface IDisabledProps {
   value?: any;
-  // gap?: string;
-  isCopy?: boolean;
+  /** 边框 */
   bordered?: boolean;
   className?: string;
-  arrSpaceSize?: number;
   dangerouslySetInnerHTML?: { __html: string };
   style?: React.CSSProperties;
+  /** 间隔符 */
+  gap?: string;
+  copyable?: boolean;
+  ellipsis?: boolean;
+
+  type?: 'text' | 'tag' | 'html';
+  tagProps?: TagProps;
 }
+
+type TagType = {
+  value: any;
+  name?: string;
+} & TagProps;
+
+const getTag: FC<TagType> = ({ value, style, ...extra }) => {
+  if (isArr(value))
+    return (
+      <Space wrap>
+        {value?.map((e, index) => (
+          <Tag
+            color="processing"
+            style={{ margin: '0', ...style }}
+            key={'tag' + index}
+            {...extra}
+          >
+            {e}
+          </Tag>
+        ))}
+      </Space>
+    );
+
+  return (
+    <Tag color="processing" style={{ lineHeight: '30px' }} {...extra}>
+      {value}
+    </Tag>
+  );
+};
+const valFormat = (value: any, gap: string) => {
+  if (isArr(value)) return value.join(gap);
+  return value;
+};
 
 export const Disabled = memo(
   ({
     value,
-    isCopy,
+    copyable,
+    ellipsis,
     bordered = true,
     dangerouslySetInnerHTML,
     className,
-    arrSpaceSize,
+    type = 'text',
+    gap = ' ',
+    tagProps,
     style,
     ...e
   }: IDisabledProps) => {
     const prefix = usePrefix('preview-tx');
-    // const getTag = (arr: any[], name?: string) =>
-    //   arr?.map((e) => (
-    //     <Tag key={name ? e[name] : e}>{name ? e[name] : e}</Tag>
-    //   )) || '-';
-    // const valStr = useMemo(() => {
-    //   switch (Object.prototype.toString.call(value)) {
-    //     case '[object Array]':
-    //       return spaceType === 'tag'
-    //         ? getTag(value)
-    //         : value.join(spaceType || ',');
-    //     default:
-    //       return value;
-    //   }
-    // }, [value, spaceType]);
-    if (isFullObj(dangerouslySetInnerHTML))
+    const { currentValue, isEllipsis, isCopyable } = useMemo(() => {
+      if (!value)
+        return {
+          currentValue: '-',
+          isEllipsis: false,
+          isCopyable: false,
+          isBordered: bordered,
+        };
+      switch (type) {
+        case 'tag':
+          return {
+            currentValue: getTag({ ...tagProps, value }),
+            isEllipsis: false,
+            isCopyable: false,
+            isBordered: false,
+          };
+        case 'html':
+          return {
+            currentValue: value,
+            isEllipsis: false,
+            isCopyable: false,
+            isBordered: bordered,
+          };
+        default:
+          return {
+            currentValue: valFormat(value, gap),
+            isEllipsis: ellipsis,
+            isCopyable: copyable,
+            isBordered: bordered,
+          };
+      }
+    }, [value, bordered, type, tagProps, gap, copyable, ellipsis]);
+
+    if (type === 'html')
       return (
         <div
           className={csn(
@@ -56,7 +116,11 @@ export const Disabled = memo(
           )}
           style={style}
           {...e}
-          dangerouslySetInnerHTML={dangerouslySetInnerHTML || { __html: '' }}
+          dangerouslySetInnerHTML={
+            isFullObj(dangerouslySetInnerHTML)
+              ? dangerouslySetInnerHTML
+              : { __html: currentValue }
+          }
         />
       );
     return (
@@ -69,27 +133,28 @@ export const Disabled = memo(
         style={style}
         {...e}
       >
-        {isStr(value) ? (
-          isCopy ? (
-            <Paragraph
-              copyable={{ text: value }}
-              style={{ marginBottom: 0, width: '99.9%', lineHeight: 'inherit' }}
-              ellipsis={{
-                rows: 1,
-                expandable: true,
-              }}
-            >
-              {value || '-'}
-            </Paragraph>
-          ) : (
-            value || '-'
-          )
-        ) : isArr(value) ? (
-          <Space align="start" size={arrSpaceSize}>
-            {value.map((item) => item)}
-          </Space>
+        {isEllipsis || isCopyable ? (
+          <Paragraph
+            copyable={isCopyable ? { text: currentValue } : false}
+            style={{
+              marginBottom: 0,
+              marginRight: 0,
+              width: '99.9%',
+              lineHeight: 'inherit',
+            }}
+            ellipsis={
+              isEllipsis
+                ? {
+                    rows: 1,
+                    expandable: true,
+                  }
+                : false
+            }
+          >
+            {currentValue}
+          </Paragraph>
         ) : (
-          value || '-'
+          currentValue
         )}
       </div>
     );

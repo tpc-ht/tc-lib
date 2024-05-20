@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 
-interface SpaceProps extends React.HTMLAttributes<HTMLDivElement> {
+interface FlexSpaceProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: 'start' | 'end' | 'center' | 'baseline';
   justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around';
   direction?: 'column' | 'row';
   size?: number;
   wrap?: boolean;
 }
-export const Space: FC<SpaceProps> = ({
+export const FlexSpace: FC<FlexSpaceProps> = ({
   align,
   direction = 'row',
   justify = 'start',

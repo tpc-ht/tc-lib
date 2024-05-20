@@ -1,5 +1,7 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { isNum } from '@tc-lib/utils';
+import { useSize } from 'ahooks';
+
 import { Button, Space } from 'antd';
 import React, {
   ReactNode,
@@ -9,7 +11,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import ResizeObserver from 'resize-observer-polyfill';
 import styled from 'styled-components';
 
 const Wrapper: any = styled.div`
@@ -57,6 +58,9 @@ export interface ITableFormProps {
     submit: () => void;
     reset: () => void;
   };
+  xxl?: number;
+  xl?: number;
+  lg?: number;
   direction?: 'row' | 'column';
 }
 
@@ -67,67 +71,76 @@ export const TableForm = memo(
     marginBottom = 16,
     search,
     direction = 'row',
+    xxl = 8,
+    xl = 6,
+    lg = 4,
   }: ITableFormProps) => {
-    let resizeObserver: any = useRef(null);
+    // let resizeObserver: any = useRef(null);
     let _innerCont: any = useRef(null);
+    const domSize = useSize(_innerCont);
     const [width, setWidth] = useState<number>(0);
     const [show, setShow] = useState<boolean>(false);
 
-    const createObserver = () => {
-      resizeObserver.current = new ResizeObserver(
-        (entries: ResizeObserverEntry[]) => {
-          const { width = 0 } = (entries[0] && entries[0].contentRect) || {};
-          setWidth(width);
-        },
-      );
-      resizeObserver.current.observe(_innerCont.current);
-    };
+    // const createObserver = () => {
+    //   resizeObserver.current = new ResizeObserver(
+    //     (entries: ResizeObserverEntry[]) => {
+    //       const { width = 0 } = (entries[0] && entries[0].contentRect) || {};
+    //       setWidth(width);
+    //     },
+    //   );
+    //   resizeObserver.current.observe(_innerCont.current);
+    // };
 
-    const destroyObserver = () => {
-      if (resizeObserver.current) {
-        resizeObserver.current?.disconnect();
-        resizeObserver.current = null;
-      }
-    };
+    // const destroyObserver = () => {
+    //   if (resizeObserver.current) {
+    //     resizeObserver.current?.disconnect();
+    //     resizeObserver.current = null;
+    //   }
+    // };
+    // useEffect(() => {
+    //   createObserver();
+    //   return () => destroyObserver();
+    // }, []);
+
     useEffect(() => {
-      createObserver();
-      return () => destroyObserver();
-    }, []);
+      // createObserver();
+      // return () => destroyObserver();
+      if (domSize?.width) setWidth(domSize.width);
+    }, [domSize]);
 
     const childList = useMemo(() => {
       const len = list.length;
       const flag = (() => {
         if (width > 1410) {
-          return '25%';
+          return `${100 / (xxl / 2)}%`;
         }
         if (width >= 1000) {
-          return '33%';
+          return `${100 / (xl / 2)}%`;
         }
-        if (width >= 500) {
-          return '50%';
-        } else {
-          return '100%';
+        if (width >= 600) {
+          return `${100 / (lg / 2)}%`;
         }
+        return '100%';
       })();
       let o = { list, flag, len, IsChangeType: false };
       // 大屏幕
       if (width >= 1410) {
         //多余8个
-        if (len > 8) {
+        if (len > xxl) {
           if (show) return o;
-          return { ...o, list: list.slice(0, 8), IsChangeType: true };
+          return { ...o, list: list.slice(0, xxl), IsChangeType: true };
         }
         return o;
       } else if (width >= 1000) {
-        if (len > 6) {
+        if (len > xl) {
           if (show) return o;
-          return { ...o, list: list.slice(0, 6), IsChangeType: true };
+          return { ...o, list: list.slice(0, xl), IsChangeType: true };
         }
         return o;
-      } else if (width >= 500) {
-        if (len > 4) {
+      } else if (width >= 600) {
+        if (len > lg) {
           if (show) return o;
-          return { ...o, list: list.slice(0, 4), IsChangeType: true };
+          return { ...o, list: list.slice(0, lg), IsChangeType: true };
         }
       } else {
         if (len > 1) {

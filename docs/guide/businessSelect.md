@@ -7,11 +7,13 @@ order: 0
 ---
 
 # Select
+
 <code src='./demos/BusinessSelectDemo.tsx'></code>
 
 ## API
+
 ```ts
-import { SelectProps } from "antd";
+import { SelectProps } from 'antd';
 export interface IBaseSelectProps extends SelectProps {
   /** 接口函数 */
   serverFun: (params?: any) => Promise<any>;
@@ -23,6 +25,8 @@ export interface IBaseSelectProps extends SelectProps {
   manual?: boolean;
   /** 是否多选 */
   isMultiple?: boolean;
+  /** 是否唯一选中 */
+  isUniqueSelect?: boolean;
   /** 每一项描述 */
   description?: string | ((row: any, index: number) => ReactNode);
   /** 自定义lobel */

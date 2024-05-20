@@ -1,11 +1,13 @@
 import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { Select, SelectProps, Typography } from 'antd';
+import { DefaultOptionType } from 'antd/lib/select';
 import React, {
   ForwardRefExoticComponent,
   ReactNode,
   RefAttributes,
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useMemo,
 } from 'react';
@@ -24,6 +26,8 @@ export type IBaseSelectProps = {
   manual?: boolean;
   /** 是否多选 */
   isMultiple?: boolean;
+  /** 是否唯一选中 */
+  isUniqueSelect?: boolean;
   /** 每一项描述 */
   description?: string | ((row: any, index: number) => ReactNode);
   /** 自定义lobel */
@@ -64,11 +68,13 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       labelFormat,
       disabled,
       isMultiple = true,
+      isUniqueSelect = false,
       value,
       dataSource,
       loading: load,
       className,
       style,
+      onChange,
       ...extra
     },
     ref,
@@ -89,6 +95,18 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       () => (isOpt ? dataSource : data),
       [isOpt, dataSource, data],
     );
+    useEffect(() => {
+      if (isUniqueSelect && list?.length === 1) {
+        let v = list[0][val];
+        onChange?.(isMultiple ? [v] : v, list[0]);
+      }
+    }, [isUniqueSelect, list, val, isMultiple]);
+    const selectChange = (
+      value: any,
+      option: DefaultOptionType | DefaultOptionType[],
+    ) => {
+      onChange?.(value, option);
+    };
     useImperativeHandle<any, IBaseSelectRef>(
       ref,
       () => ({
@@ -121,6 +139,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       <Select
         loading={load || loading}
         optionLabelProp={label}
+        onChange={selectChange}
         style={{ width: '100%', ...style }}
         className={className}
         placeholder="请选择"
@@ -134,12 +153,13 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         }
         value={value}
         disabled={disabled}
-        fieldNames={!(description || labelFormat) ? fieldNames : undefined}
-        options={!(description || labelFormat) ? list : undefined}
+        fieldNames={!description ? fieldNames : undefined}
+        options={!description ? list : undefined}
         {...getMultiple(isMultiple)}
         {...extra}
       >
-        {(description || labelFormat) &&
+        {/* {(description || labelFormat) && */}
+        {description &&
           list?.map((e: any, index: number) => {
             const v = e[val];
             const l = labelFormat ? labelFormat(e, index) : e[label];

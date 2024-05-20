@@ -1,6 +1,6 @@
-import { Allotment } from "allotment";
-import "allotment/dist/style.css";
-import csn from "classnames";
+import { Allotment } from 'allotment';
+import 'allotment/dist/style.css';
+import csn from 'classnames';
 import React, {
   CSSProperties,
   FC,
@@ -9,10 +9,10 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
-import { usePrefix } from "../hooks";
-import "./index.less";
-import SideBar from "./SideBar";
+} from 'react';
+import { usePrefix } from '../hooks';
+import './index.less';
+import SideBar from './SideBar';
 export interface IPageMainProps {
   header?: ReactNode;
   children: ReactNode;
@@ -20,9 +20,9 @@ export interface IPageMainProps {
   headStyle?: CSSProperties;
 }
 export const PageMain = ({ children, ...e }: IPageMainProps) => {
-  const mainClass = usePrefix("page-layout");
+  const mainClass = usePrefix('page-layout');
   return (
-    <div className={mainClass + "-main"} {...e}>
+    <div className={mainClass + '-main'} {...e}>
       {children}
     </div>
   );
@@ -52,7 +52,7 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
     className,
     ...extra
   }) => {
-    const mainClass = usePrefix("page-layout");
+    const mainClass = usePrefix('page-layout');
     const [visible, setVisible] = useState(false);
     const ref = useRef<any>();
     useEffect(() => {
@@ -64,7 +64,7 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
           <>
             <SideBar
               visible={visible}
-              className={mainClass + "-side-bar"}
+              className={mainClass + '-side-bar'}
               onClick={() => setVisible((e) => !e)}
             />
             <Allotment separator={!visible} ref={ref}>
@@ -74,35 +74,39 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
                 minSize={minSize}
                 maxSize={maxSize}
               >
-                <div className={mainClass + "-aside"} style={asideStyle}>
+                <div className={mainClass + '-aside'} style={asideStyle}>
                   {aside}
                 </div>
               </Allotment.Pane>
               <PageMain>
                 {header ? (
-                  <div className={mainClass + "-header"} style={headStyle}>
+                  <div className={mainClass + '-header'} style={headStyle}>
                     {header}
                   </div>
                 ) : null}
-                <div className={mainClass + "-app"} style={bodyStyle}>
-                  {children}
-                </div>
+                {children ? (
+                  <div className={mainClass + '-app'} style={bodyStyle}>
+                    {children}
+                  </div>
+                ) : null}
               </PageMain>
             </Allotment>
           </>
         ) : (
           <PageMain>
             {header ? (
-              <div className={mainClass + "-header"} style={headStyle}>
+              <div className={mainClass + '-header'} style={headStyle}>
                 {header}
               </div>
             ) : null}
-            <div className={mainClass + "-app"} style={bodyStyle}>
-              {children}
-            </div>
+            {children ? (
+              <div className={mainClass + '-app'} style={bodyStyle}>
+                {children}
+              </div>
+            ) : null}
           </PageMain>
         )}
       </div>
     );
-  }
+  },
 );

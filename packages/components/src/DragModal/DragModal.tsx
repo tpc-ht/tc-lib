@@ -32,7 +32,6 @@ const DragModal: FC<IDragModalProps> = memo(
     };
     return (
       <Modal
-        // className="y-modal"
         bodyStyle={{ padding: 0 }}
         title={
           <div

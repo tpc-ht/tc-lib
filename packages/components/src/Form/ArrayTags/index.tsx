@@ -1,11 +1,10 @@
 import {
   InputNumberProps,
   InputProps,
-  Tag,
   TimePickerProps,
   TimeRangePickerProps,
 } from 'antd';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Disabled } from '../Disabled';
 import TagsInput from './components/TagsInput';
 import TagsNumberInput from './components/TagsNumberInput';
@@ -19,7 +18,6 @@ export interface ITagArrayItemsProps {
   /** 最大标签数 */
   tagLength?: number;
   /** 禁用  */
-
   disabled?: boolean;
   /** 输入框属性  详见 antd */
   inputProps?: InputProps &
@@ -27,30 +25,13 @@ export interface ITagArrayItemsProps {
     TimeRangePickerProps &
     TimePickerProps;
 }
-const getTag = (arr: any[], name?: string) =>
-  arr?.map((e) => (
-    <Tag
-      color="processing"
-      style={{ lineHeight: '30px' }}
-      key={name ? e[name] : e}
-    >
-      {name ? e[name] : e}
-    </Tag>
-  )) || '-';
 export const ArrayTags: React.FC<ITagArrayItemsProps> = ({
   type = 'input',
   disabled,
   value,
   ...e
 }) => {
-  const valStr = useMemo(() => {
-    if (disabled && value) {
-      return getTag(value);
-    }
-    return '';
-  }, [value, disabled]);
-  if (disabled)
-    return <Disabled bordered={!valStr} value={valStr} arrSpaceSize={0} />;
+  if (disabled) return <Disabled value={value} type="tag" />;
   return (
     <div>
       {type === 'input' && <TagsInput value={value} {...e} />}

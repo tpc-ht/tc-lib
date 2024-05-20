@@ -1,7 +1,7 @@
 import { InputNumber } from 'antd';
 import React, { FC, ReactElement, useRef } from 'react';
 import styled from 'styled-components';
-import { Space } from '../../Space';
+import { FlexSpace } from '../../FlexSpace';
 import { usePrefix } from '../../hooks';
 import './index.less';
 const InputContent = styled.div`
@@ -89,7 +89,7 @@ export const ProgressBar: FC<IProps> = ({
   //   onChange?.(tVal < min ? min : tVal);
   // };
   return (
-    <Space align="center" style={{ width: '100%' }}>
+    <FlexSpace align="center" style={{ width: '100%' }}>
       {/* <div className={prefix} onClick={click}> */}
       <div className={prefix}>
         <div ref={totalRef}>
@@ -111,6 +111,6 @@ export const ProgressBar: FC<IProps> = ({
           onChange={onChange}
         />
       </InputContent>
-    </Space>
+    </FlexSpace>
   );
 };

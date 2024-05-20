@@ -1,4 +1,4 @@
-import { getArrNodes, getAttrFromArr, isFn, isStr } from '@tc-lib/utils';
+import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { Empty, Select, SelectProps, Spin, Typography } from 'antd';
 import React, {
@@ -6,6 +6,7 @@ import React, {
   ReactNode,
   RefAttributes,
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useState,
@@ -85,10 +86,15 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
         },
       },
     );
-    const list = useMemo(
-      () => (dataSource ? dataSource : data),
-      [dataSource, data],
-    );
+    useEffect(() => {
+      if (isArr(dataSource)) {
+        mutate(dataSource);
+      }
+    }, [dataSource]);
+    // const list = useMemo(
+    //   () => (dataSource ? dataSource : data),
+    //   [dataSource, data],
+    // );
     useImperativeHandle<any, IBaseSearchSelectRef>(
       ref,
       () => ({
@@ -114,16 +120,16 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
     };
     const disValue = useMemo(() => {
       if (disabled) {
-        let text = getAttrFromArr(getArrNodes(list, value, val), label, ',');
+        let text = getAttrFromArr(getArrNodes(data, value, val), label, ',');
         return text || value;
       }
-    }, [list, disabled, value, label, val]);
+    }, [data, disabled, value, label, val]);
 
     const onSearch = (e: string) => {
       if (!e) return;
       mutate([]);
       SetEmptyText('加载中');
-      run({ phoneKeyword: e });
+      run({ value: e });
     };
     const onDropdownVisibleChange = (e: boolean) => {
       if (e) SetEmptyText('请输入关键词进行搜索');
@@ -153,12 +159,12 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
         value={value}
         disabled={disabled}
         fieldNames={!(description || labelFormat) ? fieldNames : undefined}
-        options={!(description || labelFormat) ? list : undefined}
+        options={!(description || labelFormat) ? data : undefined}
         {...getMultiple(isMultiple)}
         {...extra}
       >
         {(description || labelFormat) &&
-          list?.map((e: any, index: number) => {
+          data?.map((e: any, index: number) => {
             const v = e[val];
             const l = labelFormat ? labelFormat(e, index) : e[label];
             return (
