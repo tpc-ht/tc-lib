@@ -1,4 +1,8 @@
-import { BaseSearchSelect, IBaseSearchSelectProps } from '@tc-lib/components';
+import {
+  BaseSearchSelect,
+  FlexSpace,
+  IBaseSearchSelectProps,
+} from '@tc-lib/components';
 import { Typography } from 'antd';
 import React, {
   ForwardRefExoticComponent,
@@ -47,8 +51,20 @@ const BusinessSearchSelect: ForwardRefExoticComponent<
   <BaseSearchSelect {...BusinessConfig[type]} {...extra} ref={ref} />
 ));
 export default () => (
-  <>
+  <FlexSpace direction="column">
     <Title level={5}>基础</Title>
     <BusinessSearchSelect type="member" />
-  </>
+    <BusinessSearchSelect
+      type="member"
+      value="1"
+      description={(e) => `电话号码：${e.label || '-'}`}
+      isMultiple={false}
+      dataSource={[
+        {
+          label: '张一',
+          value: '1',
+        },
+      ]}
+    />
+  </FlexSpace>
 );

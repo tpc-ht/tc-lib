@@ -139,7 +139,7 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
     ) : (
       <Select
         style={{ width: '100%' }}
-        optionLabelProp={label}
+        // optionLabelProp={label}
         placeholder="请选择"
         allowClear
         showSearch
@@ -165,8 +165,8 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
       >
         {(description || labelFormat) &&
           data?.map((e: any, index: number) => {
-            const v = e[val];
-            const l = labelFormat ? labelFormat(e, index) : e[label];
+            const v = e[val] ?? e.value;
+            const l = labelFormat ? labelFormat(e, index) : e[label] ?? e.label;
             return (
               <Option value={v} key={v} label={l} {...e}>
                 <div>

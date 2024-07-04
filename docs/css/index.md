@@ -1,7 +1,7 @@
 ---
 nav:
   title: CSS
-  order: -1
+  order: 4
 toc: content
 ---
 
@@ -44,7 +44,7 @@ height: 120px;
 background-image: url(https://----.png);
 background-repeat: no-repeat;
 background-size: cover;
-background-position: center center;
+background-position: center;
 ```
 
 ## 吸顶

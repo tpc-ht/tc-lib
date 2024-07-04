@@ -9,7 +9,7 @@ import React, {
 const { Title } = Typography;
 export type IBusinessCascaderProps = {
   type: 'build';
-} & Partial<IBaseCascaderProps<any>>;
+} & Partial<IBaseCascaderProps>;
 
 const serverFun = () => {
   return new Promise(function (e) {

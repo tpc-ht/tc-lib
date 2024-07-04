@@ -1,7 +1,7 @@
 ---
 nav:
   title: npm
-  order: 1
+  order: 5
 toc: content
 ---
 
