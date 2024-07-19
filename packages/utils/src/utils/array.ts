@@ -257,29 +257,29 @@ const enumColor = {
   },
 };
 
-export type EnumItemType = {
-  label: string | JSX.Element;
-  value: any;
-  type?: 'draft' | 'afoot' | 'success' | 'error';
-  [key: string]: any;
-};
-/** 枚举格式化 获取名称与颜色属性 */
-export class EnumController {
-  list: EnumItemType[] = [];
-  names: Map<any, any>;
-  constructor(e: EnumItemType[]) {
-    const list = isArr(e) ? e : [];
-    this.list = list;
-    const ns = new Map<any, any>();
-    for (let index = 0; index < list.length; index++) {
-      const ele: EnumItemType = index[index];
-      ns.set(ele.value, ele);
-    }
-    this.names = ns;
-  }
-  getName = (value: any) => this.names.get(value)?.label;
-  getColor = (value: any) => enumColor[this.names.get(value)?.colorType];
-}
+// export type EnumItemType = {
+//   label: string | JSX.Element;
+//   value: any;
+//   type?: 'draft' | 'afoot' | 'success' | 'error';
+//   [key: string]: any;
+// };
+// /** 枚举格式化 获取名称与颜色属性 */
+// export class EnumController {
+//   list: EnumItemType[] = [];
+//   names: Map<any, any>;
+//   constructor(e: EnumItemType[]) {
+//     const list = isArr(e) ? e : [];
+//     this.list = list;
+//     const ns = new Map<any, any>();
+//     for (let index = 0; index < list.length; index++) {
+//       const ele: EnumItemType = index[index];
+//       ns.set(ele.value, ele);
+//     }
+//     this.names = ns;
+//   }
+//   getName = (value: any) => this.names.get(value)?.label;
+//   getColor = (value: any) => enumColor[this.names.get(value)?.colorType];
+// }
 
 /**
  * 数字数组连号处理

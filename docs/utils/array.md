@@ -20,10 +20,10 @@ uniqueObjArr([{ a: 1 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 'a');
 // [{a:1},{a:2},{a:3}]
 ```
 
-## 交集 差集 补集
+## 交集
 
 ```javascript
-import { intersect, minus, complement } from '@tc-lib/utils';
+import { intersect } from '@tc-lib/utils';
 let A = [
   { id: 0, name: '小0' },
   { id: 1, name: '小1' },
@@ -45,6 +45,12 @@ intersect(A, B, 'id');
     { id: 3, name: '小4' },
  ]
 */
+```
+
+## 差集
+
+```javascript
+import { minus } from '@tc-lib/utils';
 minus(A, B, 'id');
 /**
  [
@@ -52,6 +58,12 @@ minus(A, B, 'id');
     { id: 1, name: '小1' },
  ]
 */
+```
+
+## 补集
+
+```javascript
+import { complement } from '@tc-lib/utils';
 complement(A, B, 'id');
 /**
  [
@@ -65,12 +77,12 @@ complement(A, B, 'id');
 ## 获取对象匹配的节点对象
 
 ```javascript
-import { getArrNodes, getArrNode } from '@tc-lib/utils'
-console.log(
-getArrNodes([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 2, 'a')//[{a:2}]
-getArrNodes([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], [2, 3], 'a')//[{a:2},{a:3}]
-getArrNode([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 1, 'a')//{ a: 1, b: 1 }
-getArrNode([{ a: 0 }, { a: 1, b: 9 }, { a: 2 }, { a: 3 }], 1, 'a','b')//9
+import { getArrNodes, getArrNode } from '@tc-lib/utils';
+
+getArrNodes([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 2, 'a'); //[{a:2}]
+getArrNodes([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], [2, 3], 'a'); //[{a:2},{a:3}]
+getArrNode([{ a: 0 }, { a: 1, b: 1 }, { a: 2 }, { a: 3 }], 1, 'a'); //{ a: 1, b: 1 }
+getArrNode([{ a: 0 }, { a: 1, b: 9 }, { a: 2 }, { a: 3 }], 1, 'a', 'b'); //9
 ```
 
 ## 获取对象数组指定字段值
@@ -220,4 +232,4 @@ let arr = [1, 3, 12, 2, 99, 98, 7, 9, 6, 10];
 continuousNumber(arr); //'1-3,6-7,9-10,12,98-99'
 ```
 
-## 枚举格式化 EnumController
+<!-- ## 枚举格式化 EnumController -->
