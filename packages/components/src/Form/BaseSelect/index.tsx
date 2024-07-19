@@ -74,6 +74,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       loading: load,
       className,
       style,
+      size,
       onChange,
       ...extra
     },
@@ -134,7 +135,12 @@ export const BaseSelect: CompoundedComponent = forwardRef(
     }, [list, disabled, value]);
 
     return disabled ? (
-      <Disabled value={disValue} className={className} style={style} />
+      <Disabled
+        value={disValue}
+        className={className}
+        style={style}
+        size={size}
+      />
     ) : (
       <Select
         loading={load || loading}
@@ -155,6 +161,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         disabled={disabled}
         fieldNames={!description ? fieldNames : undefined}
         options={!description ? list : undefined}
+        size={size}
         {...getMultiple(isMultiple)}
         {...extra}
       >

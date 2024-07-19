@@ -19,6 +19,7 @@ export interface IDisabledProps {
   gap?: string;
   copyable?: boolean;
   ellipsis?: boolean;
+  size?: 'large' | 'middle' | 'small';
 
   type?: 'text' | 'tag' | 'html';
   tagProps?: TagProps;
@@ -66,6 +67,7 @@ export const Disabled = memo(
     dangerouslySetInnerHTML,
     className,
     type = 'text',
+    size = 'middle',
     gap = ' ',
     tagProps,
     style,
@@ -104,7 +106,15 @@ export const Disabled = memo(
           };
       }
     }, [value, bordered, type, tagProps, gap, copyable, ellipsis]);
-
+    const height = useMemo(() => {
+      switch (size) {
+        case 'large':
+          return '40px';
+        case 'small':
+          return '24px';
+      }
+      return '32px';
+    }, [size]);
     if (type === 'html')
       return (
         <div
@@ -130,7 +140,7 @@ export const Disabled = memo(
           className,
           !bordered ? prefix + '-no-border' : '',
         )}
-        style={style}
+        style={{ height, lineHeight: height, ...style }}
         {...e}
       >
         {isEllipsis || isCopyable ? (

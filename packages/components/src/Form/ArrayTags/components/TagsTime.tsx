@@ -1,5 +1,11 @@
 import { Button, Tag, TimePicker, TimePickerProps, message } from 'antd';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 //RangePicker
 import { PlusOutlined } from '@ant-design/icons';
 import { isNum, isStr } from '@tc-lib/utils';
@@ -9,10 +15,11 @@ export interface IArrayTagsNumberProps {
   value?: any[] | undefined;
   onChange?: any;
   tagLength?: number;
+  size?: 'large' | 'middle' | 'small';
   inputProps?: TimePickerProps;
 }
 const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
-  const { onChange, value, inputProps, tagLength = 0 } = props;
+  const { onChange, value, inputProps, size = 'middle', tagLength = 0 } = props;
   const [items, setItems] = useState<string[]>(value || []);
   const [timeValue, setTimeValue] = useState<any>(undefined);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
@@ -44,20 +51,23 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
 
   const onOpenChange = (open: boolean, index?: number) => {
     if (!open && timeValue) {
-      let val = timeValue;
+      let val = valueFormat(timeValue);
       setItems((oldState: any) => {
         if (!val) return oldState;
+        let existIndex = oldState.indexOf(val);
         if (isNum(index)) {
-          const newTags = [...oldState];
-          newTags[index] = val;
-          return newTags;
+          if (existIndex === index) return oldState;
+          if (existIndex === -1) {
+            oldState[index] = val;
+            return oldState;
+          }
         }
-        if (!oldState.includes(val)) {
+        if (existIndex === -1) {
           return [...oldState, val];
-        } else {
-          message.warning('不能重复添加!');
-          return oldState;
         }
+        setTimeout(() => message.warning('不能重复添加!'), 0);
+
+        return oldState;
       });
       setInputVisible(false);
       setEditInputIndex(-1);
@@ -84,8 +94,28 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
   };
 
   const TimeChange = (e: any) => {
-    setTimeValue(valueFormat(e));
+    setTimeValue(e);
   };
+  const tagSizeStyle = useMemo(() => {
+    switch (size) {
+      case 'large':
+        return {
+          height: '40px',
+          lineHeight: '40px',
+          fontSize: '14px',
+        };
+      case 'small':
+        return {
+          height: '24px',
+          lineHeight: '24px',
+        };
+      default:
+        return {
+          height: '32px',
+          lineHeight: '32px',
+        };
+    }
+  }, [size]);
   return (
     <div>
       {items?.map((tag, index) => {
@@ -97,8 +127,10 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
               format="HH:mm"
               style={{ width: 180, marginRight: 8 }}
               key={tag}
+              open={editInputIndex === index}
               onOpenChange={(e: boolean) => onOpenChange(e, index)}
               onChange={TimeChange}
+              size={size}
               {...inputProps}
             />
           );
@@ -107,18 +139,15 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
           <Tag
             key={tag}
             closable
-            style={{ lineHeight: '30px' }}
+            style={{ ...tagSizeStyle, cursor: 'pointer' }}
             color="processing"
             onClose={() => handleClose(tag)}
+            onDoubleClick={(e) => {
+              editInputHandle(index, tag);
+              e.preventDefault();
+            }}
           >
-            <span
-              onDoubleClick={(e) => {
-                editInputHandle(index, tag);
-                e.preventDefault();
-              }}
-            >
-              {tag}
-            </span>
+            {tag}
           </Tag>
         );
         return tagElem;
@@ -131,6 +160,7 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
           style={{ width: 180 }}
           onOpenChange={onOpenChange}
           onChange={TimeChange}
+          size={size}
           {...inputProps}
         />
       )}
@@ -144,6 +174,7 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
               type="primary"
               //@ts-ignore
               icon={<PlusOutlined />}
+              size={size}
             >
               添加
             </Button>
@@ -155,6 +186,7 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
               type="primary"
               //@ts-ignore
               icon={<PlusOutlined />}
+              size={size}
             >
               添加
             </Button>

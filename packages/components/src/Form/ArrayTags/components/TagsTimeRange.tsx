@@ -1,5 +1,11 @@
 import { Button, Tag, TimePicker, TimeRangePickerProps, message } from 'antd';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 //RangePicker
 import { PlusOutlined } from '@ant-design/icons';
 import { isFullArr, isNum, isStr } from '@tc-lib/utils';
@@ -9,10 +15,11 @@ export interface ITagsTimeRangeProps {
   value?: any[] | undefined;
   onChange?: any;
   tagLength?: number;
+  size?: 'large' | 'middle' | 'small';
   inputProps?: TimeRangePickerProps;
 }
 const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
-  const { onChange, value, inputProps, tagLength = 0 } = props;
+  const { onChange, value, inputProps, size = 'middle', tagLength = 0 } = props;
   const [items, setItems] = useState<string[]>(value || []);
   const [timeValue, setTimeValue] = useState<any>([]);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
@@ -51,17 +58,20 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
       setItems((oldState: any) => {
         const strVal = valueFormat(val);
         if (!strVal) return oldState;
+
+        let existIndex = oldState.indexOf(strVal);
         if (isNum(index)) {
-          const newTags = [...oldState];
-          newTags[index] = strVal;
-          return newTags;
+          if (existIndex === index) return oldState;
+          if (existIndex === -1) {
+            oldState[index] = strVal;
+            return oldState;
+          }
         }
-        if (!items.includes(strVal)) {
+        if (existIndex === -1) {
           return [...oldState, strVal];
-        } else {
-          message.warning('不能重复添加!');
-          return oldState;
         }
+        setTimeout(() => message.warning('不能重复添加!'), 0);
+        return oldState;
       });
       setInputVisible(false);
       setEditInputIndex(-1);
@@ -90,6 +100,26 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
   const TimeChange = (e: any) => {
     setTimeValue(e);
   };
+  const tagSizeStyle = useMemo(() => {
+    switch (size) {
+      case 'large':
+        return {
+          height: '40px',
+          lineHeight: '40px',
+          fontSize: '14px',
+        };
+      case 'small':
+        return {
+          height: '24px',
+          lineHeight: '24px',
+        };
+      default:
+        return {
+          height: '32px',
+          lineHeight: '32px',
+        };
+    }
+  }, [size]);
   return (
     <div>
       {items?.map((tag, index) => {
@@ -104,6 +134,7 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
               key={tag}
               onOpenChange={(e: boolean) => onOpenChange(e, index)}
               onChange={TimeChange}
+              size={size}
               {...inputProps}
             />
           );
@@ -112,18 +143,15 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
           <Tag
             key={tag}
             closable
-            style={{ lineHeight: '30px' }}
+            style={{ ...tagSizeStyle, cursor: 'pointer' }}
             color="processing"
             onClose={() => handleClose(tag)}
+            onDoubleClick={(e) => {
+              editInputHandle(index, tag);
+              e.preventDefault();
+            }}
           >
-            <span
-              onDoubleClick={(e) => {
-                editInputHandle(index, tag);
-                e.preventDefault();
-              }}
-            >
-              {tag}
-            </span>
+            {tag}
           </Tag>
         );
         return tagElem;
@@ -137,6 +165,7 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
           style={{ width: 180 }}
           onOpenChange={onOpenChange}
           onChange={TimeChange}
+          size={size}
           {...inputProps}
         />
       )}
@@ -148,6 +177,7 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
               onClick={showInput}
               type="primary"
               icon={<PlusOutlined />}
+              size={size}
             >
               添加
             </Button>
@@ -158,6 +188,7 @@ const TagsTimeRange: React.FC<ITagsTimeRangeProps> = (props) => {
               onClick={showInput}
               type="primary"
               icon={<PlusOutlined />}
+              size={size}
             >
               添加
             </Button>

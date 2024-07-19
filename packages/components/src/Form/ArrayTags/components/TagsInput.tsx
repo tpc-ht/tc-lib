@@ -1,18 +1,19 @@
 import { Button, Input, InputProps, Tag, Tooltip, message } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
 
 export interface ITagArrayItemsProps {
   value?: string[];
   onChange?: any;
+  size?: 'large' | 'middle' | 'small';
   /** 最大标签数 */
   tagLength?: number;
   /** 输入框属性 详见 antd */
   inputProps?: InputProps;
 }
 const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
-  const { onChange, value, inputProps, tagLength = 0 } = props;
+  const { onChange, value, inputProps, size = 'middle', tagLength = 0 } = props;
   const [items, setItems] = useState<string[]>(value || []);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
@@ -44,9 +45,14 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
 
   const handleEditInputConfirm = () => {
     setItems((oldState: any) => {
-      const newTags = [...oldState];
-      newTags[editInputIndex] = editInputValue;
-      return newTags;
+      let existIndex = oldState.indexOf(editInputValue);
+      if (existIndex === editInputIndex) return oldState;
+      if (existIndex === -1) {
+        oldState[editInputIndex] = editInputValue;
+        return oldState;
+      }
+      message.warning('不能重复添加!');
+      return oldState;
     });
     setEditInputIndex(-1);
     setEditInputValue('');
@@ -85,6 +91,26 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
     setEditInputIndex(index);
     setEditInputValue(tag);
   };
+  const tagSizeStyle = useMemo(() => {
+    switch (size) {
+      case 'large':
+        return {
+          height: '40px',
+          lineHeight: '40px',
+          fontSize: '14px',
+        };
+      case 'small':
+        return {
+          height: '24px',
+          lineHeight: '24px',
+        };
+      default:
+        return {
+          height: '32px',
+          lineHeight: '32px',
+        };
+    }
+  }, [size]);
   return (
     <>
       {items?.map((tag, index) => {
@@ -100,6 +126,7 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
               onChange={handleEditInputChange}
               onBlur={handleEditInputConfirm}
               onPressEnter={handleEditInputConfirm}
+              size={size}
               {...inputProps}
             />
           );
@@ -109,18 +136,15 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
           <Tag
             key={tag}
             closable
-            style={{ lineHeight: '30px' }}
+            style={{ ...tagSizeStyle, cursor: 'pointer' }}
             color="processing"
             onClose={() => handleClose(tag)}
+            onDoubleClick={(e) => {
+              editInputHandle(index, tag);
+              e.preventDefault();
+            }}
           >
-            <span
-              onDoubleClick={(e) => {
-                editInputHandle(index, tag);
-                e.preventDefault();
-              }}
-            >
-              {isLongTag ? `${tag.slice(0, 10)}...` : tag}
-            </span>
+            {isLongTag ? `${tag.slice(0, 10)}...` : tag}
           </Tag>
         );
         return isLongTag ? (
@@ -141,6 +165,7 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
           onChange={handleInputChange}
           onBlur={handleInputConfirm}
           onPressEnter={handleInputConfirm}
+          size={size}
           {...inputProps}
         />
       )}
@@ -152,6 +177,7 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
               onClick={showInput}
               type="primary"
               icon={<PlusOutlined />}
+              size={size}
             >
               添加
             </Button>
@@ -162,6 +188,7 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
               onClick={showInput}
               type="primary"
               icon={<PlusOutlined />}
+              size={size}
             >
               添加
             </Button>

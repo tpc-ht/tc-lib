@@ -19,6 +19,7 @@ export interface ITagArrayItemsProps {
   tagLength?: number;
   /** 禁用  */
   disabled?: boolean;
+  size?: 'large' | 'middle' | 'small';
   /** 输入框属性  详见 antd */
   inputProps?: InputProps &
     InputNumberProps &
@@ -29,15 +30,20 @@ export const ArrayTags: React.FC<ITagArrayItemsProps> = ({
   type = 'input',
   disabled,
   value,
+  size,
   ...e
 }) => {
-  if (disabled) return <Disabled value={value} type="tag" />;
+  if (disabled) return <Disabled value={value} type="tag" size={size} />;
   return (
     <div>
-      {type === 'input' && <TagsInput value={value} {...e} />}
-      {type === 'number' && <TagsNumberInput value={value} {...e} />}
-      {type === 'timeRange' && <TagsTimeRange value={value} {...e} />}
-      {type === 'time' && <TagsTime value={value} {...e} />}
+      {type === 'input' && <TagsInput value={value} size={size} {...e} />}
+      {type === 'number' && (
+        <TagsNumberInput value={value} size={size} {...e} />
+      )}
+      {type === 'timeRange' && (
+        <TagsTimeRange value={value} size={size} {...e} />
+      )}
+      {type === 'time' && <TagsTime value={value} size={size} {...e} />}
     </div>
   );
 };

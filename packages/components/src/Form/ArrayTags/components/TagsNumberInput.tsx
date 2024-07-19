@@ -1,5 +1,5 @@
 import { Button, InputNumber, InputNumberProps, Tag, message } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
 import { isNum } from '@tc-lib/utils';
@@ -8,10 +8,11 @@ export interface IArrayTagsNumberProps {
   value?: number[] | undefined;
   onChange?: any;
   tagLength?: number;
+  size?: 'large' | 'middle' | 'small';
   inputProps?: InputNumberProps;
 }
 const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
-  const { onChange, value, inputProps, tagLength = 0 } = props;
+  const { onChange, value, inputProps, size = 'middle', tagLength = 0 } = props;
   const [items, setItems] = useState<number[]>(value || []);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
   const [editInputIndex, setEditInputIndex] = useState<number>(-1);
@@ -32,7 +33,6 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
   };
 
   const handleEditInputChange = (e: any) => {
-    console.log('e', e);
     setEditInputValue(e);
   };
   const handleEditInputConfirm = () => {
@@ -41,9 +41,15 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
         saveEditInputRef.current.value &&
         Number(saveEditInputRef.current.value);
       setItems((oldState: any) => {
-        const newTags = [...oldState];
-        newTags[editInputIndex] = val;
-        return newTags;
+        let existIndex = oldState.indexOf(editInputValue);
+        if (existIndex === editInputIndex) return oldState;
+        if (existIndex === -1) {
+          oldState[editInputIndex] = val;
+          return oldState;
+        }
+
+        message.warning('不能重复添加!');
+        return oldState;
       });
       setEditInputIndex(-1);
       setEditInputValue(undefined);
@@ -85,7 +91,26 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
     setEditInputIndex(index);
     setEditInputValue(tag);
   };
-
+  const tagSizeStyle = useMemo(() => {
+    switch (size) {
+      case 'large':
+        return {
+          height: '40px',
+          lineHeight: '40px',
+          fontSize: '14px',
+        };
+      case 'small':
+        return {
+          height: '24px',
+          lineHeight: '24px',
+        };
+      default:
+        return {
+          height: '32px',
+          lineHeight: '32px',
+        };
+    }
+  }, [size]);
   return (
     <div>
       <>
@@ -102,6 +127,7 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
                 onChange={handleEditInputChange}
                 onBlur={handleEditInputConfirm}
                 onPressEnter={handleEditInputConfirm}
+                size={size}
                 {...inputProps}
               />
             );
@@ -110,18 +136,15 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
             <Tag
               key={tag}
               closable
-              style={{ lineHeight: '30px' }}
+              style={{ ...tagSizeStyle, cursor: 'pointer' }}
               color="processing"
               onClose={() => handleClose(tag)}
+              onDoubleClick={(e) => {
+                editInputHandle(index, tag);
+                e.preventDefault();
+              }}
             >
-              <span
-                onDoubleClick={(e) => {
-                  editInputHandle(index, tag);
-                  e.preventDefault();
-                }}
-              >
-                {tag}
-              </span>
+              {tag}
             </Tag>
           );
           return tagElem;
@@ -134,6 +157,7 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
             style={{ width: 88 }}
             onBlur={handleInputConfirm}
             onPressEnter={handleInputConfirm}
+            size={size}
             {...inputProps}
           />
         )}
@@ -145,6 +169,7 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
                 onClick={showInput}
                 type="primary"
                 icon={<PlusOutlined />}
+                size={size}
               >
                 添加
               </Button>
@@ -155,6 +180,7 @@ const TagsNumberInput: React.FC<IArrayTagsNumberProps> = (props) => {
                 onClick={showInput}
                 type="primary"
                 icon={<PlusOutlined />}
+                size={size}
               >
                 添加
               </Button>

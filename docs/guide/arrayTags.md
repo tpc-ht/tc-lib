@@ -50,7 +50,7 @@ import { Space } from 'antd';
 export default () => {
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      <ArrayTags type="time" />
+      <ArrayTags type="time" value={['01:00', '02:00']} />
       <ArrayTags value={['01:00', '02:00']} disabled />
     </Space>
   );
@@ -66,7 +66,7 @@ import { Space } from 'antd';
 export default () => {
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      <ArrayTags type="timeRange" />
+      <ArrayTags type="timeRange" value={['00:00-00:00', '01:00-01:00']} />
       <ArrayTags value={['09:00-12:00', '14:00-18:00']} disabled />
     </Space>
   );
