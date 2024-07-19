@@ -6,12 +6,14 @@ group:
 order: 0
 ---
 
-# searchSelect
+# SearchSelect
+
 <code src='./demos/BusinessSearchSelectDemo.tsx'></code>
 
 ## API
+
 ```ts
-import { SelectProps } from "antd";
+import { SelectProps } from 'antd';
 export interface IBaseSearchSelectProps extends SelectProps {
   /** 接口函数 */
   serverFun: (params: any) => Promise<any>;

@@ -6,7 +6,7 @@ import React, { CSSProperties, FC, Key, memo, useMemo } from 'react';
 import './index.less';
 
 import { isArr } from '@tc-lib/utils';
-import { usePrefix } from '../../hooks';
+import { useDisabledStyle, usePrefix } from '../../hooks';
 const { Paragraph } = Typography;
 export interface IDisabledProps {
   value?: any;
@@ -74,6 +74,12 @@ export const Disabled = memo(
     ...e
   }: IDisabledProps) => {
     const prefix = usePrefix('preview-tx');
+    const disabledStyle = useDisabledStyle();
+    const { bodyStyle, nodeStyle } = useMemo(() => {
+      const { body, node } = disabledStyle;
+      if (!bordered) return { bodyStyle: {}, nodeStyle: {} };
+      return { bodyStyle: body, nodeStyle: node };
+    }, [bordered, disabledStyle]);
     const { currentValue, isEllipsis, isCopyable } = useMemo(() => {
       if (!value)
         return {
@@ -85,7 +91,11 @@ export const Disabled = memo(
       switch (type) {
         case 'tag':
           return {
-            currentValue: getTag({ ...tagProps, value }),
+            currentValue: getTag({
+              ...tagProps,
+              style: nodeStyle,
+              value,
+            }),
             isEllipsis: false,
             isCopyable: false,
             isBordered: false,
@@ -105,7 +115,7 @@ export const Disabled = memo(
             isBordered: bordered,
           };
       }
-    }, [value, bordered, type, tagProps, gap, copyable, ellipsis]);
+    }, [value, bordered, type, tagProps, gap, copyable, ellipsis, nodeStyle]);
     const height = useMemo(() => {
       switch (size) {
         case 'large':
@@ -124,7 +134,10 @@ export const Disabled = memo(
             className,
             !bordered ? prefix + '-no-border' : '',
           )}
-          style={style}
+          style={{
+            ...bodyStyle,
+            ...style,
+          }}
           {...e}
           dangerouslySetInnerHTML={
             isFullObj(dangerouslySetInnerHTML)
@@ -133,39 +146,57 @@ export const Disabled = memo(
           }
         />
       );
-    return (
+    return isEllipsis || isCopyable ? (
       <div
         className={csn(
           prefix,
           className,
           !bordered ? prefix + '-no-border' : '',
         )}
-        style={{ height, lineHeight: height, ...style }}
+        style={{
+          height,
+          lineHeight: height,
+          ...bodyStyle,
+          ...style,
+        }}
         {...e}
       >
-        {isEllipsis || isCopyable ? (
-          <Paragraph
-            copyable={isCopyable ? { text: currentValue } : false}
-            style={{
-              marginBottom: 0,
-              marginRight: 0,
-              width: '99.9%',
-              lineHeight: 'inherit',
-            }}
-            ellipsis={
-              isEllipsis
-                ? {
-                    rows: 1,
-                    expandable: true,
-                  }
-                : false
-            }
-          >
-            {currentValue}
-          </Paragraph>
-        ) : (
-          currentValue
+        <Paragraph
+          copyable={isCopyable ? { text: currentValue } : false}
+          style={{
+            marginBottom: 0,
+            marginRight: 0,
+            color: 'inherit',
+            width: '99.9%',
+          }}
+          ellipsis={
+            isEllipsis
+              ? {
+                  rows: 1,
+                  expandable: true,
+                }
+              : false
+          }
+        >
+          {currentValue}
+        </Paragraph>
+      </div>
+    ) : (
+      <div
+        className={csn(
+          prefix,
+          className,
+          !bordered ? prefix + '-no-border' : '',
         )}
+        style={{
+          height,
+          lineHeight: height,
+          ...(!(isEllipsis || isCopyable) ? bodyStyle : {}),
+          ...style,
+        }}
+        {...e}
+      >
+        {currentValue}
       </div>
     );
   },
@@ -191,6 +222,12 @@ export const BooleanDisable = memo(
     ...e
   }: IBooleanDisableProps) => {
     const prefix = usePrefix('preview-tx');
+    const disabledStyle = useDisabledStyle();
+    const { bodyStyle } = useMemo(() => {
+      const { body, node } = disabledStyle;
+      if (!bordered) return { bodyStyle: {}, nodeStyle: {} };
+      return { bodyStyle: body, nodeStyle: node };
+    }, [bordered, disabledStyle]);
     const switchValue = useMemo(() => {
       if (isFullArr(checkedValue)) {
         const [v1] = checkedValue;
@@ -205,17 +242,18 @@ export const BooleanDisable = memo(
           className,
           !bordered ? prefix + '-no-border' : '',
         )}
+        style={bodyStyle}
         {...e}
       >
         {switchValue ? (
           <Space align="baseline" size={6}>
             <CheckCircleFilled style={{ color: '#6abf40', fontSize: 14 }} />
-            <span>{checkedChildren}</span>
+            {checkedChildren}
           </Space>
         ) : (
           <Space align="start" size={6}>
             <CloseCircleFilled style={{ color: '#ff4d4f', fontSize: 14 }} />
-            <span>{unCheckedChildren}</span>
+            {checkedChildren}
           </Space>
         )}
       </div>
