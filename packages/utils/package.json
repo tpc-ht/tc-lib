@@ -37,9 +37,5 @@
   "engines": {
     "npm": ">=3.0.0"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "gitHead": "ee57d22280cdec8b3de7111c05427dd746eb1b59"
 }

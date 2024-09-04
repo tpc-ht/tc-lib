@@ -1,7 +1,6 @@
 {
   "name": "@tc-lib/doc",
   "version": "0.0.6",
-  "private": true,
   "description": "A react library developed with dumi",
   "homepage": "https://github.com/tpc-ht/tc-lib#readme",
   "bugs": {
@@ -44,11 +43,6 @@
     "test:init": "jest --init",
     "test:u": "yarn workspace @tc-lib/utils test"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -85,16 +79,7 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "authors": [],
-  "gitHead": "ee57d22280cdec8b3de7111c05427dd746eb1b59",
   "gitHooks": {
     "commit-msg": "node ./commitlint.js verify-commit"
-  },
-  "rules": {
-    "no-unused-vars": "off"
   }
 }
