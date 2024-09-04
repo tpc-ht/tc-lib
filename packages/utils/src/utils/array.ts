@@ -1,6 +1,6 @@
-import { Key } from "react";
-import { ObjAny } from "../type";
-import { isArr, isFullArr, isNum, isStr } from "./check";
+import { Key } from 'react';
+import { ObjAny } from '../type';
+import { isArr, isFullArr, isNum, isStr } from './check';
 /** 基础函数 变量处理 */
 
 /** 数组去重 */
@@ -18,7 +18,7 @@ export const intersect = (arr1: any[], arr2: any[], filed: string) => {
   if (!isArr(arr1) || !isArr(arr2)) return [];
   return (
     arr1.filter((item) =>
-      arr2.find((bItem) => item?.[filed] == bItem?.[filed])
+      arr2.find((bItem) => item?.[filed] == bItem?.[filed]),
     ) || []
   );
 };
@@ -27,7 +27,7 @@ export const intersect = (arr1: any[], arr2: any[], filed: string) => {
 export const minus = (arr1: any[], arr2: any[], filed: string) => {
   if (!isArr(arr1) || !isArr(arr2)) return [];
   return arr1.filter(
-    (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed])
+    (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed]),
   );
 };
 
@@ -36,10 +36,10 @@ export const complement = (arr1: any[], arr2: any[], filed: string) => {
   if (!isArr(arr1) || !isArr(arr2)) return [];
   return [
     ...arr1.filter(
-      (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed])
+      (item) => !arr2.find((aItem) => item?.[filed] == aItem?.[filed]),
     ),
     ...arr2.filter(
-      (item) => !arr1.find((aItem) => item?.[filed] == aItem?.[filed])
+      (item) => !arr1.find((aItem) => item?.[filed] == aItem?.[filed]),
     ),
   ];
 };
@@ -67,7 +67,7 @@ export const getArrNode = (
   data: any[],
   value: Key,
   key: string,
-  field?: string
+  field?: string,
 ) => {
   if (!isArr(data)) return undefined;
   let item = data.find((e) => e[key] === value);
@@ -83,12 +83,12 @@ export interface FieldNames {
 export const getTreeNodes = (
   data: any[],
   val: Key[] | Key,
-  fieldNames?: FieldNames //= { label: 'label', value: 'value', children: 'children' },
+  fieldNames?: FieldNames, //= { label: 'label', value: 'value', children: 'children' },
 ) => {
   const {
     // label = 'label',
-    value = "value",
-    children = "children",
+    value = 'value',
+    children = 'children',
   } = fieldNames || {};
   if (!isArr(data)) return [];
   let nodes: any[] = [];
@@ -119,7 +119,7 @@ export const getTreeNodes = (
 export const getAttrFromArr = (
   array: ObjAny,
   attr: string,
-  separator?: string
+  separator?: string,
 ) => {
   if (!isArr(array)) return [];
   let values = [];
@@ -132,7 +132,7 @@ export const getAttrFromArr = (
 };
 
 /** 生成指定长度的数组 */
-export const makeArray = (size: number): number[] => new Array(size).fill("");
+export const makeArray = (size: number): number[] => new Array(size).fill('');
 
 /**
  * 获取数组最大值
@@ -223,7 +223,7 @@ export const equalTuple = (arr: any[], len: number, isFill = false) => {
 export const treeFormat = (
   data: any[],
   nodeCallback: (e: any) => any,
-  childrenName = "children"
+  childrenName = 'children',
 ) => {
   return data?.map((item) => {
     let row = {
@@ -238,24 +238,24 @@ export const treeFormat = (
   });
 };
 
-const enumColor = {
-  draft: {
-    background: '#E6E6E6',
-    color: '#00000073',
-  },
-  afoot: {
-    background: '#D6EEFF',
-    color: '#208EFD',
-  },
-  success: {
-    background: '#E1F2D9',
-    color: '#54C31E',
-  },
-  error: {
-    background: '#FFE5E6',
-    color: '#FF4E4E',
-  },
-};
+// const enumColor = {
+//   draft: {
+//     background: '#E6E6E6',
+//     color: '#00000073',
+//   },
+//   afoot: {
+//     background: '#D6EEFF',
+//     color: '#208EFD',
+//   },
+//   success: {
+//     background: '#E1F2D9',
+//     color: '#54C31E',
+//   },
+//   error: {
+//     background: '#FFE5E6',
+//     color: '#FF4E4E',
+//   },
+// };
 
 // export type EnumItemType = {
 //   label: string | JSX.Element;
@@ -283,8 +283,8 @@ const enumColor = {
 
 /**
  * 数字数组连号处理
- * @param nums 
- * @returns 
+ * @param nums
+ * @returns
  */
 export const continuousNumber = (nums: number[]) => {
   if (!isArr(nums)) return '';
@@ -311,4 +311,4 @@ export const continuousNumber = (nums: number[]) => {
     result.push(start);
   }
   return result.join(',');
-}
+};

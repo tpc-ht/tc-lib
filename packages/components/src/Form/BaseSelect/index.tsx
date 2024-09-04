@@ -1,6 +1,7 @@
+import { RedoOutlined } from '@ant-design/icons';
 import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
-import { Select, SelectProps, Typography } from 'antd';
+import { Button, Empty, Select, SelectProps, Typography } from 'antd';
 import { DefaultOptionType } from 'antd/lib/select';
 import React, {
   ForwardRefExoticComponent,
@@ -86,7 +87,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       [fieldNames],
     );
 
-    const { loading, data, run, refresh, mutate } = useRequest(
+    const { loading, data, run, refresh, mutate, error } = useRequest(
       (e) => serverFun({ ...params, ...e }),
       {
         manual: isOpt || manual,
@@ -161,6 +162,23 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         disabled={disabled}
         fieldNames={!description ? fieldNames : undefined}
         options={!description ? list : undefined}
+        suffixIcon={<RedoOutlined />}
+        dropdownRender={(enumList) => {
+          return error ? (
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="资源获取失败！"
+            >
+              {refresh ? (
+                <Button type="primary" onClick={refresh}>
+                  重新加载
+                </Button>
+              ) : null}
+            </Empty>
+          ) : (
+            enumList
+          );
+        }}
         size={size}
         {...getMultiple(isMultiple)}
         {...extra}

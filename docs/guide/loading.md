@@ -13,7 +13,6 @@ export default () => {
         style={{
             height:600,border: '1px solid #f0f0f0'
         }}
-        
         aside={
         <div>侧边栏</div>
         }

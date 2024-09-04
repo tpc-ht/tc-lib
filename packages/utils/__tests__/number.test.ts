@@ -1,14 +1,26 @@
-import { amountFormat, calcPageNo, numberFormat, strToNum } from '../src';
+import { amountFormat, calcPageNo, strToNum, toFloat, toNum } from '../src';
 
 describe('小数格式化', () => {
-  test('默认值', () => {
-    expect(numberFormat(6)).toBe('6.00');
+  test('toNum - 默认值', () => {
+    expect(toNum(6)).toBe('6');
   });
-  test('小数', () => {
-    expect(numberFormat(6, 1)).toBe('6.0');
+  test('toNum - 带小数', () => {
+    expect(toNum(6.556)).toBe('7');
   });
-  test('带后缀', () => {
-    expect(numberFormat(69.567, 2, '%')).toBe('69.57 %');
+  test('toNum - 带后缀', () => {
+    expect(toNum(69.567, '%')).toBe('70 %');
+  });
+  test('toFloat - 默认值', () => {
+    expect(toFloat(6.561)).toBe('6.56');
+  });
+  test('toFloat - 默认值', () => {
+    expect(toFloat(6)).toBe('6.00');
+  });
+  test('toFloat - 小数', () => {
+    expect(toFloat(6.561, '', 1)).toBe('6.6');
+  });
+  test('toFloat - 带后缀', () => {
+    expect(toFloat(6.561, '%', 2)).toBe('6.56 %');
   });
 });
 describe('分页计算', () => {
@@ -41,7 +53,7 @@ describe('金额格式化', () => {
 });
 describe('字符串转数值', () => {
   test('100', () => {
-    expect(strToNum("100")).toBe(100);
+    expect(strToNum('100')).toBe(100);
   });
   test('1A', () => {
     expect(strToNum('1A')).toBe(0);
@@ -52,5 +64,4 @@ describe('字符串转数值', () => {
   test('测试空', () => {
     expect(strToNum('', null)).toBe(null);
   });
-
 });

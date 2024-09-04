@@ -1,5 +1,5 @@
-@import "~antd/lib/style/themes/default.less";
-@import "../assets/variables.less";
+@import '~antd/lib/style/themes/default.less';
+@import '../assets/variables.less';
 :root {
   --focus-border: #1890ff;
   --separator-border: rgb(240, 240, 240);
@@ -22,8 +22,11 @@
   }
   &-aside {
     padding: 10px;
-    height: auto;
+    height: 100%;
     overflow: hidden auto;
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
   }
   &-header {
     position: relative;

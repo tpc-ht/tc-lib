@@ -7,15 +7,27 @@ nav:
 
 # 数值
 
-## 小数格式化
+## 数值格式化
 
-`numberFormat(num: number, precision = 2, addonAfter = '')`
+`toNum(num: number, addonAfter = '')`
 
 ```javascript
-numberFormat(6); //6.00
-numberFormat(6, 1); //6.0
-numberFormat(69.567, 2, '%'); //69.57 %
+toNum(6); //6
+toNum(6.556); //7
+toNum(69.567, '%'); //70 %
 ```
+
+## 浮点数值格式化
+
+`toFloat(num: number, addonAfter = '', precision = 2)`
+
+```javascript
+toFloat(6.561); //6.56
+toFloat(6); //6.00
+toFloat(6.561, '', 1); //6.6
+toFloat(6.561, '%', 2); //6.56 %
+```
+
 
 ## 分页序号计算
 
