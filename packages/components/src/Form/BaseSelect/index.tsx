@@ -1,4 +1,3 @@
-import { RedoOutlined } from '@ant-design/icons';
 import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { Button, Empty, Select, SelectProps, Typography } from 'antd';
@@ -162,7 +161,6 @@ export const BaseSelect: CompoundedComponent = forwardRef(
         disabled={disabled}
         fieldNames={!description ? fieldNames : undefined}
         options={!description ? list : undefined}
-        suffixIcon={<RedoOutlined />}
         dropdownRender={(enumList) => {
           return error ? (
             <Empty
