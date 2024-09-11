@@ -1,6 +1,7 @@
 {
   "name": "@tc-lib/components",
   "version": "0.1.0",
+  "private": true,
   "description": "",
   "homepage": "https://github.com/tpc-ht/tc-lib#readme",
   "bugs": {
