@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-interface FlexSpaceProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FlexSpaceProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: 'start' | 'end' | 'center' | 'baseline';
   justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around';
   direction?: 'column' | 'row';
