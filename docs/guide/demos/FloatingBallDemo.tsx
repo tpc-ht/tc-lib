@@ -38,7 +38,7 @@ export default () => {
             lineHeight: '84px',
           }}
         >
-          right
+          left
         </div>
       </FloatingBall>
       <FloatingBall type="right" yProportion={0.8}>

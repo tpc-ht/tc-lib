@@ -32,11 +32,13 @@ export const FloatingBall = ({
     right: 0,
   });
   const draggleRef = useRef<HTMLDivElement>(null);
+  // 窗口变化的hooks
   const windowResize = useWindowResize();
 
   const onStart = (_event: DraggableEvent, uiData: DraggableData) => {
     handlerCoordinate(uiData);
   };
+  /** 设置拖拽边界 */
   const handlerCoordinate = (uiData?: DraggableData) => {
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = draggleRef.current?.getBoundingClientRect();
@@ -53,6 +55,7 @@ export const FloatingBall = ({
     };
     setBounds(bounds);
   };
+  /** 位置格式化 */
   const positionFormat = () => {
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = draggleRef.current?.getBoundingClientRect();
@@ -115,6 +118,7 @@ export const FloatingBall = ({
           ref={draggleRef}
           style={{
             cursor: 'all-scroll',
+            // 脱离当前文档流
             position: 'absolute',
           }}
         >
