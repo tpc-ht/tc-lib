@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/tpc-ht/tc-lib/compare/v0.2.3...v0.3.0) (2024-09-24)
+
+### Features
+
+- 新增文字高亮组件 ([63c0ccb](https://github.com/tpc-ht/tc-lib/commit/63c0ccb4bd3eed0c3e9eff56ee76d76eb1086b75))
+
 ## [0.2.3](https://github.com/tpc-ht/tc-lib/compare/v0.2.2...v0.2.3) (2024-09-23)
 
 **Note:** Version bump only for package @tc-lib/doc
