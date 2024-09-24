@@ -1,4 +1,5 @@
 const preFix = 'zd';
-export const usePrefix = (name: string) => {
+const usePrefix = (name: string) => {
   return `${preFix}-${name}`;
 };
+export default usePrefix;

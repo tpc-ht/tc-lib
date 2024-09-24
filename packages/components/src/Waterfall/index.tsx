@@ -2,6 +2,7 @@ import React, {
   FC,
   ReactElement,
   UIEventHandler,
+  memo,
   useEffect,
   useMemo,
   useRef,
@@ -25,7 +26,7 @@ export interface WaterfallProps extends React.HTMLAttributes<HTMLDivElement> {
   onScroll?: UIEventHandler<HTMLDivElement>;
 }
 
-export const Waterfall: FC<WaterfallProps> = (props) => {
+const Waterfall: FC<WaterfallProps> = memo((props) => {
   const {
     space = 10,
     bufferHeight = 0,
@@ -227,4 +228,6 @@ export const Waterfall: FC<WaterfallProps> = (props) => {
         : children}
     </div>
   );
-};
+});
+
+export default Waterfall;

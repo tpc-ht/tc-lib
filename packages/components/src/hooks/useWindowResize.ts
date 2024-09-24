@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useWindowResize = () => {
+const useWindowResize = () => {
   const callbacks = useRef<Function[]>([]);
   useEffect(() => {
     const updateSize = (e: Event) => {
@@ -19,3 +19,4 @@ export const useWindowResize = () => {
     callbacks.current.push(callback);
   };
 };
+export default useWindowResize;

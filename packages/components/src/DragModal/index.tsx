@@ -1,5 +1,4 @@
-import DragModal from './DragModal';
-import ModalFooter from './ModalFooter';
-export type { IDragModalProps } from './DragModal';
-export type { IModalFooterProps } from './ModalFooter';
+import DragModal, { IDragModalProps } from './DragModal';
+import ModalFooter, { IModalFooterProps } from './ModalFooter';
 export { DragModal, ModalFooter };
+export type { IDragModalProps, IModalFooterProps };

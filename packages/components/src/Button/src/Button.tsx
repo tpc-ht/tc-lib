@@ -3,7 +3,7 @@ import type { ButtonProps } from 'antd';
 import { Button as AndButton } from 'antd';
 import React, { memo, useState } from 'react';
 
-export const Button = memo(({ onClick, children, ...extar }: ButtonProps) => {
+const Button = memo(({ onClick, children, ...extar }: ButtonProps) => {
   const [loading, setLoading] = useState(false);
   const click = async (e: any) => {
     if (!(onClick && isFn(onClick))) return;
@@ -22,3 +22,5 @@ export const Button = memo(({ onClick, children, ...extar }: ButtonProps) => {
     </AndButton>
   );
 });
+
+export default Button;

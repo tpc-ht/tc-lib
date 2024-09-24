@@ -1,19 +1,19 @@
-import { Button, Empty, Spin, SpinProps } from "antd";
-import cns from "classnames";
-import React, { memo } from "react";
-import { usePrefix } from "../hooks";
-import "./index.less";
+import { Button, Empty, Spin, SpinProps } from 'antd';
+import cns from 'classnames';
+import React, { memo } from 'react';
+import { usePrefix } from '../hooks';
+import './index.less';
 
-export interface ILoadingProps extends SpinProps {
+export interface LoadingProps extends SpinProps {
   loading: boolean;
   error?: any;
   empty?: boolean;
   refresh?: () => void;
-  size?: "small" | "default" | "large";
+  size?: 'small' | 'default' | 'large';
   children?: any;
 }
 
-export const Loading = memo(
+const Loading = memo(
   ({
     loading,
     error,
@@ -21,14 +21,14 @@ export const Loading = memo(
     refresh,
     className,
     children,
-    size = "default",
+    size = 'default',
     ...e
-  }: ILoadingProps) => {
-    const loadClassName = usePrefix("loading-main");
+  }: LoadingProps) => {
+    const loadClassName = usePrefix('loading-main');
     if (error)
       return (
         <Empty
-          style={{ padding: "32px 0" }}
+          style={{ padding: '32px 0' }}
           image={Empty.PRESENTED_IMAGE_SIMPLE}
           description="资源获取失败！"
         >
@@ -53,5 +53,7 @@ export const Loading = memo(
         {empty ? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> : children}
       </Spin>
     );
-  }
+  },
 );
+
+export default Loading;

@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button, Modal } from 'antd';
 import React, {
   FC,
   ReactNode,
@@ -8,23 +8,23 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from "react";
+} from 'react';
 const awaitWrap = (promise: Promise<any>): Promise<any> => {
   return promise.then((res: any) => res).catch(() => {});
 };
-export interface IVersionUpdateTips {
+export interface VersionUpdateTipsProps {
   pollingTime?: number; //每次检查更新间隔，单位：秒。默认值：60
   title?: string; //发现新版本！！！
   children?: ReactNode; //发现新版本，为避免造成数据错误，请刷新后使用!
   metaName?: string; // meta标签名称，默认：web_version
 }
 /** 检测版本更新 */
-export const VersionUpdateTips: FC<IVersionUpdateTips> = memo(
+const VersionUpdateTips: FC<VersionUpdateTipsProps> = memo(
   ({
     pollingTime = 60,
-    title = "发现新版本！！！",
-    children = "发现新版本，为避免造成数据错误，请刷新后使用!",
-    metaName = "web_version",
+    title = '发现新版本！！！',
+    children = '发现新版本，为避免造成数据错误，请刷新后使用!',
+    metaName = 'web_version',
   }) => {
     /** 当前版本号 */
     const curVersion = useRef<any>(null);
@@ -38,12 +38,12 @@ export const VersionUpdateTips: FC<IVersionUpdateTips> = memo(
       const res = await awaitWrap(
         fetch(`${window.location.origin}?time=${timestamp}`)
           .then(function (res) {
-            console.log("res", res);
+            console.log('res', res);
             return res.text();
           })
           .then(function (text) {
             return text;
-          })
+          }),
       );
       return res;
     };
@@ -59,11 +59,11 @@ export const VersionUpdateTips: FC<IVersionUpdateTips> = memo(
       // 在 js 中请求首页地址不会更新页面
       const response = await getHtml();
       // 返回的是字符串，需要转换为 html
-      const el = document.createElement("html");
+      const el = document.createElement('html');
       el.innerHTML = response;
-      let newVersion = "";
+      let newVersion = '';
       // 拿到 版本号
-      const metaList = el.querySelectorAll("meta");
+      const metaList = el.querySelectorAll('meta');
       if (metaList.length) {
         metaList.forEach((item) => {
           if (item.name === metaName) {
@@ -94,8 +94,8 @@ export const VersionUpdateTips: FC<IVersionUpdateTips> = memo(
 
     /** 获取当前版本号 */
     const getCurrentVersion = useCallback(() => {
-      let version = "";
-      const metaList = document.querySelectorAll("meta");
+      let version = '';
+      const metaList = document.querySelectorAll('meta');
       if (metaList.length) {
         metaList.forEach((item) => {
           if (item.name === metaName) {
@@ -136,9 +136,9 @@ export const VersionUpdateTips: FC<IVersionUpdateTips> = memo(
     }, []);
 
     useEffect(() => {
-      document.addEventListener("visibilitychange", onVisibilityChange);
+      document.addEventListener('visibilitychange', onVisibilityChange);
       return () => {
-        document.removeEventListener("visibilitychange", onVisibilityChange);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
       };
     }, []);
 
@@ -165,5 +165,6 @@ export const VersionUpdateTips: FC<IVersionUpdateTips> = memo(
         {children}
       </Modal>
     );
-  }
+  },
 );
+export default VersionUpdateTips;

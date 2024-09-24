@@ -50,7 +50,7 @@ const SearchBar = styled.div`
   overflow: hidden;
 `;
 
-export interface ITableFormProps {
+export interface TableFormProps {
   list: ReactNode[];
   labelW?: number;
   marginBottom?: number | string;
@@ -64,7 +64,7 @@ export interface ITableFormProps {
   direction?: 'row' | 'column';
 }
 
-export const TableForm = memo(
+const TableForm = memo(
   ({
     list,
     labelW,
@@ -74,8 +74,7 @@ export const TableForm = memo(
     xxl = 8,
     xl = 6,
     lg = 4,
-  }: ITableFormProps) => {
-    // let resizeObserver: any = useRef(null);
+  }: TableFormProps) => {
     let _innerCont: any = useRef(null);
     const domSize = useSize(_innerCont);
     const [width, setWidth] = useState<number>(0);
@@ -202,3 +201,4 @@ export const TableForm = memo(
     );
   },
 );
+export default TableForm;

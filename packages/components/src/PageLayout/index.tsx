@@ -12,22 +12,9 @@ import React, {
 } from 'react';
 import { usePrefix } from '../hooks';
 import './index.less';
+import PageMain from './PageMain';
 import SideBar from './SideBar';
-export interface IPageMainProps {
-  header?: ReactNode;
-  children: ReactNode;
-  style?: CSSProperties;
-  headStyle?: CSSProperties;
-}
-export const PageMain = ({ children, ...e }: IPageMainProps) => {
-  const mainClass = usePrefix('page-layout');
-  return (
-    <div className={mainClass + '-main'} {...e}>
-      {children}
-    </div>
-  );
-};
-export interface IPageLayoutProps {
+export interface PageLayoutProps {
   aside?: ReactNode;
   minSize?: number;
   maxSize?: number;
@@ -39,7 +26,8 @@ export interface IPageLayoutProps {
   headStyle?: CSSProperties;
   className?: string;
 }
-export const PageLayout: FC<IPageLayoutProps> = memo(
+
+const PageLayout: FC<PageLayoutProps> = memo(
   ({
     aside,
     header,
@@ -110,6 +98,7 @@ export const PageLayout: FC<IPageLayoutProps> = memo(
     );
   },
 );
+export default PageLayout;
 // 根据children判断插槽类型
 // import { isArr } from '@tc-lib/utils';
 // import { Allotment } from 'allotment';

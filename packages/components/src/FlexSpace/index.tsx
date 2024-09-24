@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 export interface FlexSpaceProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: 'start' | 'end' | 'center' | 'baseline';
@@ -7,30 +7,34 @@ export interface FlexSpaceProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: number;
   wrap?: boolean;
 }
-export const FlexSpace: FC<FlexSpaceProps> = ({
-  align,
-  direction = 'row',
-  justify = 'start',
-  wrap = false,
-  size = 8,
-  children,
-  style,
-  ...e
-}) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: align,
-        flexWrap: wrap ? 'wrap' : 'nowrap',
-        flexDirection: direction,
-        justifyContent: justify,
-        gap: size,
-        ...style,
-      }}
-      {...e}
-    >
-      {children}
-    </div>
-  );
-};
+const FlexSpace: FC<FlexSpaceProps> = memo(
+  ({
+    align,
+    direction = 'row',
+    justify = 'start',
+    wrap = false,
+    size = 8,
+    children,
+    style,
+    ...e
+  }) => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: align,
+          flexWrap: wrap ? 'wrap' : 'nowrap',
+          flexDirection: direction,
+          justifyContent: justify,
+          gap: size,
+          ...style,
+        }}
+        {...e}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
+export default FlexSpace;

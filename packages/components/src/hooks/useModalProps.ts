@@ -1,11 +1,9 @@
-// import { ModalProps } from 'antd';
 import { useState } from 'react';
 export type IHandleModalVisible<T> = (
   flag?: boolean,
   value?: T,
   extra?: IExtraModalProps,
 ) => void;
-// export interface IExtraModalProps<T, U = any> extends ModalProps {
 export interface IExtraModalProps {
   modalType?: string;
   [key: string]: any;
@@ -15,16 +13,16 @@ export interface IModalProps<T = any, U = any> extends IExtraModalProps {
   value?: T;
 }
 /** model开启规范 */
-export const useModalProps = <T = any,>(
+const useModalProps = <T = any>(
   value?: IModalProps<T>,
 ): [
-    IModalProps<T>,
-    (flag?: boolean, value?: T, extra?: IExtraModalProps) => void,
-  ] => {
+  IModalProps<T>,
+  (flag?: boolean, value?: T, extra?: IExtraModalProps) => void,
+] => {
   const initValue = {
     open: false,
-    reload: () => { },
-    handleModalVisible: () => { },
+    reload: () => {},
+    handleModalVisible: () => {},
   };
   const [modalProps, setModalProps] = useState<IModalProps<T>>(
     value || initValue,
@@ -44,3 +42,5 @@ export const useModalProps = <T = any,>(
   };
   return [modalProps, handleModalVisible];
 };
+
+export default useModalProps;

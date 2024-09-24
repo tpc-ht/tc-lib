@@ -2,10 +2,10 @@
  * 侧边树状图收缩按钮
  * */
 
-import classNames from "classnames";
-import React from "react";
-import sidebarHide from "../assets/side-bar-hide.svg";
-import sidebarOpen from "../assets/side-bar-open.svg";
+import classNames from 'classnames';
+import React, { memo } from 'react';
+import sidebarHide from '../assets/side-bar-hide.svg';
+import sidebarOpen from '../assets/side-bar-open.svg';
 
 interface SideBarProps {
   className: string;
@@ -13,7 +13,7 @@ interface SideBarProps {
   onClick: () => void;
 }
 
-const SideBar: React.FC<SideBarProps> = (props) => {
+const SideBar: React.FC<SideBarProps> = memo((props) => {
   const { visible, onClick, className } = props;
   return (
     <div className={className} onClick={onClick}>
@@ -36,6 +36,6 @@ const SideBar: React.FC<SideBarProps> = (props) => {
       />
     </div>
   );
-};
+});
 
 export default SideBar;

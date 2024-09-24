@@ -2,7 +2,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import type { AutoCompleteProps, InputRef } from 'antd';
 import { AutoComplete, Input, Space } from 'antd';
 import classNames from 'classnames';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
 import styled from 'styled-components';
 import { usePrefix } from '../hooks';
@@ -20,7 +20,7 @@ export type MenuSearchProps = {
   onSelect?: (value: string, option: any) => void;
 };
 
-export const MenuSearch: React.FC<MenuSearchProps> = (props) => {
+const MenuSearch: React.FC<MenuSearchProps> = memo((props) => {
   const { className, options = [], onSelect, placeholder = '搜索' } = props;
   const prefix = usePrefix('menu-search');
   const inputRef = useRef<InputRef | null>(null);
@@ -94,4 +94,6 @@ export const MenuSearch: React.FC<MenuSearchProps> = (props) => {
       </AutoComplete>
     </div>
   );
-};
+});
+
+export default MenuSearch;
