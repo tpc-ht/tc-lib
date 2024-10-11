@@ -56,6 +56,11 @@ const BusinessConfig: { [key: string]: IBaseSelectProps } = {
             id: '1',
             tip: '描述描述',
           },
+          {
+            name: '张二',
+            id: '2',
+            tip: '描述描述',
+          },
         ]);
       }),
     isMultiple: false,
@@ -89,6 +94,10 @@ export default () => {
         value={values}
         onChange={setValues}
       />
+      <Title level={5}>禁用</Title>
+      <BusinessSelect type="unique" disabled isMultiple value={['1', '2']} />
+      <br />
+      <BusinessSelect type="unique" disabled isMultiple value={[]} />
     </>
   );
 };

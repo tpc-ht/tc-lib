@@ -2,12 +2,18 @@ import { Modal, ModalProps } from 'antd';
 import React, { FC, memo, useRef, useState } from 'react';
 import type { DraggableData, DraggableEvent } from 'react-draggable';
 import Draggable from 'react-draggable';
+import Loading from '../Loading';
 import './index.less';
 export interface IDragModalProps extends ModalProps {
   title: string;
+  loadingProps?: {
+    loading: boolean;
+    refresh?: () => void;
+    error?: any;
+  };
 }
 const DragModal: FC<IDragModalProps> = memo(
-  ({ title, open, children, ...e }) => {
+  ({ title, open, children, loadingProps, ...e }) => {
     const [disabled, setDisabled] = useState(true);
     const [bounds, setBounds] = useState({
       left: 0,
@@ -64,7 +70,11 @@ const DragModal: FC<IDragModalProps> = memo(
         // getContainer={false}
         {...e}
       >
-        {children}
+        {loadingProps ? (
+          <Loading {...loadingProps}>{children}</Loading>
+        ) : (
+          children
+        )}
       </Modal>
     );
   },

@@ -1,7 +1,7 @@
+import { FlexSpace } from '@tc-lib/components';
 import { InputNumber } from 'antd';
 import React, { FC, ReactElement, useRef } from 'react';
 import styled from 'styled-components';
-import { FlexSpace } from '../../FlexSpace';
 import { usePrefix } from '../../hooks';
 import './index.less';
 const InputContent = styled.div`

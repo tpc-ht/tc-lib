@@ -5,10 +5,10 @@
   --separator-border: rgb(240, 240, 240);
 }
 .@{prefix-cls}-page-layout {
-  position: relative;
   min-height: 0;
   height: 100%;
   background-color: #fff;
+  position: relative;
   &-main {
     display: flex;
     flex-direction: column;
@@ -23,6 +23,7 @@
   &-aside {
     padding: 10px;
     height: 100%;
+    position: relative;
     overflow: hidden auto;
     &::-webkit-scrollbar {
       width: 0px;

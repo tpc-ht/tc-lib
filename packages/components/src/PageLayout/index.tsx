@@ -48,38 +48,40 @@ const PageLayout: FC<PageLayoutProps> = memo(
     }, []);
     return (
       <div className={csn(mainClass, className)} {...extra}>
+        {aside && (
+          <SideBar
+            visible={visible}
+            className={mainClass + '-side-bar'}
+            onClick={() => setVisible((e) => !e)}
+          />
+        )}
+
         {aside ? (
-          <>
-            <SideBar
-              visible={visible}
-              className={mainClass + '-side-bar'}
-              onClick={() => setVisible((e) => !e)}
-            />
-            <Allotment separator={!visible} ref={ref}>
-              <Allotment.Pane
-                visible={!visible}
-                preferredSize={minSize}
-                minSize={minSize}
-                maxSize={maxSize}
-              >
-                <div className={mainClass + '-aside'} style={asideStyle}>
-                  {aside}
+          <Allotment separator={!visible} ref={ref}>
+            <Allotment.Pane
+              visible={!visible}
+              preferredSize={minSize}
+              minSize={minSize}
+              maxSize={maxSize}
+            >
+              <div className={mainClass + '-aside'} style={asideStyle}>
+                {aside}
+              </div>
+            </Allotment.Pane>
+
+            <PageMain>
+              {header ? (
+                <div className={mainClass + '-header'} style={headStyle}>
+                  {header}
                 </div>
-              </Allotment.Pane>
-              <PageMain>
-                {header ? (
-                  <div className={mainClass + '-header'} style={headStyle}>
-                    {header}
-                  </div>
-                ) : null}
-                {children ? (
-                  <div className={mainClass + '-app'} style={bodyStyle}>
-                    {children}
-                  </div>
-                ) : null}
-              </PageMain>
-            </Allotment>
-          </>
+              ) : null}
+              {children ? (
+                <div className={mainClass + '-app'} style={bodyStyle}>
+                  {children}
+                </div>
+              ) : null}
+            </PageMain>
+          </Allotment>
         ) : (
           <PageMain>
             {header ? (

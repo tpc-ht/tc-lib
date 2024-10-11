@@ -20,6 +20,7 @@ export default () => {
       <ArrayTags />
       <ArrayTags value={['标签一', '标签二']} disabled />
       <ArrayTags disabled />
+      <ArrayTags disabled value={[]} />
     </Space>
   );
 };

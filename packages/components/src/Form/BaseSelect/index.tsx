@@ -1,4 +1,11 @@
-import { getArrNodes, getAttrFromArr, isArr, isFn, isStr } from '@tc-lib/utils';
+import {
+  getArrNodes,
+  getAttrFromArr,
+  isArr,
+  isFn,
+  isFullArr,
+  isStr,
+} from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
 import { Button, Empty, Select, SelectProps, Typography } from 'antd';
 import { DefaultOptionType } from 'antd/lib/select';
@@ -129,8 +136,11 @@ export const BaseSelect: CompoundedComponent = forwardRef(
     };
     const disValue = useMemo(() => {
       if (disabled) {
+        let defaultVal = !isFullArr(value) ? '-' : value ?? '-';
         let text = getAttrFromArr(getArrNodes(list, value, val), label, ',');
-        return text || value;
+        console.log('text || value', text || value);
+
+        return text || defaultVal;
       }
     }, [list, disabled, value]);
 

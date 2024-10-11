@@ -49,6 +49,8 @@ export interface ProDrawerProps extends DrawerProps {
     refresh?: () => void;
     error?: any;
   };
+  maxWidth?: number | string;
+  minWidth?: number | string;
   headerRight?: ReactNode;
 }
 interface DrawerTitleProps {
@@ -61,10 +63,14 @@ const DrawerTitle = memo(
     const drawerHeader = usePrefix('drawer-header');
     return (
       <div className={drawerHeader}>
-        <TextHover title="返回" onClick={onClose}>
+        <TextHover
+          title="返回"
+          className={drawerHeader + '-icon'}
+          onClick={onClose}
+        >
           <LeftOutlined />
         </TextHover>
-        <div>{children}</div>
+        <div className={drawerHeader + '-title'}>{children}</div>
         <div>{headerRight}</div>
       </div>
     );
@@ -77,14 +83,19 @@ const ProDrawer: React.FC<ProDrawerProps> = memo(
     className,
     children,
     headerStyle,
+    contentWrapperStyle,
     bodyStyle,
     title,
     headerRight,
+    afterOpenChange,
+    maxWidth,
+    minWidth,
     ...e
   }) => {
     const [afterOpen, setAfterOpen] = useState(false);
-    const afterOpenChange = (open) => {
+    const handleAfterOpenChange = (open) => {
       setAfterOpen(open);
+      afterOpenChange?.(open);
     };
     const body = useMemo(() => {
       if (!afterOpen) return;
@@ -93,13 +104,13 @@ const ProDrawer: React.FC<ProDrawerProps> = memo(
     }, [loadingProps, afterOpen, children]);
     return (
       <Drawer
-        afterOpenChange={afterOpenChange}
+        afterOpenChange={handleAfterOpenChange}
         bodyStyle={{
           position: 'relative',
-          padding: 0,
           height: '100%',
           width: '100%',
           overflow: 'hidden auto',
+          padding: 10,
           ...bodyStyle,
         }}
         placement="bottom"
@@ -115,13 +126,17 @@ const ProDrawer: React.FC<ProDrawerProps> = memo(
         height={'100%'}
         headerStyle={{
           padding: 0,
-          border: '1px solid #f0f0f0',
           ...headerStyle,
+        }}
+        contentWrapperStyle={{
+          boxShadow: 'none',
+          border: '1px solid #f0f0f0',
+          ...contentWrapperStyle,
         }}
         {...e}
         className={cns(className)}
       >
-        {body}
+        <div style={{ maxWidth, minWidth, margin: 'auto' }}>{body}</div>
       </Drawer>
     );
   },

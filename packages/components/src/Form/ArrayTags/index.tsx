@@ -1,3 +1,4 @@
+import { isFullArr } from '@tc-lib/utils';
 import {
   InputNumberProps,
   InputProps,
@@ -33,7 +34,15 @@ export const ArrayTags: React.FC<ITagArrayItemsProps> = ({
   size,
   ...e
 }) => {
-  if (disabled) return <Disabled value={value} type="tag" size={size} />;
+  if (disabled) {
+    return (
+      <Disabled
+        value={isFullArr(value) ? value : undefined}
+        type="tag"
+        size={size}
+      />
+    );
+  }
   return (
     <div>
       {type === 'input' && <TagsInput value={value} size={size} {...e} />}
