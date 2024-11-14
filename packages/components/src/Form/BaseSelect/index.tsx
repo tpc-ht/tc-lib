@@ -7,7 +7,8 @@ import {
   isStr,
 } from '@tc-lib/utils';
 import { useRequest } from 'ahooks';
-import { Button, Empty, Select, SelectProps, Typography } from 'antd';
+import type { SelectProps } from 'antd';
+import { Button, Empty, Select, Typography } from 'antd';
 import { DefaultOptionType } from 'antd/lib/select';
 import React, {
   ForwardRefExoticComponent,

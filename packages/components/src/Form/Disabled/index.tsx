@@ -253,7 +253,7 @@ export const BooleanDisable = memo(
         ) : (
           <Space align="start" size={6}>
             <CloseCircleFilled style={{ color: '#ff4d4f', fontSize: 14 }} />
-            {checkedChildren}
+            {unCheckedChildren}
           </Space>
         )}
       </div>

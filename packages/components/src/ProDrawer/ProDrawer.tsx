@@ -136,7 +136,9 @@ const ProDrawer: React.FC<ProDrawerProps> = memo(
         {...e}
         className={cns(className)}
       >
-        <div style={{ maxWidth, minWidth, margin: 'auto' }}>{body}</div>
+        <div style={{ maxWidth, minWidth, margin: 'auto', height: '100%' }}>
+          {body}
+        </div>
       </Drawer>
     );
   },
