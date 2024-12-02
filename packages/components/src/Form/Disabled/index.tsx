@@ -6,7 +6,7 @@ import React, { CSSProperties, FC, Key, memo, useMemo } from 'react';
 import './index.less';
 
 import { isArr } from '@tc-lib/utils';
-import { useDisabledStyle, usePrefix } from '../../hooks';
+import { usePrefix } from '../../hooks';
 const { Paragraph } = Typography;
 export interface IDisabledProps {
   value?: any;
@@ -74,12 +74,6 @@ export const Disabled = memo(
     ...e
   }: IDisabledProps) => {
     const prefix = usePrefix('preview-tx');
-    const disabledStyle = useDisabledStyle();
-    const { bodyStyle, nodeStyle } = useMemo(() => {
-      const { body, node } = disabledStyle;
-      if (!bordered) return { bodyStyle: {}, nodeStyle: {} };
-      return { bodyStyle: body, nodeStyle: node };
-    }, [bordered, disabledStyle]);
     const { currentValue, isEllipsis, isCopyable } = useMemo(() => {
       if (!value)
         return {
@@ -93,7 +87,7 @@ export const Disabled = memo(
           return {
             currentValue: getTag({
               ...tagProps,
-              style: nodeStyle,
+              // style: nodeStyle,
               value,
             }),
             isEllipsis: false,
@@ -115,7 +109,7 @@ export const Disabled = memo(
             isBordered: bordered,
           };
       }
-    }, [value, bordered, type, tagProps, gap, copyable, ellipsis, nodeStyle]);
+    }, [value, bordered, type, tagProps, gap, copyable, ellipsis]);
     const height = useMemo(() => {
       switch (size) {
         case 'large':
@@ -135,7 +129,6 @@ export const Disabled = memo(
             !bordered ? prefix + '-no-border' : '',
           )}
           style={{
-            ...bodyStyle,
             ...style,
           }}
           {...e}
@@ -156,7 +149,6 @@ export const Disabled = memo(
         style={{
           height,
           lineHeight: height,
-          ...bodyStyle,
           ...style,
         }}
         {...e}
@@ -191,7 +183,6 @@ export const Disabled = memo(
         style={{
           height,
           lineHeight: height,
-          ...(!(isEllipsis || isCopyable) ? bodyStyle : {}),
           ...style,
         }}
         {...e}
@@ -222,12 +213,6 @@ export const BooleanDisable = memo(
     ...e
   }: IBooleanDisableProps) => {
     const prefix = usePrefix('preview-tx');
-    const disabledStyle = useDisabledStyle();
-    const { bodyStyle } = useMemo(() => {
-      const { body, node } = disabledStyle;
-      if (!bordered) return { bodyStyle: {}, nodeStyle: {} };
-      return { bodyStyle: body, nodeStyle: node };
-    }, [bordered, disabledStyle]);
     const switchValue = useMemo(() => {
       if (isFullArr(checkedValue)) {
         const [v1] = checkedValue;
@@ -242,7 +227,7 @@ export const BooleanDisable = memo(
           className,
           !bordered ? prefix + '-no-border' : '',
         )}
-        style={bodyStyle}
+        // style={bodyStyle}
         {...e}
       >
         {switchValue ? (
