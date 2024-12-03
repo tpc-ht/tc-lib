@@ -2,8 +2,10 @@
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useWorkspaces": true,
   "version": "0.3.4",
+  
   "command": {
     "publish": {
+      "directory": "{workspaceRoot}/dist/{projectRoot}",
       "conventionalCommits": true,
       "message": "chore: %s"
     }
