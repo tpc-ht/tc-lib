@@ -14,7 +14,7 @@ describe('对象转路径参数', () => {
     expect(toPathParams(params)).toBe('name=%E5%B0%8F%E6%98%8E&id=1');
   });
 });
-
+//
 describe('解析路径参数', () => {
   let params = '?id=1&name=小明';
   let params1 = 'id=1&name=小明';
