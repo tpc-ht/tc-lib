@@ -15,13 +15,16 @@ export const parsePathParams = (url: string, defaultValue: any = undefined) => {
   if (isStr(url)) {
     try {
       const splitIndex = url.indexOf('?');
-      let content: any = {};
-      (splitIndex === -1 ? url : url.slice(splitIndex))
+      let content: any = defaultValue;
+      (splitIndex === -1 ? url : url.slice(splitIndex + 1))
         .replace(/"/g, '\\"')
         .split('&')
         .forEach((e) => {
-          const [key, val] = e.split('=');
-          content[key] = decodeURIComponent(val);
+          if (e) {
+            const [key, val] = e.split('=');
+            if (content === defaultValue) content = {};
+            content[key] = decodeURIComponent(val);
+          }
         });
       return content;
     } catch (error) {}

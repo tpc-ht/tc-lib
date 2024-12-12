@@ -2,6 +2,7 @@ import {
   getFileName,
   getFileSuffix,
   getTreeNodes,
+  parsePathParams,
   repeat,
   toJSON,
   toPathParams,
@@ -10,7 +11,26 @@ import {
 describe('对象转路径参数', () => {
   let params = { name: '小明', id: 1 };
   test("{name:'小明',id:1}", () => {
-    expect(toPathParams(params)).toBe('name=小明&id=1');
+    expect(toPathParams(params)).toBe('name=%E5%B0%8F%E6%98%8E&id=1');
+  });
+});
+
+describe('解析路径参数', () => {
+  let params = '?id=1&name=小明';
+  let params1 = 'id=1&name=小明';
+  let params2 = '前缀?id=1&name=小明';
+  let params3 = '前缀?';
+  test('?id=1&name=小明', () => {
+    expect(parsePathParams(params)).toMatchObject({ id: '1', name: '小明' });
+  });
+  test('id=1&name=小明', () => {
+    expect(parsePathParams(params1)).toMatchObject({ id: '1', name: '小明' });
+  });
+  test('前缀?id=1&name=小明', () => {
+    expect(parsePathParams(params2)).toMatchObject({ id: '1', name: '小明' });
+  });
+  test('前缀?', () => {
+    expect(parsePathParams(params3)).toBe(undefined);
   });
 });
 
