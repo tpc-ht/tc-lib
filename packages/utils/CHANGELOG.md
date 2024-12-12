@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.8](https://github.com/tpc-ht/tc-lib/compare/v0.3.7...v0.3.8) (2024-12-12)
+
+### Bug Fixes
+
+- - ([98e1a66](https://github.com/tpc-ht/tc-lib/commit/98e1a66979334f86c478ac9253e1fe8ee1176835))
+
 ## [0.3.7](https://github.com/tpc-ht/tc-lib/compare/v0.3.6...v0.3.7) (2024-12-12)
 
 ### Bug Fixes
