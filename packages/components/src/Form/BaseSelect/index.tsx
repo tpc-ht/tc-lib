@@ -139,8 +139,6 @@ export const BaseSelect: CompoundedComponent = forwardRef(
       if (disabled) {
         let defaultVal = !isFullArr(value) ? '-' : value ?? '-';
         let text = getAttrFromArr(getArrNodes(list, value, val), label, ',');
-        console.log('text || value', text || value);
-
         return text || defaultVal;
       }
     }, [list, disabled, value]);
