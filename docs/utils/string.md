@@ -14,10 +14,10 @@ import { reverse } from '@tc-lib/utils';
 reverse('abc'); // cda
 ```
 
-## getPathParams URL 参数解析
+## parsePathParams URL 参数解析
 
 ```javascript
-getPathParams('https://cn.bing.com//search?q=掘金&qs=HS');
+parsePathParams('https://cn.bing.com//search?q=掘金&qs=HS');
 // {q: '掘金', qs: 'HS'}
 ```
 
