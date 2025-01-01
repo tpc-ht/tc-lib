@@ -7,7 +7,7 @@ export const randomHexColor = () =>
 let IDX = 36,
   HEX = '';
 while (IDX--) HEX += IDX.toString(36);
-
+/** uid生成 */
 export const uid = (len = 11) => {
   let str = '',
     num = len;

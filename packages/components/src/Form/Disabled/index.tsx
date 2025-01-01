@@ -17,7 +17,7 @@ export interface IDisabledProps {
   style?: React.CSSProperties;
   /** 间隔符 */
   gap?: string;
-  copyable?: boolean;
+  copy?: boolean;
   ellipsis?: boolean;
   size?: 'large' | 'middle' | 'small';
 
@@ -36,7 +36,7 @@ const getTag: FC<TagType> = ({ value, style, ...extra }) => {
       <Space wrap>
         {value?.map((e, index) => (
           <Tag
-            color="processing"
+            // color="processing"
             style={{ margin: '0', ...style }}
             key={'tag' + index}
             {...extra}
@@ -61,7 +61,7 @@ const valFormat = (value: any, gap: string) => {
 export const Disabled = memo(
   ({
     value,
-    copyable,
+    copy,
     ellipsis,
     bordered = true,
     dangerouslySetInnerHTML,
@@ -74,12 +74,12 @@ export const Disabled = memo(
     ...e
   }: IDisabledProps) => {
     const prefix = usePrefix('preview-tx');
-    const { currentValue, isEllipsis, isCopyable } = useMemo(() => {
+    const { currentValue, isEllipsis, isCopy } = useMemo(() => {
       if (!value)
         return {
           currentValue: '-',
           isEllipsis: false,
-          isCopyable: false,
+          isCopy: false,
           isBordered: bordered,
         };
       switch (type) {
@@ -91,25 +91,25 @@ export const Disabled = memo(
               value,
             }),
             isEllipsis: false,
-            isCopyable: false,
+            isCopy: false,
             isBordered: false,
           };
         case 'html':
           return {
             currentValue: value,
             isEllipsis: false,
-            isCopyable: false,
+            isCopy: false,
             isBordered: bordered,
           };
         default:
           return {
             currentValue: valFormat(value, gap),
             isEllipsis: ellipsis,
-            isCopyable: copyable,
+            isCopy: copy,
             isBordered: bordered,
           };
       }
-    }, [value, bordered, type, tagProps, gap, copyable, ellipsis]);
+    }, [value, bordered, type, tagProps, gap, copy, ellipsis]);
     const height = useMemo(() => {
       switch (size) {
         case 'large':
@@ -139,7 +139,7 @@ export const Disabled = memo(
           }
         />
       );
-    return isEllipsis || isCopyable ? (
+    return isEllipsis || isCopy ? (
       <div
         className={csn(
           prefix,
@@ -148,13 +148,15 @@ export const Disabled = memo(
         )}
         style={{
           height,
-          lineHeight: height,
+          lineHeight: 0,
+          display: 'flex',
+          alignItems: 'center',
           ...style,
         }}
         {...e}
       >
         <Paragraph
-          copyable={isCopyable ? { text: currentValue } : false}
+          copyable={isCopy ? { text: currentValue } : false}
           style={{
             marginBottom: 0,
             marginRight: 0,
@@ -182,7 +184,9 @@ export const Disabled = memo(
         )}
         style={{
           height,
-          lineHeight: height,
+          lineHeight: 0,
+          display: 'flex',
+          alignItems: 'center',
           ...style,
         }}
         {...e}

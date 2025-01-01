@@ -1,19 +1,19 @@
-import { AimOutlined } from "@ant-design/icons";
-import { debounce } from "@tc-lib/utils";
-import { Select, Typography, message } from "antd";
-import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-import { usePrefix } from "../../hooks";
-import "./index.less";
+import { AimOutlined } from '@ant-design/icons';
+import { debounce } from '@tc-lib/utils';
+import { Select, Typography, message } from 'antd';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { usePrefix } from '../../hooks';
+import './index.less';
 const { Text } = Typography;
 
-let MapKey: string = "";
+let MapKey: string = '';
 /**
  * 动态添加腾讯地图 SDK
  * @param MapKey KEY
  * @param id 资源标签Id，用于script标签中src更换
  * @returns
  */
-export const AddMapJs = (key: string, id = "TxMapJs") => {
+export const AddMapJs = (key: string, id = 'TxMapJs') => {
   MapKey = key;
   return new Promise(function (resolve, reject) {
     let MapDom = document.getElementById(id);
@@ -23,10 +23,10 @@ export const AddMapJs = (key: string, id = "TxMapJs") => {
       resolve(true);
       return;
     }
-    let script = document.createElement("script");
+    let script = document.createElement('script');
     document.body.appendChild(script);
     script.id = id;
-    script.type = "text/javascript";
+    script.type = 'text/javascript';
     script.async = true;
     script.src = `https://map.qq.com/api/gljs?v=1.exp&libraries=service&key=${key}`;
     script.onerror = (err) => reject(err);
@@ -55,11 +55,11 @@ export const TxMap = memo(
     onChange,
     disabled,
     mapConfig,
-    id = "TxMapContainer",
+    id = 'TxMapContainer',
     value,
     ...e
   }: ITXMapPropsType) => {
-    const prefix = usePrefix("tx-map");
+    const prefix = usePrefix('tx-map');
     const markerLayerRef = useRef<any>(null);
     const mapRef = useRef<any>(null);
     const [location, setLocation] = useState<any>();
@@ -106,7 +106,7 @@ export const TxMap = memo(
       const _temp = document.getElementById(id);
       const option = {
         // center, // 设置地图中心点坐标
-        viewMode: "2D",
+        viewMode: '2D',
         pitch: 0, // 设置俯仰角
         rotation: 0, // 设置地图旋转角度
         zoom: 13, // 设置地图缩放级别
@@ -115,16 +115,16 @@ export const TxMap = memo(
       const map = new TMap.Map(_temp, option);
 
       const _markerLayer = new TMap.MultiMarker({
-        id: "marker-layer",
+        id: 'marker-layer',
         styles: {
           highlight: new TMap.MarkerStyle({
-            src: "https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/marker-pink.png",
+            src: 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/marker-pink.png',
           }),
         },
         map,
       });
       /*添加点击事件*/
-      if (!disabled) map.on("click", (e: any) => mapClick(e, _markerLayer));
+      if (!disabled) map.on('click', (e: any) => mapClick(e, _markerLayer));
       markerLayerRef.current = _markerLayer;
       mapRef.current = map;
     }, []);
@@ -198,8 +198,8 @@ export const TxMap = memo(
           ClickMap(position);
         },
         () => {
-          message.error("获取当前定位失败");
-        }
+          message.error('获取当前定位失败');
+        },
       );
     };
 
@@ -225,7 +225,7 @@ export const TxMap = memo(
     return (
       <div className={prefix} style={{ height, minHeight: 200 }} {...e}>
         {!disabled ? (
-          <div className={prefix + "-search"}>
+          <div className={prefix + '-search'}>
             <Select
               showSearch
               placeholder="请输入地址"
@@ -253,21 +253,21 @@ export const TxMap = memo(
             />
           </div>
         ) : null}
-        <div id={id} className={prefix + "-content"} />
+        <div id={id} className={prefix + '-content'} />
         {/*定位*/}
         {location ? (
           <div
-            className={prefix + "-location"}
+            className={prefix + '-location'}
             onClick={(e) => {
               e.stopPropagation();
               getAtLocation();
             }}
-            title={"定位到当前"}
+            title={'定位到当前'}
           >
             <AimOutlined style={{ fontSize: 30 }} />
           </div>
         ) : null}
       </div>
     );
-  }
+  },
 );
