@@ -7,5 +7,5 @@
 # 包发布
 
 ```bash
-lerna publish
+yarn publish
 ```
