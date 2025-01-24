@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.15](https://github.com/tpc-ht/tc-lib/compare/v0.3.14...v0.3.15) (2025-01-24)
+
+**Note:** Version bump only for package @tc-lib/doc
+
 ## [0.3.14](https://github.com/tpc-ht/tc-lib/compare/v0.3.13...v0.3.14) (2025-01-01)
 
 ### Bug Fixes
