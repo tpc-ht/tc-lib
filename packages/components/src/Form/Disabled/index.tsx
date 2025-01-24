@@ -33,7 +33,7 @@ type TagType = {
 const getTag: FC<TagType> = ({ value, style, ...extra }) => {
   if (isArr(value))
     return (
-      <Space wrap>
+      <Space wrap size={[8, 0]}>
         {value?.map((e, index) => (
           <Tag
             // color="processing"
