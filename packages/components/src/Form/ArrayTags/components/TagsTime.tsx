@@ -92,7 +92,7 @@ const TagsTime: React.FC<IArrayTagsNumberProps> = (props) => {
     setEditInputIndex(index);
     setTimeValue(valueParse(strVal));
   };
-
+  //
   const TimeChange = (e: any) => {
     setTimeValue(e);
   };
