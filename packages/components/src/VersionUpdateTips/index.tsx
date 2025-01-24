@@ -17,6 +17,7 @@ export interface VersionUpdateTipsProps {
   title?: string; //发现新版本！！！
   children?: ReactNode; //发现新版本，为避免造成数据错误，请刷新后使用!
   metaName?: string; // meta标签名称，默认：web_version
+  basePath?: string; // 请求路径前缀
 }
 /** 检测版本更新 */
 const VersionUpdateTips: FC<VersionUpdateTipsProps> = memo(
@@ -25,6 +26,7 @@ const VersionUpdateTips: FC<VersionUpdateTipsProps> = memo(
     title = '发现新版本！！！',
     children = '发现新版本，为避免造成数据错误，请刷新后使用!',
     metaName = 'web_version',
+    basePath = '',
   }) => {
     /** 当前版本号 */
     const curVersion = useRef<any>(null);
@@ -36,7 +38,7 @@ const VersionUpdateTips: FC<VersionUpdateTipsProps> = memo(
     const getHtml = async () => {
       const timestamp = new Date().getTime();
       const res = await awaitWrap(
-        fetch(`${window.location.origin}?time=${timestamp}`)
+        fetch(`${window.location.origin}${basePath}?time=${timestamp}`)
           .then(function (res) {
             console.log('res', res);
             return res.text();

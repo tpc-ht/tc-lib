@@ -97,17 +97,19 @@ const TagsInput: React.FC<ITagArrayItemsProps> = (props) => {
         return {
           height: '40px',
           lineHeight: '40px',
-          fontSize: '14px',
+          fontSize: '16px',
         };
       case 'small':
         return {
           height: '24px',
           lineHeight: '24px',
+          fontSize: '14px',
         };
       default:
         return {
           height: '32px',
           lineHeight: '32px',
+          fontSize: '14px',
         };
     }
   }, [size]);

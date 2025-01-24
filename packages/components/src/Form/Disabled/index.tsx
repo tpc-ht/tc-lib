@@ -37,7 +37,7 @@ const getTag: FC<TagType> = ({ value, style, ...extra }) => {
         {value?.map((e, index) => (
           <Tag
             // color="processing"
-            style={{ margin: '0', ...style }}
+            style={{ margin: '0', fontSize: 14, lineHeight: '22px', ...style }}
             key={'tag' + index}
             {...extra}
           >
@@ -147,8 +147,9 @@ export const Disabled = memo(
           !bordered ? prefix + '-no-border' : '',
         )}
         style={{
-          height,
-          lineHeight: 0,
+          minHeight: height,
+          // height,
+          // lineHeight: 0,
           display: 'flex',
           alignItems: 'center',
           ...style,
@@ -183,8 +184,8 @@ export const Disabled = memo(
           !bordered ? prefix + '-no-border' : '',
         )}
         style={{
-          height,
-          lineHeight: 0,
+          minHeight: height,
+          // lineHeight: 0,
           display: 'flex',
           alignItems: 'center',
           ...style,

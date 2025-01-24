@@ -17,7 +17,9 @@ import { Space } from 'antd';
 export default () => {
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
+      <ArrayTags size="small" />
       <ArrayTags />
+      <ArrayTags size="large" />
       <ArrayTags value={['标签一', '标签二']} disabled />
       <ArrayTags disabled />
       <ArrayTags disabled value={[]} />

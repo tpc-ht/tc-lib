@@ -30,6 +30,7 @@ export default () => {
       />
       <Disabled value={value} />
       <Disabled value={['小黑', '小红', '小黄']} type="tag" />
+      <Disabled value={'******************'} />
       <Disabled value={"<div style='color:red'>html</div>"} type="html" />
       <Disabled value={value} gap="~" ellipsis copyable />
       <Disabled value={'无边框背景'} bordered={false} />
