@@ -51,9 +51,12 @@ const BusinessSearchSelect: ForwardRefExoticComponent<
   <BaseSearchSelect {...BusinessConfig[type]} {...extra} ref={ref} />
 ));
 export default () => (
-  <FlexSpace direction="column">
+  <FlexSpace direction="column" style={{ width: 80 }}>
     <Title level={5}>基础</Title>
-    <BusinessSearchSelect type="member" />
+    <BusinessSearchSelect
+      type="member"
+      placeholder="可根据电话号码或昵称进行搜索！"
+    />
     <BusinessSearchSelect
       type="member"
       value="1"

@@ -14,7 +14,7 @@
     overflow: hidden;
     background: transparent;
     border-radius: 0;
-    // transition: width 0.1s, margin-left 0.1s;
+    // transition: opacity 2s ease;
     :global(.ant-select-selection) {
       background: transparent;
     }
@@ -23,6 +23,7 @@
     }
   }
   &-input&-show {
+    transition: width 0.2s;
     width: 210px;
     margin-left: 8px;
   }
