@@ -51,7 +51,7 @@ const DragModal: FC<IDragModalProps> = memo(
             }}
             onMouseOut={() => setDisabled(true)}
           >
-            {title}
+            {title}66
           </div>
         }
         footer={null}

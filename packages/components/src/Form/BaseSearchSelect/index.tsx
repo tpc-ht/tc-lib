@@ -158,7 +158,7 @@ export const BaseSearchSelect: CompoundedComponent = forwardRef(
         }
         value={value}
         disabled={disabled}
-        fieldNames={!(description || labelFormat) ? fieldNames : undefined}
+        fieldNames={!(description || 0) ? fieldNames : undefined}
         options={!(description || labelFormat) ? data : undefined}
         {...getMultiple(isMultiple)}
         {...extra}

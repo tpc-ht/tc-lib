@@ -91,7 +91,7 @@ export const BaseSelect: CompoundedComponent = forwardRef(
     const isOpt = useMemo(() => isArr(dataSource), [dataSource]);
     const { label = 'label', value: val = 'value' } = useMemo(
       () => fieldNames,
-      [fieldNames],
+      [fieldNames],  
     );
 
     const { loading, data, run, refresh, mutate, error } = useRequest(

@@ -53,7 +53,7 @@ const serverFun = () => {
     ]);
   });
 };
-const BusinessConfig: { [key: string]: IBaseCascaderProps<any> } = {
+const BusinessConfig: { [key: string]: IBaseCascaderProps } = {
   build: {
     serverFun,
     fieldNames: { label: 'name', value: 'id', children: 'children' },
