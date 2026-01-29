@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/tpc-ht/tc-lib/compare/v0.3.17...v0.4.0) (2026-01-29)
+
+### Bug Fixes
+
+- 1 ([d469701](https://github.com/tpc-ht/tc-lib/commit/d469701394bd49fba39db9e0ba222c1e13bdcc68))
+
+### Features
+
+- xz ([40f3c84](https://github.com/tpc-ht/tc-lib/commit/40f3c844502f65ea7018ef0093ab27411dfa29dc))
+
 ## [0.3.17](https://github.com/tpc-ht/tc-lib/compare/v0.3.16...v0.3.17) (2025-02-27)
 
 ### Bug Fixes
